@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./slide.css">
+</head>
+<body>
+    <section class="first">
+        <div class="container ">
+            <nav class="first navbar navbar-expand-lg firstNav">
+                <a class="navbar-brand" href="homepage.html">
+                    <img src="./images/icon/Logo.jpg" alt="Logo của Shop" style="width:100px;"/>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#PetBar" aria-controls="PetBar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">|||</span>
+                </button>
+                <div class="collapse navbar-collapse" id="PetBar">
+                    <ul class="navbar-nav mr-auto"></ul>
+                    <ul class="navbar-nav mr-auto"></ul>
+                    <form class="form-inline my-2 my-lg-0 mr-auto ">
+                        <input class="box form-control mr-sm-2 w" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a id="itemNavLeft" class="nav-link" href="#">Đăng Nhập</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a id="itemNavLeft" class="nav-link" href="#">Đăng ký</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </section>
+
+    <section class="second">
+        <div class="container">
+            <nav>
+                <div class="nav nav-tabs justify-content-center" id="category" role="tabslist">
+                    <button class="nav-link" id="Dog-tab" data-toggle="tab" data-target="#Dog" type="button" role="tab" aria-controls="Dog" aria-selected="true">
+                        <img src="./images/icon/dogIcon.png" alt="dog icon" width="20px"/>
+                        Chó cảnh
+                    </button>
+                    <button class="nav-link" id="Cat-tab" data-toggle="tab" data-target="#Cat" type="button" role="tab" aria-controls="Cat" aria-selected="true">
+                        <img src="./images/icon/catIcon.png" al t="dog icon" width="20px"/>
+                        Mồn lèo
+                    </button>
+                    <button class="nav-link" id="foodSupply-tab" data-toggle="tab" data-target="#foodSupply" type="button" role="tab" aria-controls="foodSupply" aria-selected="true">
+                        <img src="./images/icon/foodIcon.png" alt="dog icon" width="20px"/>
+                        Đồ ăn
+                    </button>
+                    <button class="nav-link" id="Toy-tab" data-toggle="tab" data-target="#Toy" type="button" role="tab" aria-controls="Toy" aria-selected="true">
+                        <img src="./images/icon/toyIcon.png" alt="dog icon" width="20px"/>
+                        Đồ chơi
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </section>
+
+    <section class="slideshow">
+        <h1 class="title m-2">-Best Seller của Sốp-</h1>
+        <div class="container">
+            <div class="slide-container row">
+                <div class="slide">
+                </div>
+                <div class="slide">
+                </div>
+
+
+                <a class="prev" onclick="plusSlides(-1)">
+                    <img src="./images/icon/BenTrai.png" alt="Mũi tên trái" width="30" height="30">
+                </a>
+                <a class="next" onclick="plusSlides(1)">
+                    <img src="./images/icon/BenPhai.png" alt="Mũi tên phải" width="30" height="30">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container line"></div>
+
+    <section class="third">
+        <div class="container">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active mt-1" id="Dog" role="tabpanel" aria-labelledby="Dog-tab">
+                    <h2 class="title">
+                        Đa dạng giống chó cảnh cho bạn lựa chọn
+                    </h2>    
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                            <div class="card mt-1" style="width:20rem;">
+                                <img src="./images/choCanh/chihuahua.jpg" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+                                <h3 class="card-title text-center">
+                                    Chó Chihuahua
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="card mt-1" style="width:20rem;">
+                                <img src="./images/choCanh/bacKinh.jpg" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+                                <h3 class="card-title text-center">
+                                    Chó Bắc Kinh
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="card mt-1" style="width:20rem;">
+                                <img src="./images/choCanh/husky.jpg" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+                                <h3 class="card-title text-center">
+                                    Chó Husky
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 bestseller">
+                            <div class="card mt-1 " style="width:20rem;">
+                                <img src="./images/choCanh/alaska.jpg" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+                                <h3 class="card-title text-center">
+                                    Chó Alaska
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 bestseller">
+                            <div class="card mt-1 " style="width:20rem;">
+                                <img src="./images/choCanh/poodle.jpg" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+                                <h3 class="card-title text-center">
+                                    Chó Poodle
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="card mt-1" style="width:20rem;">
+                                <img src="./images/choCanh/golden.jpg" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+                                <h3 class="card-title text-center">
+                                    Chó Golden
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade show m-1" id="Cat" role="tabpanel" aria-labelledby="Cat-tab">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active mt-1" id="Cat" role="tabpanel" aria-labelledby="Cat-tab">
+                            <h2 class="title">
+                                Lựa chọn mèo thoải mái với nhiều loài khác nhau
+                            </h2>    
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                                    <div class="card mt-1" style="width:20rem;">
+                                        <img src="./images/meoCanh/meomuop.jpg" class="card-img-top" alt="Mèo mướp" width="200" height="200">
+                                        <h3 class="card-title text-center">
+                                            Mèo mướp
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 bestseller">
+                                    <div class="card mt-1 " style="width:20rem;">
+                                        <img src="./images/meoCanh/meovang.jpg" class="card-img-top" alt="Mèo vàng" width="200" height="200">
+                                        <h3 class="card-title text-center">
+                                            Mèo vàng
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                                    <div class="card mt-1" style="width:20rem;">
+                                        <img src="./images/meoCanh/meoxiem.jpg" class="card-img-top" alt="Mèo xiêm" width="200" height="200">
+                                        <h3 class="card-title text-center">
+                                            Mèo Xiêm
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                                    <div class="card mt-1" style="width:20rem;">
+                                        <img src="./images/meoCanh/meoanh.jpg" class="card-img-top" alt="Mèo anh lông ngắn" width="200" height="200">
+                                        <h3 class="card-title text-center">
+                                            Mèo Anh lông ngắn
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                                    <div class="card mt-1" style="width:20rem;">
+                                        <img src="./images/meoCanh/meoscottish.png" class="card-img-top" alt="Mèo tai cụp Scottish Fold" width="200" height="200">
+                                        <h3 class="card-title text-center">
+                                            Mèo tai cụp Scottish Fold
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                                    <div class="card mt-1" style="width:20rem;">
+                                        <img src="./images/meoCanh/meomunchkin.png" class="card-img-top" alt="Mèo Munchkin chân ngắn" width="200" height="200">
+                                        <h3 class="card-title text-center">
+                                            Mèo Munchkin chân ngắn
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade show m-1" id="foodSupply" role="tabpanel" aria-labelledby="foodSupply-tab">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active mt-1" id="foodSupply" role="tabpanel" aria-labelledby="foodSupply-tab">
+                            <h2 class="title">
+                                Lựa chọn thức ăn cho thú cưng của mình
+                            </h2>    
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                                    <div class="card mt-1" style="width:20rem;">
+                                        <img src="./images/food/thucan1.jpg" class="card-img-top" alt="Royal Canin Kitten" width="200" height="200">
+                                        <h3 class="card-title text-center">
+                                            Royal Canin Kitten
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                                    <div class="card mt-1" style="width:20rem;">
+                                        <img src="./images/food/thucan2.jpg" class="card-img-top" alt="Royal Canin Indoor" width="200" height="200">
+                                        <h3 class="card-title text-center">
+                                            Royal Canin Indoor
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                                    <div class="card mt-1" style="width:20rem;">
+                                        <img src="./images/food/thucan3.jpg" class="card-img-top" alt="Royal Canin Hair and Skin" width="200" height="200">
+                                        <h3 class="card-title text-center">
+                                            Royal Canin Hair and Skin
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                                    <div class="card mt-1" style="width:20rem;">
+                                        <img src="./images/food/thucan4.jpg" class="card-img-top" alt="Súp thưởng cho chó" width="200" height="200">
+                                        <h3 class="card-title text-center">
+                                            Súp thưởng cho chó
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                                    <div class="card mt-1" style="width:20rem;">
+                                        <img src="./images/food/thucan5.jpg" class="card-img-top" alt="Pate IRIS One Care Beef" width="200" height="200">
+                                        <h3 class="card-title text-center">
+                                            Pate IRIS One Care Beef
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                                    <div class="card mt-1" style="width:20rem;">
+                                        <img src="./images/food/thucan6.jpg" class="card-img-top" alt="Cần sa cho mèo" width="200" height="200">
+                                        <h3 class="card-title text-center">
+                                            Cần sa cho mèo
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade show m-1" id="Toy" role="tabpanel" aria-labelledby="Dog-tab">This is toy</div>
+            </div>
+        </section>
+    </div>
+    <section class="forth mt-2">
+        <div class="container">
+            <div class="row pb-2 pt-2">
+                <img src="./images/icon/Logo.jpg" alt="Logo của sốp" width="100">
+                <div class="footer">
+                    <h4>Thông tin liên lạc sốp</h4>
+                    <p><b>Địa chỉ:</b> 19 Đ. Nguyễn Hữu Thọ, Tân Hưng, Quận 7, Thành phố Hồ Chí Minh</p>
+                    <p><b>Số điện thoại:</b> (028) 37 755 051</p>
+                    <p><b>Mạng xã hội:</b> 
+                        <img src="./images/icon/facebook.png" alt="Facebook" width="20" height="20">
+                        <img src="./images/icon/instagram.png" alt="Facebook" width="20" height="20">
+                        <img src="./images/icon/twitter.png" alt="Facebook" width="20" height="20">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+<script>
+    var index = 0;
+    showSlide(index);
+    function plusSlides(n){
+        showSlide(index += n);
+    }
+
+
+    function showSlide(n){
+        var i;
+        var slides = document.getElementsByClassName("slide");
+        var bestseller = document.getElementsByClassName("bestseller");
+        var get = bestseller;
+        if(n >= bestseller.length){
+            index = 0;
+        }
+        if(n < 0){
+            index = bestseller.length-1;
+        }
+        slides[0].innerHTML = get[index].innerHTML;
+        if(index + 1 >= bestseller.length){
+            slides[1].innerHTML = get[0].innerHTML;
+        }else{
+            slides[1].innerHTML = get[index+1].innerHTML;
+        }
+        
+    }
+</script>
+</html>

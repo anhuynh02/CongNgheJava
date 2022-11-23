@@ -1,0 +1,33 @@
+.menu{
+    text-align: center;
+}
+
+.slide-container{
+    max-width: fit-content;
+    position: relative;
+    margin: auto;
+}
+
+.prev, .next{
+    cursor: pointer;
+    position: absolute;
+    top:40%;
+    border-radius: 50%;
+    width: fit-content;
+}
+
+.next{
+    right: 0;
+}
+
+.slide{
+    width: fit-content;
+    height: fit-content;
+    margin-bottom: 20px;
+}
+.textinline{
+    position: absolute;
+    text-align: center;
+    font-size: 20px;
+}
+
