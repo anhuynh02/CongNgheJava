@@ -1,2 +1,2 @@
-asddkasdiasdasd
-Hello
+BCrypt:
+$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy = 123

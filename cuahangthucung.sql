@@ -5,84 +5,24 @@ SET time_zone = "+00:00";
 -- Database: `cuahangthucung`
 --
 
-<<<<<<< Updated upstream
-CREATE TABLE APP_USER(
-    USER_NAME collate utf8_unicode_ci NOT NULL AUTO_INCREMENT,
-    ENCRYTED_PASSWORD VARCHAR(128) collate utf8_unicode_ci NOT NULL,
-    ENABLED BIT NOT NULL,
-	PRIMARY KEY (USER_NAME)
+CREATE TABLE user_role(
+    role_id INT NOT NULL,
+    role_name VARCHAR(30) NOT NULL,
+	PRIMARY KEY (role_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE TABLE APP_ROLE(
-    ROLE_ID BIGINT NOT NULL,
-    ROLE_NAME VARCHAR(30) NOT NULL
-); 
-ALTER TABLE
-    APP_ROLE ADD CONSTRAINT APP_ROLE_PK PRIMARY KEY(ROLE_ID);
-ALTER TABLE
-    APP_ROLE ADD CONSTRAINT APP_ROLE_UK UNIQUE(ROLE_NAME);
-CREATE TABLE USER_ROLE(
-    ID BIGINT NOT NULL,
-    USER_ID BIGINT NOT NULL,
-    ROLE_ID BIGINT NOT NULL
-); ALTER TABLE
-    USER_ROLE ADD CONSTRAINT USER_ROLE_PK PRIMARY KEY(ID);
-ALTER TABLE
-    USER_ROLE ADD CONSTRAINT USER_ROLE_UK UNIQUE(USER_ID, ROLE_ID);
-ALTER TABLE
-    USER_ROLE ADD CONSTRAINT USER_ROLE_FK1 FOREIGN KEY(USER_ID) REFERENCES APP_USER(USER_ID);
-ALTER TABLE
-    USER_ROLE ADD CONSTRAINT USER_ROLE_FK2 FOREIGN KEY(ROLE_ID) REFERENCES APP_ROLE(ROLE_ID);
-CREATE TABLE Persistent_Logins(
-    username VARCHAR(64) NOT NULL,
-    series VARCHAR(64) NOT NULL,
-    token VARCHAR(64) NOT NULL,
-    last_used TIMESTAMP NOT NULL,
-    PRIMARY KEY(series)
-); INSERT INTO App_User(
-    USER_ID,
-    USER_NAME,
-    ENCRYTED_PASSWORD,
-    ENABLED
-)
-VALUES(
-    2,
-    'dbuser1',
-    '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu',
-    1
-);
-INSERT INTO App_User(
-    USER_ID,
-    USER_NAME,
-    ENCRYTED_PASSWORD,
-    ENABLED
-)
-VALUES(
-    1,
-    'dbadmin1',
-    '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu',
-    1
-);
-INSERT INTO app_role(ROLE_ID, ROLE_NAME)
-VALUES(1, 'ROLE_ADMIN');
-INSERT INTO app_role(ROLE_ID, ROLE_NAME)
-VALUES(2, 'ROLE_USER');
-INSERT INTO user_role(ID, USER_ID, ROLE_ID)
-VALUES(1, 1, 1);
-INSERT INTO user_role(ID, USER_ID, ROLE_ID)
-VALUES(2, 1, 2);
-INSERT INTO user_role(ID, USER_ID, ROLE_ID)
-VALUES(3, 2, 2);
-=======
 CREATE TABLE app_user(
     username VARCHAR(36) collate utf8_unicode_ci NOT NULL,
     password VARCHAR(128) collate utf8_unicode_ci NOT NULL,
     enable BIT NOT NULL,
-	role VARCHAR(30) collate utf8_unicode_ci NOT NULL,
-	PRIMARY KEY (username)
+	role_id INT NOT NULL,
+	PRIMARY KEY (username),
+	FOREIGN KEY (role_id) REFERENCES user_role(role_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO app_user(username, password, enable, role) VALUES
-('admin', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', 1, 'admin'),
-('user', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', 1, 'user');
->>>>>>> Stashed changes
+INSERT INTO user_role(role_id, role_name) VALUES
+(1, 'admin'), (2, 'staff'), (3, 'user');
+
+INSERT INTO app_user(username, password, enable, role_id) VALUES
+('admin', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', 1, 1),
+('user', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', 1, 3);
