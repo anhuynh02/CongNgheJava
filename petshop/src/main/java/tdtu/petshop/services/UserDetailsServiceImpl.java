@@ -10,19 +10,18 @@ import tdtu.petshop.models.User;
 import tdtu.petshop.repositories.UserRepository;
 
 @Service
-public class ShopUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	@Autowired
 	private UserRepository userRepository;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
 		User user = userRepository.findByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("User Not Found");
 		}
-		return new ShopUserDetails(user);
+		return new UserDetailsImpl(user);
 	}
 
 }

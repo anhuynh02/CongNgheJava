@@ -6,16 +6,15 @@ import java.util.Collections;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 import tdtu.petshop.models.User;
 
-@Component
-public class ShopUserDetails implements UserDetails {
+public class UserDetailsImpl implements UserDetails {
 
+	private static final long serialVersionUID = 1L;
 	private User user;
 	
-	public ShopUserDetails(User user) {
+	public UserDetailsImpl(User user) {
 		super();
 		this.user = user;
 	}
@@ -37,26 +36,22 @@ public class ShopUserDetails implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
-	
+
 }

@@ -2,10 +2,13 @@ package tdtu.petshop.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Type;
 
 @Entity
+@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
 public class User {
 	
 	@Id
@@ -43,4 +46,5 @@ public class User {
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", enable=" + enable + ", role=" + role + "]";
 	}
+	
 }
