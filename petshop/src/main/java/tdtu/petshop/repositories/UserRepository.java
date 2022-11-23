@@ -7,5 +7,6 @@ import tdtu.petshop.models.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
-
+	
+	User findByUsername(String username); 
 }
