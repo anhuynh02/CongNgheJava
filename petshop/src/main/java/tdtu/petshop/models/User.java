@@ -1,5 +1,6 @@
 package tdtu.petshop.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -11,6 +12,8 @@ import javax.persistence.Table;
 @Table(name = "user")
 public class User {
 	
+	@Column(unique=true)
+	private String phone;
 	@Id
 	private String username;
 	private String password;
@@ -20,6 +23,12 @@ public class User {
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -47,7 +56,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", enable=" + enable + ", role=" + role + "]";
+		return "User [phone=" + phone + ", username=" + username + ", password=" + password + ", enable=" + enable + ", role=" + role + "]";
 	}
 	
 }
