@@ -69,7 +69,7 @@ CREATE TABLE `user`
 	FOREIGN KEY (role_id) REFERENCES role(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `user` (username, password, enable, role_id) VALUES
+INSERT INTO `user` (phone, username, password, enable, role_id) VALUES
 ('0700000001', 'admin', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', 1, 1),
 ('0700000002', 'customer', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', 1, 3);
 
