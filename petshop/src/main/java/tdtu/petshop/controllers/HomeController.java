@@ -1,5 +1,7 @@
 package tdtu.petshop.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -7,9 +9,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tdtu.petshop.models.User;
+import tdtu.petshop.services.UserService;
+import tdtu.petshop.services.RoleService;
 
 @Controller
 public class HomeController {
+	
+	@Autowired
+    private UserService userService;
+    @Autowired
+    private RoleService roleService;
 	
 	@GetMapping("")
 	public String getHome() {
@@ -28,7 +37,11 @@ public class HomeController {
 	
 	@PostMapping("register")
 	public String postRegister(@ModelAttribute("user") User user) {
-		return "register";
+		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+		user.setEnable(true);
+		user.setRole(roleService.findById(3));
+		userService.addUser(user);
+		return "login";
 	}
 	
 	@GetMapping("customer")
