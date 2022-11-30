@@ -1,21 +1,24 @@
 package tdtu.petshop.models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-
-import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
+@Table(name = "user")
 public class User {
 	
 	@Id
 	private String username;
 	private String password;
 	private boolean enable;
-	private String role;
+	
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
 	
 	public String getUsername() {
 		return username;
@@ -35,10 +38,10 @@ public class User {
 	public void setEnable(boolean enable) {
 		this.enable = enable;
 	}
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 	

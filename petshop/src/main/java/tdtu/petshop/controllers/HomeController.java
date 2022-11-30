@@ -11,9 +11,14 @@ public class HomeController {
 		return "Homepage";
 	}
 	
-	@GetMapping("/user")
-	public String user() {
-		return "User Page";
+	@GetMapping("/customer")
+	public String customer() {
+		return "Customer Page";
+	}
+	
+	@GetMapping("/staff")
+	public String staff() {
+		return "Staff Page";
 	}
 	
 	@GetMapping("/admin")
