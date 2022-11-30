@@ -7,8 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "role")
-public class Role {
+@Table(name = "category")
+public class Category {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,5 +39,5 @@ public class Role {
 	public String toString() {
 		return "Role [id=" + id + ", name=" + name + ", description=" + description + "]";
 	}
-	
+
 }
