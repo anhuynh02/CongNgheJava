@@ -38,11 +38,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.hasAuthority("admin");
 		http.authorizeRequests().and().formLogin()
 			.loginPage("/login")
-			.loginProcessingUrl("/login")
-			.defaultSuccessUrl("/", true);
+			.defaultSuccessUrl("/");
 		http.authorizeRequests().and().logout()
-			.logoutUrl("/logout")
-			.deleteCookies("JSESSIONID");
+			.logoutUrl("/logout");
 		http.authorizeRequests().and().httpBasic();
 	}
 	

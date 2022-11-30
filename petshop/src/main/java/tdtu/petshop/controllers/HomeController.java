@@ -8,30 +8,30 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HomeController {
 	
 	@GetMapping("")
-	public String home() {
+	public String getHome() {
 		return "Homepage";
 	}
 	
 	@GetMapping("login")
-	public String login() {
+	public String getLogin() {
 		return "login";
 	}
 	
 	@GetMapping("customer")
 	@ResponseBody
-	public String customer() {
+	public String getCustomer() {
 		return "Customer Page";
 	}
 	
 	@GetMapping("staff")
 	@ResponseBody
-	public String staff() {
+	public String getStaff() {
 		return "Staff Page";
 	}
 	
 	@GetMapping("admin")
 	@ResponseBody
-	public String admin() {
+	public String getAdmin() {
 		return "Admin Page";
 	}
 	
