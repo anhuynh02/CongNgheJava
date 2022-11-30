@@ -17,6 +17,11 @@ public class HomeController {
 		return "login";
 	}
 	
+	@GetMapping("register")
+	public String getRegister() {
+		return "register";
+	}
+	
 	@GetMapping("customer")
 	@ResponseBody
 	public String getCustomer() {
