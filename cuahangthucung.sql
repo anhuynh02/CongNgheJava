@@ -60,6 +60,7 @@ INSERT INTO role (id, name, description) VALUES
 
 CREATE TABLE `user`
 (
+    phone VARCHAR(13) collate utf8_unicode_ci NOT NULL UNIQUE,
     username VARCHAR(36) collate utf8_unicode_ci NOT NULL,
     password VARCHAR(128) collate utf8_unicode_ci NOT NULL,
     enable BIT NOT NULL,
