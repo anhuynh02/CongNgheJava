@@ -28,19 +28,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-			.antMatchers("/")
-			.permitAll()
-			.antMatchers("/customer")
-			.hasAnyAuthority("customer", "staff", "admin")
-			.antMatchers("/staff")
-			.hasAnyAuthority("staff", "admin")
-			.antMatchers("/admin")
-			.hasAuthority("admin")
-			.anyRequest()
-			.authenticated()
-			.and()
-			.httpBasic();
-		}
+		http.authorizeRequests().antMatchers("/").permitAll();
+		http.authorizeRequests().antMatchers("/customer").hasAnyAuthority("customer", "staff", "admin");
+		http.authorizeRequests().antMatchers("/staff").hasAnyAuthority("staff", "admin");
+		http.authorizeRequests().antMatchers("/admin").hasAuthority("admin");
+		http.authorizeRequests().and().httpBasic();
+	}
 	
 }
