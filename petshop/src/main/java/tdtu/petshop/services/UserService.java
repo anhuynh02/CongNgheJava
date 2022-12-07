@@ -1,9 +1,13 @@
 package tdtu.petshop.services;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import tdtu.petshop.models.Role;
 import tdtu.petshop.models.User;
 import tdtu.petshop.repositories.UserRepository;
 
@@ -20,6 +24,10 @@ public class UserService {
 	
 	public User findByPhone(String phone) {
 		return userRepository.findByPhone(phone);
+	}
+	
+	public List<User> findAllByRole(Role role) {
+		return userRepository.findAllByRole(role);
 	}
 	
 	public void saveUser(User user) {
