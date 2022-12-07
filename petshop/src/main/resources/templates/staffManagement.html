@@ -50,6 +50,10 @@
             e.preventDefault();
         });
         
+        $("#editPassword").click(function() {
+        	window.location.href = "staff/edit/password/" + $("#editUsername").val();
+        });
+        
         $(".delete").click(function(e) {
   			$("#deleteUsername").val($(this).data("id"));
             $("#deleteModal").modal({
@@ -174,7 +178,7 @@
                         <label class="control-label" for="name">Họ và tên:</label>
                         <input type="text" class="form-control" placeholder="Họ và Tên" name="name" id="editName" required/>
                     </div>
-                    <a href="/edit/password" class="btn btn-primary">Đổi mật khẩu</a>
+                    <button type="button" class="btn btn-default" id="editPassword">Đổi mật khấu</button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>

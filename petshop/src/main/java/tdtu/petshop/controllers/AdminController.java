@@ -62,8 +62,17 @@ public class AdminController {
 	}
 	
 	@GetMapping("/staff/edit/password/{username}")
-	public String getStaffEditPassword(@PathVariable("username") String username) {
-		return "password";
+	public String getStaffEditPassword(Model model, @PathVariable("username") String username) {
+		model.addAttribute("username", username);
+		return "staffPasswordChange";
+	}
+	
+	@PostMapping("/staff/edit/password")
+	public String postStaffEditPassword(HttpServletRequest request) {
+		User staff = userService.findByUsername(request.getParameter("username"));
+		staff.setPassword(new BCryptPasswordEncoder().encode(request.getParameter("password")));
+		userService.saveUser(staff);
+		return "redirect:/admin/staff";
 	}
 	
 	@PostMapping("/staff/delete")
