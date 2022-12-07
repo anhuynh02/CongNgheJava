@@ -61,6 +61,7 @@ INSERT INTO role (id, name, description) VALUES
 CREATE TABLE `user`
 (
     phone VARCHAR(13) collate utf8_unicode_ci NOT NULL UNIQUE,
+	name VARCHAR(150) collate utf8_unicode_ci NOT NULL,
     username VARCHAR(36) collate utf8_unicode_ci NOT NULL,
     password VARCHAR(128) collate utf8_unicode_ci NOT NULL,
     enable BIT NOT NULL,
@@ -70,7 +71,9 @@ CREATE TABLE `user`
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `user` (phone, username, password, enable, role_id) VALUES
-('0700000001', 'admin', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', 1, 1),
-('0700000002', 'customer', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', 1, 3);
+('0700000001', 'Admin', 'admin', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', 1, 1),
+('0700000010', 'Lê Khánh Văn', 'staff', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', 1, 2);
+('0700000020', 'Liễu Duy Ngôn', 'staffTemp', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', 1, 2);
+('0700000002', 'Trần Văn A', 'customer', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', 1, 3);
 
 -- --------------------------------------------------------

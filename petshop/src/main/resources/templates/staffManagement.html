@@ -183,12 +183,12 @@
                 </thead>
 
                 <tbody id="table-body">
-                	<tr th:each="staff : ${staffs}
-                		<td th:text="${user.name}"></td>  
-			            <td th:text="${user.email}"></td>  
-			            <td th:text="${user.phone}"></td>  
+                	<tr th:each="staff : ${staffs}">
+                		<td th:text="${staff.phone}"></td>  
+			            <td th:text="${staff.username}"></td>  
+			            <td th:text="${staff.password}"></td>  
 			            <td>  
-			                <a th:href="@{/edit?id={id}(id=${user.id})}" class="btn btn-primary">Edit</a>  
+			                <a th:href="@{/edit?id={id}(id=${staff.username})}" class="btn btn-primary">Edit</a>  
 			                <a th:href="@{/delete?id={id}(id=${user.id})}" class="btn btn-danger">Delete</a>  
             			</td>
         			</tr>
