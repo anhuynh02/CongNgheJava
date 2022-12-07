@@ -38,11 +38,16 @@
         });
         
         $(".edit").click(function(e) {
-  			e.preventDefault();
-            $("#editModal").modal({
+        	$("#editModal").modal({
                 backdrop: "static",
                 keyboard: false
             });
+        	$.get("staff/edit/" + $(this).data("id"), function(staff) {
+				$("#editPhone").val(staff.phone);
+				$("#editName").val(staff.name);
+				$("#editUsername").val(staff.username);
+       		});
+            e.preventDefault();
         });
         
         $(".delete").click(function(e) {
@@ -81,7 +86,7 @@
 			            <td th:text="${staff.username}"></td>  
 			            <td th:text="${staff.password}"></td>  
 			            <td>  
-			                <a href="#" th:attr="data-id=${staff.username}" class="btn btn-primary">Edit</a>
+			                <a href="#" th:attr="data-id=${staff.username}" class="edit btn btn-primary">Edit</a>
 			                <a href="#" th:attr="data-id=${staff.username}" class="delete btn btn-danger">Delete</a>  
                         </td>
                     </tr>
@@ -159,6 +164,7 @@
             </div>
             <form th:action="@{staff/edit}" th:object="${staff}" method="post">
                 <div class="modal-body">
+                	<input type="hidden" name="username" id="editUsername">
                 	<div class="form-group">
                         <label class="control-label" for="phone">Số điện thoại:</label>
                         <input type="text" class="form-control" placeholder="Số điện thoại" name="phone" id="editPhone" required/>
@@ -168,6 +174,7 @@
                         <label class="control-label" for="name">Họ và tên:</label>
                         <input type="text" class="form-control" placeholder="Họ và Tên" name="name" id="editName" required/>
                     </div>
+                    <a href="/edit/password" class="btn btn-primary">Đổi mật khẩu</a>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
@@ -195,7 +202,7 @@
                 <p>Bạn có chắc chắn muốn xóa nhân viên?</p>
             </div>
             <div class="modal-footer">
-            	<form th:action="@{staff/delete}" th:object="${staff}" method="post">  
+            	<form th:action="@{staff/delete}" method="post">  
         			<input type="hidden" name="username" id="deleteUsername">  
         			<input type="submit" class="btn btn-danger" value=Xóa>
         			<button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
