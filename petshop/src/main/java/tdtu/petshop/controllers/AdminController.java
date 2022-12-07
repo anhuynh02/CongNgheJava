@@ -40,4 +40,10 @@ public class AdminController {
 		return "redirect:/admin/staff";
 	}
 	
+	@PostMapping("/staff/delete")
+	public String postDeleteStaff(@ModelAttribute("staff") User staff) {
+		userService.deleteUser(staff.getUsername());
+		return "redirect:/admin/staff";
+	}
+	
 }
