@@ -40,7 +40,7 @@ public class HomeController {
 		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 		user.setEnable(true);
 		user.setRole(roleService.findById(3));
-		userService.addUser(user);
+		userService.saveUser(user);
 		return "login";
 	}
 	

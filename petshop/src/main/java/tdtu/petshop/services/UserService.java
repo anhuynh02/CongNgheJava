@@ -22,8 +22,12 @@ public class UserService {
 		return userRepository.findByPhone(phone);
 	}
 	
-	public void addUser(User user) {
+	public void saveUser(User user) {
 		userRepository.save(user);
+	}
+	
+	public void deleteUser(String username) {
+		userRepository.deleteById(username);
 	}
 		
 }
