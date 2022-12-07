@@ -5,6 +5,11 @@ SET time_zone = "+00:00";
 -- Database: `cuahangthucung`
 --
 
+CREATE DATABASE IF NOT EXISTS `cuahangthucung` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `cuahangthucung`;
+
+-- --------------------------------------------------------
+
 --
 -- Table: `category`
 --
@@ -15,6 +20,12 @@ CREATE TABLE category (
   description VARCHAR(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO category (id, name, description) VALUES
+(1, 'cat', 'Thú cưng là mèo.'),
+(2, 'dog', 'Thú cưng là chó.'),
+(3, 'food', 'Đồ ăn cho chó và mèo'),
+(4, 'toy', 'Đồ chơi cho thú cưng');
 
 -- --------------------------------------------------------
 
@@ -33,6 +44,12 @@ CREATE TABLE product (
   PRIMARY KEY (id),
   FOREIGN KEY (category_id) REFERENCES category(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO product (id, name, price, description, vote, `image`, category_id) VALUES
+(1, 'Mèo Xiêm', 'Một trong những loài mèo đầu tiên của mèo lông ngắn phương Đông được công nhận', 2800000, 4, './images/cat/meoxiem.jpg', 1),
+(2, 'Chó Alaska', 'Chó Alaska hay Alaska Malamute hoặc Mahlemuts là một giống chó kéo xe ở Alaska', 9000000, 4, './images/dog/alaska.jpg', 2),
+(3, 'Royal Canin Kitten', 'Thức ăn cho mèo con ROYAL CANIN Kitten bao gồm protein từ lòng trắng trứng + Probiotic, chất chống oxy hóa giúp nâng cao sức khỏe', 115000, 4, './images/food/thucan1.jpg', 3),
+(4, 'Đồ chơi tạm', 'Placeholder', 100000, 4, './images/toy/temp', 4);
 
 -- --------------------------------------------------------
 
@@ -70,10 +87,10 @@ CREATE TABLE `user`
 	FOREIGN KEY (role_id) REFERENCES role(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `user` (phone, username, password, enable, role_id) VALUES
+INSERT INTO `user` (phone, name, username, password, enable, role_id) VALUES
 ('0700000001', 'Admin', 'admin', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', 1, 1),
-('0700000010', 'Lê Khánh Văn', 'staff', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', 1, 2);
-('0700000020', 'Liễu Duy Ngôn', 'staffTemp', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', 1, 2);
+('0700000010', 'Lê Khánh Văn', 'staff', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', 1, 2),
+('0700000020', 'Liễu Duy Ngôn', 'staffTemp', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', 1, 2),
 ('0700000002', 'Trần Văn A', 'customer', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', 1, 3);
 
 -- --------------------------------------------------------
