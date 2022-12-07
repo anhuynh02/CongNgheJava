@@ -14,6 +14,7 @@ public class User {
 	
 	@Column(unique=true)
 	private String phone;
+	private String name;
 	@Id
 	private String username;
 	private String password;
@@ -28,6 +29,12 @@ public class User {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getUsername() {
 		return username;
@@ -56,7 +63,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [phone=" + phone + ", username=" + username + ", password=" + password + ", enable=" + enable + ", role=" + role + "]";
+		return "User [phone=" + phone + ", name=" + name + ", username=" + username + ", password=" + password + ", enable=" + enable + ", role=" + role + "]";
 	}
 	
 }

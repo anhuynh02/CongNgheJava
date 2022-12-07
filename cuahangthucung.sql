@@ -46,10 +46,10 @@ CREATE TABLE product (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO product (id, name, price, description, vote, `image`, category_id) VALUES
-(1, 'Mèo Xiêm', 'Một trong những loài mèo đầu tiên của mèo lông ngắn phương Đông được công nhận', 2800000, 4, './images/cat/meoxiem.jpg', 1),
-(2, 'Chó Alaska', 'Chó Alaska hay Alaska Malamute hoặc Mahlemuts là một giống chó kéo xe ở Alaska', 9000000, 4, './images/dog/alaska.jpg', 2),
-(3, 'Royal Canin Kitten', 'Thức ăn cho mèo con ROYAL CANIN Kitten bao gồm protein từ lòng trắng trứng + Probiotic, chất chống oxy hóa giúp nâng cao sức khỏe', 115000, 4, './images/food/thucan1.jpg', 3),
-(4, 'Đồ chơi tạm', 'Placeholder', 100000, 4, './images/toy/temp', 4);
+(1, 'Mèo Xiêm', 2800000, 'Một trong những loài mèo đầu tiên của mèo lông ngắn phương Đông được công nhận', 4, './images/cat/meoxiem.jpg', 1),
+(2, 'Chó Alaska', 9000000, 'Chó Alaska hay Alaska Malamute hoặc Mahlemuts là một giống chó kéo xe ở Alaska', 4, './images/dog/alaska.jpg', 2),
+(3, 'Royal Canin Kitten', 115000, 'Thức ăn cho mèo con ROYAL CANIN Kitten bao gồm protein từ lòng trắng trứng + Probiotic, chất chống oxy hóa giúp nâng cao sức khỏe', 4, './images/food/thucan1.jpg', 3),
+(4, 'Đồ chơi tạm', 100000, 'Placeholder', 4, './images/toy/temp', 4);
 
 -- --------------------------------------------------------
 
