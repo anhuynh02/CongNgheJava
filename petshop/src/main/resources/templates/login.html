@@ -2,65 +2,48 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/login.css">
+
 </head>
 
 <body>
     <script>
-        $(document).ready(function() {
-            $("#signUp").click(function(e) {
+        $(document).ready(function () {
+            $("#signUp").click(function (e) {
                 $('#mySignUp').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
             });
         })
+        $(function(){
+            $('.message a').click(function(){
+                $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+             });
+        });
+        
     </script>
-    <div class="container">
-        <form th:action="@{/login}" method="post">
-            <h2>Login</h2>
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input class="form-control" id="username" placeholder="Enter username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
-                <a href="#" id="signUp">Create new account</a>
-            </div>
-            <div id="checkError" class="error" style="color: red;"></div>
-            <div id="checkError" class="success" style="color: green;"></div>
-            <input type="submit" value="login" name="loginBtn">
-        </form>
-    </div>
-
-    <div class="modal fade" id="mySignUp" role="dialog">
-        <div class="modal-dialog">
-            <form action="#" method="post">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h3 class="modal-title">Đăng kí tài khoản</h3>
-                    </div>
-                    <div class="modal-body">
-                        <label for="signUsername">Username:</label>
-                        <input class="form-control" id="signUsername" placeholder="Enter username" name="signUsername" required>
-                        <label for="signPassword">Password:</label>
-                        <input type="password" class="form-control" id="signPassword" placeholder="Enter password" name="signPassword" required>
-                        <label for="rePassword">Password:</label>
-                        <input type="password" class="form-control" id="rePassword" placeholder="Enter password again" name="rePassword" required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                        <input type="submit" class="btn btn-success" name="signUpBtn" value="Sign - up">
-                    </div>
-                </div>
-            </form>
-            <!-- Modal content-->
+    <div class="login-container">
+        <div class="form">
+          <form class="register-form" id="registerForm" method="post">
+            <input type="text" placeholder="username" name="registerUsername" class="info" required/>
+            <input type="password" placeholder="password" name="registerPassword" class="info" required/>
+            <input type="email" placeholder="email address" name="registerEmail" class="info" required/>
+            <input type="submit" value="Create" id="createBtn" style="background-color: skyblue;color:white">
+            <p class="error message" style="color:red"></p>
+            <p class="message">Already registered? <a href="#" id="signin">Sign In</a></p>
+          </form>
+          <form class="login-form" action="#" id="loginForm" method="post">
+            <input type="text" placeholder="username" id="username" name="username" class="info" required />
+            <input type="password" placeholder="password" id="password" name="password" class="info" required/>
+            <input type="submit" value="Login" id="loginBtn" style="background-color: skyblue;color:white">
+            <p class="error message" style="color:red"></p>
+            <p class="message">Not registered? <a href="#" id="signup">Create an account</a></p>
+            
+          </form>
         </div>
-    </div>
+      </div>
 </body>
 
 </html>
