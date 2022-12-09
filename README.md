@@ -1,6 +1,5 @@
-BCrypt:
-$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy = 123
-Fix lỗi k tìm thấy file pom.xml:
+BCrypt: $2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy = 123<br>
+Fix lỗi k tìm thấy file pom.xml:<br>
   1. Right click on the project
   2. Select menu Properties
   3. Click on Maven item in the list of left side
