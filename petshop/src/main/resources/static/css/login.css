@@ -44,7 +44,7 @@
   cursor: pointer;
 }
 
-.form #createBtn:hover,
+.form #registerBtn:hover,
 .form #loginBtn:hover,
 .form button:focus {
   background-color:blue !important;

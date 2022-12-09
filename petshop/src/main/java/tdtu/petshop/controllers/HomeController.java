@@ -1,5 +1,7 @@
 package tdtu.petshop.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -30,18 +32,17 @@ public class HomeController {
 		return "login";
 	}
 	
-	@GetMapping("register")
-	public String getRegister() {
-		return "register";
-	}
-	
 	@PostMapping("register")
-	public String postRegister(@ModelAttribute("user") User user) {
-		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-		user.setEnable(true);
-		user.setRole(roleService.findById(3));
-		userService.saveUser(user);
-		return "login";
+	public String postRegister(@ModelAttribute("user") User user, HttpServletRequest request) {
+		if (request.getParameter("confirmPassword") == user.getPassword()) {
+			user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+			user.setEnable(true);
+			user.setRole(roleService.findById(3));
+			userService.saveUser(user);
+			return "login";
+		} else {
+			return "login";
+		}
 	}
 	
 	@GetMapping("customer")
