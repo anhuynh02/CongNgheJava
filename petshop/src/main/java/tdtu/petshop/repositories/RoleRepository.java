@@ -8,6 +8,5 @@ import tdtu.petshop.models.Role;
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Integer> {
 	
-	Role findById(int id);
-	
+	Role findById(int id);	
 }

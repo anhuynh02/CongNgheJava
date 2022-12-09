@@ -82,7 +82,7 @@
                         <th>Thao tác</th>
                     </tr>
                 </thead>
-
+                
                 <tbody id="table-body">
                     <tr th:each="staff : ${staffs}">
                         <td th:text="${staff.phone}"></td>
@@ -141,6 +141,11 @@
 		            <div class="form-group">
 		                <label for="password">Password:</label>
 		                <input type="password" class="form-control" placeholder="Nhập mật khẩu" name="password" required>
+		            </div>
+		            
+		            <div class="form-group">
+		                <label for="confirmPassword">Nhập lại Password:</label>
+		                <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" name="confirmPassword" required>
 		            </div>
                 </div>
 
