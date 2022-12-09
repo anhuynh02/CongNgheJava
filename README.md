@@ -10,3 +10,12 @@ Fix lỗi k tìm thấy file pom.xml:<br>
   8. Configure -> Convert to maven project
   9. Run As -> Maven clean
   10. Run As -> Maven install
+<br>
+Cần code:<br>
+Quản lý kho, loại sản phẩm (repository service thymeleaf each)<br>
+thống kê (?)<br>
+tìm kiếm (repository service)<br>
+database thêm bill, bill_details (vỏ hàng)<br>
+<br>
+error cho login + trang error (th:if="${#fields.hasErrors('???')}")<br>
+logout (post @{/logout})<br>
