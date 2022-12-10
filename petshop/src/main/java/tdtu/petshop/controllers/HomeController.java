@@ -3,6 +3,7 @@ package tdtu.petshop.controllers;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import tdtu.petshop.models.User;
 import tdtu.petshop.services.UserService;
+import tdtu.petshop.services.UserDetailsImpl;
 import tdtu.petshop.services.RoleService;
 
 @Controller
@@ -29,6 +31,9 @@ public class HomeController {
 	
 	@GetMapping("login")
 	public String getLogin() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetailsImpl)
+			return "redirect:/";
 		return "login";
 	}
 	
