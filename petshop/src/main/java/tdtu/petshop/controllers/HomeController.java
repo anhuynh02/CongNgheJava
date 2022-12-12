@@ -69,10 +69,4 @@ public class HomeController {
 		return "Staff Page";
 	}
 	
-	@GetMapping("admin")
-	@ResponseBody
-	public String getAdmin() {
-		return "Admin Page";
-	}
-	
 }

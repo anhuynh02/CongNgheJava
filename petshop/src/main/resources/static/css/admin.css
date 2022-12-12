@@ -1,0 +1,173 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+tbody td{
+    padding: 15px 0;
+}
+
+thead th{
+	text-align: center;
+}
+
+.container-item{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+}
+
+a:-webkit-any-link{
+    color: black;
+    text-decoration: none;
+}
+
+a:hover{
+	color:black;
+	text-decoration: none;
+}
+
+/* CSS thanh side */
+
+.side-header{
+    width: 300px;
+    height: 1000px;
+    background-color: #FAF7F0;
+}
+
+.side-logo{
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    border-bottom: 1px solid black;
+}
+
+.side-logo p{
+    font-size: 40px;
+    font-weight: bold;
+    font-style: italic;
+    
+}
+
+.side-items{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 200px;
+    justify-content: space-between;
+    margin-top: 15px;
+    border-bottom: 1px solid black;
+    padding-bottom: 15px;
+}
+.items{
+    font-size: 30px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+.side-logout{
+    margin-top: 15px;
+    display: flex;
+    height: 50px;
+    width: 300px;
+}
+
+/* CSS other side */
+.content{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    flex-direction: column;
+}
+
+/* CSS header */
+.header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    height: 100px;
+    background-color: #E5BA73;
+    
+}
+
+.header-logo{
+    font-size: 40px;
+    font-weight: bold;
+    font-style: italic;
+    position: absolute;
+    left: 45%;
+}
+.header-side{
+    font-size: 20px;
+    font-style: italic;
+    position: absolute;
+    right: 25px;
+}
+
+/* CSS for every management table and header */
+
+.inside-head{
+    padding: 15px;
+    width: 100%;
+    height: fit-content;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+
+.inside-content{
+    padding: 15px;
+}
+
+.inside-table{
+    width: 95%;
+    font-size: 20px;
+    text-align: center;
+}
+
+.inside-btnAdd{
+    margin-top: 15px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #d4cccc;
+    font-size: 15px;
+    width: 150px;
+    height: 40px;
+    background-color: #E5BA73;
+    cursor: pointer;
+}
+
+#productManage{
+    display: none;
+}
+
+#staffManage{
+    display: block;
+}
+
+.btnEdit{
+    width: 50px;
+    height: 30px;
+    border: none;
+    box-shadow:  0 0 10px #d4cccc;
+    background-color: yellow;
+    border-radius: 20px;
+}
+
+.btnDel{
+    width: 70px;
+    height: 30px;
+    border: none;
+    box-shadow:  0 0 10px #d4cccc;
+    background-color: red;
+    border-radius: 20px;
+}
+
+.des{
+	width: 400px;
+	text-align: start;
+}

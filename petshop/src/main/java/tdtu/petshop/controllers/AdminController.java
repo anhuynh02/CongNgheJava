@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import tdtu.petshop.models.Product;
 import tdtu.petshop.models.User;
+import tdtu.petshop.services.ProductService;
 import tdtu.petshop.services.RoleService;
 import tdtu.petshop.services.UserService;
 
@@ -30,6 +32,17 @@ public class AdminController {
     private UserService userService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private ProductService productService;
+    
+    @GetMapping("")
+	public String getAdmin(Model mode1, Model model2) {
+    	List<User> staffs = userService.findAllByRole(roleService.findById(2));
+    	List<Product> products = productService.findAll();
+    	mode1.addAttribute("staffs", staffs);
+    	model2.addAttribute("products",products);
+		return "admin";
+	}
 	
 	@GetMapping("/staff")
 	public String getStaff(Model model) {
