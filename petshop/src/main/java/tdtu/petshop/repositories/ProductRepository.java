@@ -8,8 +8,11 @@ import org.springframework.stereotype.Repository;
 import tdtu.petshop.models.Product;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, String>{
+public interface ProductRepository extends JpaRepository<Product, Integer>{
 	
 	@Query("select product from Product product")
 	List<Product> findAll();
+	
+	Product findById(int id);
+	
 }
