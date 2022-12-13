@@ -1,5 +1,7 @@
 package tdtu.petshop.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +14,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import tdtu.petshop.models.Product;
 import tdtu.petshop.models.User;
 import tdtu.petshop.services.UserService;
 import tdtu.petshop.services.UserDetailsImpl;
+import tdtu.petshop.services.CategoryService;
+import tdtu.petshop.services.ProductService;
 import tdtu.petshop.services.RoleService;
 
 @Controller
@@ -24,6 +29,10 @@ public class HomeController {
     private UserService userService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private CategoryService categoryService;
 	
 	@GetMapping("")
 	public String getHome(Model model) {
@@ -33,6 +42,9 @@ public class HomeController {
 		}
 		else
 			model.addAttribute("user", null);
+		List<Product> dogs = productService.findAllByCategory(categoryService.findById(2));
+		model.addAttribute("dogs",dogs);
+		
 		return "Homepage";
 	}
 	

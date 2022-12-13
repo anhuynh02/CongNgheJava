@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import tdtu.petshop.models.Category;
 import tdtu.petshop.models.Product;
+import tdtu.petshop.repositories.CategoryRepository;
 import tdtu.petshop.repositories.ProductRepository;
 
 @Service
@@ -30,5 +32,9 @@ public class ProductService {
 	
 	public void deleteProduct(int id) {
 		productRepository.deleteById(id);
+	}
+	
+	public List<Product> findAllByCategory(Category category){
+		return productRepository.findAllByCategory(category);
 	}
 }

@@ -55,4 +55,23 @@ p{
 		background: none!important;
 		border: none;
 		cursor: pointer;
-    }
+}
+
+#search-bar{
+    width: 600px;
+    border-radius: 20px 0 0 20px;
+    margin-right: 0 !important;
+}
+
+#search-btn{
+    background-color: #AAC4FF;
+    border-radius: 0 20px 20px 0;
+    width: 60px;
+}
+
+#search-form{
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    
+}
