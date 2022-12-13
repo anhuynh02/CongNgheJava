@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tdtu.petshop.models.User;
+import tdtu.petshop.repositories.UserRepository;
 import tdtu.petshop.services.UserService;
 import tdtu.petshop.services.UserDetailsImpl;
 import tdtu.petshop.services.RoleService;
@@ -54,16 +55,14 @@ public class HomeController {
 	}
 	
 	@PostMapping("register")
-	public String postRegister(@ModelAttribute("user") User user, HttpServletRequest request) {
-		if (request.getParameter("confirmPassword") == user.getPassword()) {
-			user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-			user.setEnable(true);
-			user.setRole(roleService.findById(3));
-			userService.saveUser(user);
-			return "login";
-		} else {
-			return "login";
+	public String postRegister(Model model, @ModelAttribute("user") User user, HttpServletRequest request) {
+		String error = userService.registerCustomer(user, request.getParameter("confirmPassword"));
+		if (error != null) {
+			model.addAttribute("error", error);
+			model.addAttribute("user", user);
+			return "register";
 		}
+		return "login";
 	}
 	
 	@GetMapping("customer")

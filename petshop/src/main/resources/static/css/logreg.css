@@ -65,10 +65,6 @@
     color: blue;
 }
 
-.form .register-form {
-  display: none;
-}
-
 .container {
   position: relative;
   z-index: 1;
