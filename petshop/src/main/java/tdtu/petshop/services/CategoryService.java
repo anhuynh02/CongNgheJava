@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import tdtu.petshop.models.Category;
-import tdtu.petshop.models.User;
 import tdtu.petshop.repositories.CategoryRepository;
 
 @Service
