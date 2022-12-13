@@ -23,8 +23,6 @@ public class HomeController {
 	
 	@Autowired
     private UserService userService;
-    @Autowired
-    private RoleService roleService;
 	
 	@GetMapping("")
 	public String getHome(Model model) {
