@@ -1,6 +1,7 @@
 package tdtu.petshop.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,5 +18,17 @@ public class ProductService {
 	
 	public List<Product> findAll() {
 		return productRepository.findAll();
+	}
+	
+	public void saveProduct(Product product) {
+		productRepository.save(product);
+	}
+	
+	public Product findById(int id) {
+		return productRepository.findById(id);
+	}
+	
+	public void deleteProduct(int id) {
+		productRepository.deleteById(id);
 	}
 }

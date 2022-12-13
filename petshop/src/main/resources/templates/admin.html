@@ -31,7 +31,10 @@
                 <p class="header-logo">Trang chủ quản lý</p>
                 <p class="header-side">Xin chào admin</p>
             </div>
-            <!-- Quản lý nhân viên -->
+            
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Quản lý nhân viên+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+            <!-- Quản lý danh sách nhân viên -->
             <div id="staffManage">
                 <div class="inside-head">
                     <h1>Quản lý nhân viên</h1>
@@ -53,44 +56,15 @@
                                 <td th:text="${staff.name}"></td>
                                 <td th:text="${staff.username}"></td>
                                 <td>
-									<button class="btnEdit"><a href="#" th:attr="data-id=${staff.username}">Edit</a></button>
-			                		<button class="btnDel"><a href="#" th:attr="data-id=${staff.username}">Delete</a></button>
+									<button class="staffEdit btnEdit" th:attr="data-id=${staff.username}">Edit</button>
+			                		<button class="staffDel btnDel" th:attr="data-id=${staff.username}">Delete</button>
 								</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <!-- Quản lý product -->
-            <div id="productManage">
-                <div class="inside-head">
-                    <h1>Quản lý kho</h1>
-                    <button class="inside-btnAdd">Thêm sản phẩm</button>
-                </div>
-                <div class="inside-content">
-                    <table class="inside-table">
-                        <thead>
-                            <tr>
-                                <th>Tên</th>
-                                <th>Giá cả</th>
-                                <th>Mô tả</th>
-                                <th>Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="product: ${products}">
-                                <td th:text="${product.name}"></td>
-                                <td th:text="${product.price}"></td>
-                                <td class="des" th:text="${product.description}"></td>
-                                <td>
-									<button class="btnEdit"><a href="#">Edit</a></button>
-			                		<button class="btnDel"><a href="#">Delete</a></button>
-								</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            
             
             <!-- Thêm nhân viên dialog -->
 			<div class="modal fade" id="addModal" role="dialog">
@@ -102,7 +76,7 @@
 			                <button type="button" class="close" data-dismiss="modal">&times;</button>
 			                <h4 class="modal-title">Thêm nhân viên</h4>
 			            </div>
-			            <form th:action="@{staff/add}" th:object="${staff}" method="post">
+			            <form th:action="@{admin/staff/add}" th:object="${staff}" method="post">
 			                <div class="modal-body">
 			                	<div class="form-group">
 			                        <label class="control-label" for="phone">Số điện thoại:</label>
@@ -141,6 +115,208 @@
 			    </div>
 			</div>
 			<!-- Thêm nhân viên dialog -->
+			
+			<!-- Sửa nhân viên dialog -->
+			<div class="modal fade" id="editModal" role="dialog">
+			    <div class="modal-dialog">
+			
+			        <!-- Modal content-->
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <button type="button" class="close" data-dismiss="modal">&times;</button>
+			                <h4 class="modal-title">Sửa thông tin nhân viên</h4>
+			            </div>
+			            <form th:action="@{staff/edit}" th:object="${staff}" method="post">
+			                <div class="modal-body">
+			                	<input type="hidden" name="username" id="editUsername">
+			                	<div class="form-group">
+			                        <label class="control-label" for="phone">Số điện thoại:</label>
+			                        <input type="text" class="form-control" placeholder="Số điện thoại" name="phone" id="editPhone" required/>
+			                    </div>
+			                
+			                    <div class="form-group">
+			                        <label class="control-label" for="name">Họ và tên:</label>
+			                        <input type="text" class="form-control" placeholder="Họ và Tên" name="name" id="editName" required/>
+			                    </div>
+			                    <button type="button" class="btn btn-default" id="editPassword">Đổi mật khấu</button>
+			                </div>
+			                <div class="modal-footer">
+			                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+								<input type="submit" class="btn btn-success" value="Sửa"/>
+			                </div>
+			
+			            </form>
+			        </div>
+			        
+			    </div>
+			</div>
+			<!-- Sửa nhân viên dialog -->
+			
+			<!-- Xóa nhân viên dialog -->
+			<div class="modal fade" id="deleteModal" role="dialog">
+			    <div class="modal-dialog">
+			
+			        <!-- Modal content-->
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <button type="button" class="close" data-dismiss="modal">&times;</button>
+			                <h4 class="modal-title">Xóa nhân viên</h4>
+			            </div>
+			            <div class="modal-body">
+			                <p>Bạn có chắc chắn muốn xóa nhân viên?</p>
+			            </div>
+			            <div class="modal-footer">
+			            	<form th:action="@{admin/staff/delete}" method="post">  
+			        			<input type="hidden" name="username" id="deleteUsername">  
+			        			<input type="submit" class="btn btn-danger" value=Xóa>
+			        			<button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
+			        		</form>
+			            </div>
+			        </div>
+			
+			    </div>
+			</div>
+			<!-- Xóa nhân viên dialog -->
+			
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Quản lý sản phẩm+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+			<!-- Quản lý danh sách sản phẩm-->
+            <div id="productManage">
+                <div class="inside-head">
+                    <h1>Quản lý kho</h1>
+                    <button class="inside-btnAdd" id="proAddBtn">Thêm sản phẩm</button>
+                </div>
+                <div class="inside-content">
+                    <table class="inside-table">
+                        <thead>
+                            <tr>
+                                <th>Tên</th>
+                                <th>Giá cả</th>
+                                <th>Mô tả</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="product: ${products}">
+                                <td th:text="${product.name}"></td>
+                                <td th:text="${product.price}"></td>
+                                <td class="des" th:text="${product.description}"></td>
+                                <td>
+									<button class="productEdit btnEdit" th:attr="data-id=${product.id}">Edit</button>
+			                		<button class="productDel btnDel" th:attr="data-id=${product.id}">Delete</button>
+								</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+			
+			<!-- Thêm sản phẩm dialog -->
+			<div class="modal fade" id="addProduct" role="dialog">
+			    <div class="modal-dialog">
+			
+			        <!-- Modal content-->
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <button type="button" class="close" data-dismiss="modal">&times;</button>
+			                <h4 class="modal-title">Thêm sản phẩm</h4>
+			            </div>
+			            <form th:action="@{admin/product/add}" th:object="${product}" method="post">
+			                <div class="modal-body">
+			                	<div class="form-group">
+			                        <label class="control-label" for="phone">Tên sản phẩm:</label>
+			                        <input type="text" class="form-control" placeholder="Nhập tên sản phẩm" name="name" required/>
+			                    </div>
+			     	           
+			                    <div class="form-group">
+			                        <label class="control-label" for="name">Giá sản phẩm:</label>
+			                        <input type="text" class="form-control" placeholder="Nhập giá sản phẩm" name="price" required/>
+			                    </div>
+			    
+			                    <div class="form-group">
+					                <label for="username">Mô tả:</label>
+					                <input type="text" class="form-control" placeholder="Nhập mô tả" name="description" required>
+					            </div>
+			                </div>
+			
+			                <div class="modal-footer">
+			                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+								<input type="submit" class="btn btn-success" value="Thêm"/>
+			                </div>
+			
+			            </form>
+			        </div>
+			        
+			    </div>
+			</div>
+			<!-- Thêm sản phẩm dialog -->
+			
+			<!-- Sửa sản phẩm dialog -->
+			<div class="modal fade" id="editProduct" role="dialog">
+			    <div class="modal-dialog">
+			
+			        <!-- Modal content-->
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <button type="button" class="close" data-dismiss="modal">&times;</button>
+			                <h4 class="modal-title">Sửa thông tin sản phẩm</h4>
+			            </div>
+			            <form th:action="@{admin/product/edit}" th:object="${product}" method="post">
+			                <div class="modal-body">
+			                	<input type="hidden" name="id" id="editProId">
+			                	<div class="form-group">
+			                        <label class="control-label" for="name">Tên sản phẩm:</label>
+			                        <input type="text" class="form-control" placeholder="Nhập tên sản phẩm" name="name" id="editProName" required/>
+			                    </div>
+			                
+			                    <div class="form-group">
+			                        <label class="control-label" for="price">Giá cả:</label>
+			                        <input type="text" class="form-control" placeholder="Nhập giá cả" name="price" id="editProPrice" required/>
+			                    </div>
+			                    <div class="form-group">
+			                        <label class="control-label" for="des">Mô tả:</label>
+			                        <input type="text" class="form-control" placeholder="Nhập mô tả" name="description" id="editProDes" required/>
+			                    </div>
+			                </div>
+			                <div class="modal-footer">
+			                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+								<input type="submit" class="btn btn-success" value="Sửa"/>
+			                </div>
+			
+			            </form>
+			        </div>
+			        
+			    </div>
+			</div>
+			<!-- Sửa sản phẩm dialog -->
+			
+			<!-- Xóa nhân viên dialog -->
+			<div class="modal fade" id="deleteProduct" role="dialog">
+			    <div class="modal-dialog">
+			
+			        <!-- Modal content-->
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <button type="button" class="close" data-dismiss="modal">&times;</button>
+			                <h4 class="modal-title">Xóa sản phẩm</h4>
+			            </div>
+			            <div class="modal-body">
+			                <p>Bạn có chắc chắn muốn xóa sản phẩm?</p>
+			            </div>
+			            <div class="modal-footer">
+			            	<form th:action="@{admin/product/delete}" method="post">  
+			        			<input type="hidden" name="id" id="delProId">  
+			        			<input type="submit" class="btn btn-danger" value=Xóa>
+			        			<button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
+			        		</form>
+			            </div>
+			        </div>
+			
+			    </div>
+			</div>
+			<!-- Xóa nhân viên dialog -->
+			
+			
         </div>
     </div>
 </body>

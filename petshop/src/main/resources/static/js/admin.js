@@ -13,11 +13,79 @@ $(document).ready(function() {
         productM.css("display","block");
     })
     
+//----------------------Quản lý nhân viên-------------------------
+    
     //Thêm nhân viên dialog
     $("#addBtn").click(function(e) {
             $("#addModal").modal({
                 backdrop: "static",
                 keyboard: false
             });
+    });
+    
+    //Chỉnh sửa nhân viên
+    $(".staffEdit").click(function(e) {
+			console.log("click");
+        	$("#editModal").modal({
+                backdrop: "static",
+                keyboard: false
+            });
+        	$.get("staff/edit/" + $(this).data("id"), function(staff) {
+				$("#editPhone").val(staff.phone);
+				$("#editName").val(staff.name);
+				$("#editUsername").val(staff.username);
+       		});
+            e.preventDefault();
+        });
+    
+    //Xóa nhân viên
+    	$(".staffDel").click(function(e) {
+			console.log("Delete" + $(this).data("id"));
+  			$("#deleteUsername").val($(this).data("id"));
+            $("#deleteModal").modal({
+                backdrop: "static",
+                keyboard: false
+            });
+  			e.preventDefault();
+        });
+    
+//----------------------Quản lý sản phẩm-------------------------
+    
+    //Thêm sản phẩm dialog
+    $("#proAddBtn").click(function(e) {
+            $("#addProduct").modal({
+                backdrop: "static",
+                keyboard: false
+            });
+        });
+        
+    //Chỉnh sửa sản phẩm
+    $(".productEdit").click(function(e) {
+			console.log($(this).data("id"));
+        	$("#editProduct").modal({
+                backdrop: "static",
+                keyboard: false
+            });
+        	$.get("admin/product/edit/" + $(this).data("id"), function(product) {
+				$("#editProPrice").val(product.price);
+				$("#editProName").val(product.name);
+				$("#editProDes").val(product.description);
+				$("#editProId").val(product.id);
+				console.log($("#editProId").val())
+				
+       		});
+            e.preventDefault();
+        });
+     
+    //Xóa sản phẩm
+    $(".productDel").click(function(e) {
+			console.log($(this).data("id"))
+  			$("#delProId").val($(this).data("id"));
+  			console.log($("#delProId").val())
+            $("#deleteProduct").modal({
+                backdrop: "static",
+                keyboard: false
+            });
+  			e.preventDefault();
         });
 })
