@@ -171,3 +171,8 @@ a:hover{
 	width: 400px;
 	text-align: start;
 }
+.link{
+	background: none!important;
+	border: none;
+	cursor: pointer;
+}

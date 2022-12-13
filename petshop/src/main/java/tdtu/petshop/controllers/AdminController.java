@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import tdtu.petshop.models.Product;
 import tdtu.petshop.models.User;
@@ -40,19 +39,12 @@ public class AdminController {
     
     @GetMapping("")
 	public String getAdmin(Model model) {
-    	List<User> staffs = userService.findAllByRole(roleService.findById(2));
+    	List<User> staffs = userService.findAllByRole(2);
     	List<Product> products = productService.findAll();
     	model.addAttribute("staffs", staffs);
     	model.addAttribute("products",products);
 		return "admin";
 	}
-	
-//	@GetMapping("/staff")
-//	public String getStaff(Model model) {
-//		List<User> staffs = userService.findAllByRole(roleService.findById(2));
-//		model.addAttribute("staffs", staffs);  
-//		return "staffManagement";
-//	}
 	
 	@PostMapping("/staff/add")
 	public String postAddStaff(@ModelAttribute("staff") User staff) {
@@ -116,8 +108,8 @@ public class AdminController {
 	}
 	
 	@GetMapping(path = "/product/edit/{id}", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Product> getProductEdit(@PathVariable("id") String id) {
-		return new ResponseEntity<Product>(productService.findById(Integer.parseInt(id)), HttpStatus.OK);
+	public ResponseEntity<Product> getProductEdit(@PathVariable("id") int id) {
+		return new ResponseEntity<Product>(productService.findById(id), HttpStatus.OK);
 	}
 	
 	@PostMapping("/product/delete")

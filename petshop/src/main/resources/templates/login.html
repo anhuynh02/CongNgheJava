@@ -3,40 +3,18 @@
 
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="./css/login.css">
-
+    <link rel="stylesheet" href="/css/logreg.css">
 </head>
 
 <body>
-    <script>
-        
-        $(function(){
-            $('.message a').click(function(e) {
-                $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-                e.preventDefault();
-             });
-        });
-        
-    </script>
     <div class="login-container">
         <div class="form">
-          <form th:action="@{/register}" class="register-form" th:object="${user}" method="post">
-            <input type="text" placeholder="full name" name="name" class="info" required/>
-            <input type="text" placeholder="phone number" name="phone" class="info" required/>
-            <input type="text" placeholder="username" name="username" class="info" required/>
-            <input type="password" placeholder="password" name="password" class="info" required/>
-            <input type="password" placeholder="confirm password" name="confirmPassword" class="info" required/>
-            <input type="submit" value="Register" id="registerBtn" style="background-color: skyblue;color:white">
-            <p class="error message" style="color:red"></p>
-            <p class="message">Already registered? <a href="#" id="signin">Sign In</a></p>
-          </form>
           <form th:action="@{/login}" class="login-form" method="post">
-            <input type="text" placeholder="username" name="username" class="info" required />
-            <input type="password" placeholder="password" name="password" class="info" required/>
-            <input type="submit" value="Login" id="loginBtn" style="background-color: skyblue;color:white">
-            <p class="error message" style="color:red"></p>
-            <p class="message">Not registered? <a href="#" id="signup">Create an account</a></p>
-            
+            <input type="text" placeholder="Tên người dùng" name="username" class="info" required />
+            <input type="password" placeholder="Mật khẩu" name="password" class="info" required/>
+            <input type="submit" value="Đăng nhập" id="loginBtn" style="background-color: skyblue;color:white">
+            <p class="error message" style="color:red" th:if="${param.error}">Tên người dùng hoặc mật khẩu không hợp lệ.</p>
+            <p class="message">Chưa đăng ký? <a href="/register" id="signup">Tạo tài khoản</a></p>
           </form>
         </div>
       </div>

@@ -9,6 +9,5 @@ import tdtu.petshop.models.Category;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer>{
 	
-	@Query("select category from Category category where category.id = ?1")
-	Category findbById(int id);
+	Category findById(int id);
 }
