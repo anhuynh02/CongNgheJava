@@ -15,7 +15,7 @@
             <input type="text" placeholder="Tên người dùng" name="username" class="info" th:value="*{username}" required/>
             <input type="password" placeholder="Mật khẩu" name="password" class="info" th:value="*{password}" required/>
             <input type="password" placeholder="Nhập lại mật khẩu" name="confirmPassword" class="info" required/>
-            <input type="submit" value="Register" id="registerBtn" style="background-color: skyblue;color:white">
+            <input type="submit" value="Đăng ký" id="registerBtn" style="background-color: skyblue;color:white">
             <p class="error message" style="color:red" th:text="${error}"></p>
             <p class="message">Đã đăng ký? <a href="/login">Đăng nhập</a></p>
           </form>

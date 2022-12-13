@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import tdtu.petshop.models.Product;
 import tdtu.petshop.models.User;
@@ -109,8 +108,8 @@ public class AdminController {
 	}
 	
 	@GetMapping(path = "/product/edit/{id}", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Product> getProductEdit(@PathVariable("id") String id) {
-		return new ResponseEntity<Product>(productService.findById(Integer.parseInt(id)), HttpStatus.OK);
+	public ResponseEntity<Product> getProductEdit(@PathVariable("id") int id) {
+		return new ResponseEntity<Product>(productService.findById(id), HttpStatus.OK);
 	}
 	
 	@PostMapping("/product/delete")

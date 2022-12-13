@@ -16,7 +16,7 @@ public class CategoryService {
 	private CategoryRepository categoryRepository;
 	
 	public Category findById(int id) {
-		return categoryRepository.findbById(id);
+		return categoryRepository.findById(id);
 	}
 	
 	
