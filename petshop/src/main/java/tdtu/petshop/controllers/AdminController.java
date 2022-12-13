@@ -39,11 +39,11 @@ public class AdminController {
     private CategoryService categoryService;
     
     @GetMapping("")
-	public String getAdmin(Model mode1, Model model2) {
+	public String getAdmin(Model model) {
     	List<User> staffs = userService.findAllByRole(roleService.findById(2));
     	List<Product> products = productService.findAll();
-    	mode1.addAttribute("staffs", staffs);
-    	model2.addAttribute("products",products);
+    	model.addAttribute("staffs", staffs);
+    	model.addAttribute("products",products);
 		return "admin";
 	}
 	
