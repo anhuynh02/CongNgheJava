@@ -23,7 +23,9 @@
                 <p class="items" id="ketoan">Thống kê</p>
             </div>
             <div class="side-logout">
-                <a href="#" class="items"><i class="fa-solid fa-right-from-bracket"></i>  Đăng xuất</a>
+            	<form th:action="@{logout}" method="post">
+                    <button class="items link"><i class="fa-solid fa-right-from-bracket"></i>  Đăng xuất</button>
+                </form>
             </div>
         </div>
         <div class="content">
