@@ -44,6 +44,15 @@ public class HomeController {
 		return "login";
 	}
 	
+	@GetMapping("register")
+	public String getRegister(Model model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetailsImpl)
+			return "redirect:/";
+		model.addAttribute("user", new User());
+		return "register";
+	}
+	
 	@PostMapping("register")
 	public String postRegister(@ModelAttribute("user") User user, HttpServletRequest request) {
 		if (request.getParameter("confirmPassword") == user.getPassword()) {

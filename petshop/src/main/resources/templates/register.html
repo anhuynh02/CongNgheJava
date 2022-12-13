@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/logreg.css">
+</head>
+
+<body>
+    <script>
+        
+    </script>
+    <div class="login-container">
+        <div class="form">
+          <form th:action="@{/register}" class="register-form" th:object="${user}" method="post">
+            <input type="text" placeholder="full name" name="name" class="info" th:value="*{name}" required/>
+            <input type="text" placeholder="phone number" name="phone" class="info" th:value="*{phone}" required/>
+            <input type="text" placeholder="username" name="username" class="info" th:value="*{username}" required/>
+            <input type="password" placeholder="password" name="password" class="info" th:value="*{password}" required/>
+            <input type="password" placeholder="confirm password" name="confirmPassword" class="info" required/>
+            <input type="submit" value="Register" id="registerBtn" style="background-color: skyblue;color:white">
+            <p class="error message" style="color:red" th:text="${error}"></p>
+            <p class="message">Already registered? <a href="login">Sign In</a></p>
+          </form>
+        </div>
+      </div>
+</body>
+
+</html>
