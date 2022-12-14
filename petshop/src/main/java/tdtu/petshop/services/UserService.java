@@ -31,8 +31,7 @@ public class UserService {
 		return userRepository.findAllByRole(roleService.findById(id));
 	}
 	
-	
-	public String registerCustomer(User user, String confirmPassword) {
+	public String registerUser(User user, String confirmPassword) {
 		if (!user.getPhone().matches("\\d{10}")) {
 			return "Số điện thoại không hợp lệ";
 		}

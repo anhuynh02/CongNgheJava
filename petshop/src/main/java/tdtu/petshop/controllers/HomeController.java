@@ -29,8 +29,6 @@ public class HomeController {
 	@Autowired
     private UserService userService;
     @Autowired
-    private RoleService roleService;
-    @Autowired
     private ProductService productService;
     @Autowired
     private CategoryService categoryService;
@@ -42,7 +40,7 @@ public class HomeController {
 		if (principal instanceof UserDetailsImpl) {
 			model.addAttribute("user", (UserDetailsImpl) principal);
 		}
-		else
+		else // principal = "anonymousUser"
 			model.addAttribute("user", null);
 		List<Product> cats = productService.findAllByCategory(categoryService.findById(1));
 		List<Product> dogs = productService.findAllByCategory(categoryService.findById(2));
@@ -55,6 +53,18 @@ public class HomeController {
 		model.addAttribute("toys",toys);
 		
 		return "Homepage";
+	}
+	
+	@GetMapping("cart")
+	public String getCart(Model model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetailsImpl) {
+			model.addAttribute("user", (UserDetailsImpl) principal);
+		}
+		else // principal = "anonymousUser"
+			model.addAttribute("user", null);
+		
+		return "cart";
 	}
 	
 	@GetMapping("login")
@@ -76,7 +86,7 @@ public class HomeController {
 	
 	@PostMapping("register")
 	public String postRegister(Model model, @ModelAttribute("user") User user, HttpServletRequest request) {
-		String error = userService.registerCustomer(user, request.getParameter("confirmPassword"));
+		String error = userService.registerUser(user, request.getParameter("confirmPassword"));
 		if (error != null) {
 			model.addAttribute("error", error);
 			model.addAttribute("user", user);

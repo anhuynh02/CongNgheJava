@@ -154,7 +154,7 @@ a:hover{
     height: 30px;
     border: none;
     box-shadow:  0 0 10px #d4cccc;
-    background-color: yellow;
+    background-color: #E5BA73;
     border-radius: 20px;
 }
 
@@ -163,7 +163,7 @@ a:hover{
     height: 30px;
     border: none;
     box-shadow:  0 0 10px #d4cccc;
-    background-color: red;
+    background-color: #FF4500;
     border-radius: 20px;
 }
 
