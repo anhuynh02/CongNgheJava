@@ -18,6 +18,10 @@ public class UserDetailsImpl implements UserDetails {
 		super();
 		this.user = user;
 	}
+	
+	public int getId() {
+		return user.getId();
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -55,6 +55,21 @@ public class UserService {
 		return null;
 	}
 	
+	public String changeUserInfo(User user) {
+		User temp = userRepository.findById(user.getId());
+		if (userRepository.findByPhone(user.getPhone()) != null && !temp.getPhone().equals(user.getPhone())) {
+			return "Số điện thoại đã được sử dụng";
+		}
+		if (userRepository.findByUsername(user.getUsername()) != null && !temp.getUsername().equals(user.getUsername())) {
+			return "Tên người dùng đã được sử dụng";
+		}
+		temp.setPhone(user.getPhone());
+		temp.setName(user.getName());
+		temp.setUsername(user.getUsername());
+		userRepository.save(temp);
+		return null;
+	}
+	
 	public void saveUser(User user) {
 		userRepository.save(user);
 	}

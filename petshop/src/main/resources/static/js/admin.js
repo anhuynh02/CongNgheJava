@@ -31,29 +31,30 @@ $(document).ready(function() {
         });
     });
     
-    // //Chỉnh sửa nhân viên
-    // $(".btn-edit-staff").click(function(e) {
-    // 	$("#editStaffModal").modal({
-    //         backdrop: "static",
-    //         keyboard: false
-    //     });
-    // 	$.get("admin/staff/edit/" + $(this).data("id"), function(staff) {
-	// 		$("#editStaffPhone").val(staff.phone);
-	// 		$("#editStaffName").val(staff.name);
-	// 		$("#editStaffUsername").val(staff.username);
-   	// 	});
-    //     e.preventDefault();
-    // });
+    //Chỉnh sửa nhân viên
+    $(".btn-edit-staff").click(function(e) {
+    	$("#editStaffModal").modal({
+            backdrop: "static",
+            keyboard: false
+        });
+    	$.get("admin/staff/edit/" + $(this).data("id"), function(staff) {
+			$("#editStaffId").val(staff.id);
+			$("#editStaffPhone").val(staff.phone);
+			$("#editStaffName").val(staff.name);
+			$("#editStaffUsername").val(staff.username);
+   		});
+        e.preventDefault();
+    });
     
-    // //Xóa nhân viên
-	// $(".btn-delete-staff").click(function(e) {
-	// 	$("#deleteId").val($(this).data("id"));
-    //     $("#deleteModal").modal({
-    //         backdrop: "static",
-    //         keyboard: false
-    //     });
-	// 	e.preventDefault();
-    // });
+    //Xóa nhân viên
+	$(".btn-delete-staff").click(function(e) {
+		$("#deleteId").val($(this).data("id"));
+        $("#deleteModal").modal({
+            backdrop: "static",
+            keyboard: false
+        });
+		e.preventDefault();
+    });
     
 //----------------------Quản lý sản phẩm-------------------------
     

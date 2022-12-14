@@ -62,25 +62,27 @@ public class AdminController {
 		return "redirect:/admin/";
 	}
 	
-	@GetMapping(path = "/staff/edit/{username}", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/staff/edit/{id}", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> getStaffEdit(@PathVariable("id") int id) {
 		return new ResponseEntity<User>(userService.findById(id), HttpStatus.OK);
 	}
 	
 	@PostMapping("/staff/edit")
-	public String postStaffEdit(@ModelAttribute("staff") User staff) {
-		User temp = userService.findByUsername(staff.getUsername());
-		temp.setPhone(staff.getPhone());
-		temp.setName(staff.getName());
-		userService.saveUser(temp);
+	public String postStaffEdit(RedirectAttributes redirectAttributes, @ModelAttribute("staff") User staff) {
+		String error = userService.changeUserInfo(staff);
+		if (error != null) {
+			redirectAttributes.addFlashAttribute("error", error);
+		} else {
+			redirectAttributes.addFlashAttribute("success", "Sửa thông tin nhân viên.");
+		}
 		return "redirect:/admin";
 	}
 	
-	@GetMapping("/staff/edit/password/{username}")
-	public String getStaffEditPassword(Model model, @PathVariable("username") String username) {
-		model.addAttribute("username", username);
-		return "staffPasswordChange";
-	}
+//	@GetMapping("/staff/edit/password/{id}")
+//	public String getStaffEditPassword(Model model, @PathVariable("id") int id) {
+//		model.addAttribute("id", id);
+//		return "staffPasswordChange";
+//	}
 	
 	@PostMapping("/staff/edit/password")
 	public String postStaffEditPassword(HttpServletRequest request) {
