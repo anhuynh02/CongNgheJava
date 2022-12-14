@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 14, 2022 lúc 06:11 AM
+-- Thời gian đã tạo: Th12 14, 2022 lúc 06:14 AM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 8.1.6
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `cuahangthucung`
 --
+CREATE DATABASE IF NOT EXISTS `cuahangthucung` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `cuahangthucung`;
 
 -- --------------------------------------------------------
 
