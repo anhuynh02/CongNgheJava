@@ -78,14 +78,15 @@ public class AdminController {
 		return "redirect:/admin";
 	}
 	
-//	@GetMapping("/staff/edit/password/{id}")
-//	public String getStaffEditPassword(Model model, @PathVariable("id") int id) {
-//		model.addAttribute("id", id);
-//		return "staffPasswordChange";
-//	}
+	@GetMapping("/staff/edit/password/{id}")
+	public String getStaffEditPassword(Model model, @PathVariable("id") int id) {
+		model.addAttribute("id", id);
+		return "staffPasswordChange";
+	}
 	
 	@PostMapping("/staff/edit/password")
 	public String postStaffEditPassword(HttpServletRequest request) {
+		
 		User staff = userService.findById(Integer.parseInt(request.getParameter("id")));
 		staff.setPassword(new BCryptPasswordEncoder().encode(request.getParameter("password")));
 		userService.saveUser(staff);

@@ -70,6 +70,16 @@ public class UserService {
 		return null;
 	}
 	
+	public String changeUserPassword(User user, String confirmPassword) {
+		User temp = userRepository.findById(user.getId());
+		if (!user.getPassword().equals(confirmPassword)) {
+			return "Mật khẩu nhập không khớp";
+		}
+		temp.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+		userRepository.save(temp);
+		return null;
+	}
+	
 	public void saveUser(User user) {
 		userRepository.save(user);
 	}
