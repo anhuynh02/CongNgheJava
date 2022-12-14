@@ -66,17 +66,16 @@
                     </table>
                 </div>
                 <br><br>
-			    <div class="alert alert-success alert-dismissable fade in">
+			    <div th:if="${success} != null" class="alert alert-success alert-dismissable fade in">
 			        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			        <strong>Success!</strong> <span id="success"></span>
+			        <strong>Thành công!</strong> <span th:text="${success}"></span>
 			    </div>
 			    <br>
-			    <div class="alert alert-danger alert-dismissable fade in">
+			    <div th:if="${error} != null" class="alert alert-danger alert-dismissable fade in">
 			        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			        <strong>Failed!</strong> <span id="fail"></span>
+			        <strong>Thất bại!</strong> <span th:text="${error}"></span>
 			    </div>
             </div>
-            
             
             <!-- Thêm nhân viên dialog -->
 			<div class="modal fade" id="addModal" role="dialog">

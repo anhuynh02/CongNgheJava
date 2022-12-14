@@ -33,8 +33,6 @@ public class AdminController {
 	@Autowired
     private UserService userService;
     @Autowired
-    private RoleService roleService;
-    @Autowired
     private ProductService productService;
     @Autowired
     private CategoryService categoryService;
@@ -53,7 +51,9 @@ public class AdminController {
 		String error = userService.registerUser(staff, request.getParameter("confirmPassword"));
 		if (error != null) {
 			redirectAttributes.addFlashAttribute("error", error);
-			redirectAttributes.addFlashAttribute("user", staff);
+			redirectAttributes.addFlashAttribute("staff", staff);
+		} else {
+			redirectAttributes.addFlashAttribute("success", "Thêm nhân viên.");
 		}
 		return "redirect:/admin/";
 	}
