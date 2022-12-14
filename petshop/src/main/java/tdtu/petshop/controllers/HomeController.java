@@ -29,8 +29,6 @@ public class HomeController {
 	@Autowired
     private UserService userService;
     @Autowired
-    private RoleService roleService;
-    @Autowired
     private ProductService productService;
     @Autowired
     private CategoryService categoryService;
@@ -42,7 +40,7 @@ public class HomeController {
 		if (principal instanceof UserDetailsImpl) {
 			model.addAttribute("user", (UserDetailsImpl) principal);
 		}
-		else
+		else // principal = "anonymousUser"
 			model.addAttribute("user", null);
 		List<Product> dogs = productService.findAllByCategory(categoryService.findById(2));
 		model.addAttribute("dogs",dogs);
@@ -69,7 +67,7 @@ public class HomeController {
 	
 	@PostMapping("register")
 	public String postRegister(Model model, @ModelAttribute("user") User user, HttpServletRequest request) {
-		String error = userService.registerCustomer(user, request.getParameter("confirmPassword"));
+		String error = userService.registerUser(user, request.getParameter("confirmPassword"));
 		if (error != null) {
 			model.addAttribute("error", error);
 			model.addAttribute("user", user);

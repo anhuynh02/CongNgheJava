@@ -12,10 +12,12 @@ import javax.persistence.Table;
 @Table(name = "user")
 public class User {
 	
+	@Id
+	private int id;
 	@Column(unique=true)
 	private String phone;
 	private String name;
-	@Id
+	@Column(unique=true)
 	private String username;
 	private String password;
 	private boolean enable;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.aspectj.weaver.patterns.HasThisTypePatternTriedToSneakInSomeGenericOrParameterizedTypePatternMatchingStuffAnywhereVisitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import tdtu.petshop.models.Product;
 import tdtu.petshop.models.User;
@@ -47,11 +49,12 @@ public class AdminController {
 	}
 	
 	@PostMapping("/staff/add")
-	public String postAddStaff(@ModelAttribute("staff") User staff) {
-		staff.setPassword(new BCryptPasswordEncoder().encode(staff.getPassword()));
-		staff.setEnable(true);
-		staff.setRole(roleService.findById(2));
-		userService.saveUser(staff);
+	public String postAddStaff(RedirectAttributes redirectAttributes, @ModelAttribute("staff") User staff, HttpServletRequest request) {
+		String error = userService.registerUser(staff, request.getParameter("confirmPassword"));
+		if (error != null) {
+			redirectAttributes.addFlashAttribute("error", error);
+			redirectAttributes.addFlashAttribute("user", staff);
+		}
 		return "redirect:/admin/";
 	}
 	
