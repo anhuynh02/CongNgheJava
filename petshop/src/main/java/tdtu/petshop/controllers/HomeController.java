@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -93,6 +94,19 @@ public class HomeController {
 			return "register";
 		}
 		return "login";
+	}
+	
+	@PostMapping("search")
+	public String search(Model model, @ModelAttribute("name") String name) {
+		List<Product> list = null;
+		int length = 0;
+		if(StringUtils.hasText(name)) {
+			list = productService.findByNameContaining(name);
+			length = list.size();
+		}
+		model.addAttribute("products",list);
+		model.addAttribute("length",length);
+		return "search";
 	}
 	
 	@GetMapping("customer")

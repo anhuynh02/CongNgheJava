@@ -73,4 +73,16 @@ p{
     width: fit-content;
     display: flex;
     flex-direction: row;
+    }
+    
+.second-search{
+    background-color: #D2DAFF;
+    height: 50px;
+    font-size: 1.5rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.search-result{
+    margin: 20px 0;
+}
     

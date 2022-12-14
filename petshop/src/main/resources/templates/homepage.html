@@ -16,7 +16,7 @@
     <section class="first">
         <div class="container ">
             <nav class="first navbar navbar-expand-lg firstNav">
-                <a class="navbar-brand" href="homepage.html">
+                <a class="navbar-brand" th:href="@{/}">
                     <img src="./images/icon/Logo.jpg" alt="Logo của Shop" style="width:100px;"/>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#PetBar" aria-controls="PetBar" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,8 +25,8 @@
                 <div class="collapse navbar-collapse" id="PetBar">
                     <ul class="navbar-nav mr-auto"></ul>
                     <ul class="navbar-nav mr-auto"></ul>
-                    <form id="search-form" class="my-2 my-lg-0 mr-auto">
-                        <input id="search-bar" class="box form-control mr-sm-2 w" type="search" placeholder="Search" aria-label="Search">
+                    <form id="search-form" th:action="@{/search}" method="post" class="my-2 my-lg-0 mr-auto">
+                        <input id="search-bar" class="box form-control mr-sm-2 w" name="name" type="search" placeholder="Search" aria-label="Search">
                         <button id="search-btn" class="btn my-2 my-sm-0" type="submit"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
                     </form>
                     <ul class="navbar-nav ml-auto">
@@ -107,10 +107,10 @@
 	                      
 	                    <div class="row">
 	                    	<th:block th:each="dog: ${dogs}">                    
-	                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+	                        <div class="bestseller col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
 	                            <div class="card mt-1" style="width:20rem;">
 	                                <img th:src="@{${dog.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
-	                                <h3 class="card-title text-center" th:text="${dog.name}"></h3>
+	                                <h4 class="card-title text-center" th:text="${dog.name}"></h4>
 	                            </div>
 	                        </div>
 	                        </th:block>
@@ -118,113 +118,46 @@
 	                    
 	                    <h2 class="title">
                                 Lựa chọn mèo thoải mái với nhiều loài khác nhau
-                            </h2>    
-                            <div class="row">
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/cat/meomuop.jpg" class="card-img-top" alt="Mèo mướp" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Mèo mướp
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 bestseller">
-                                    <div class="card mt-1 " style="width:20rem;">
-                                        <img src="./images/cat/meovang.jpg" class="card-img-top" alt="Mèo vàng" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Mèo vàng
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/cat/meoxiem.jpg" class="card-img-top" alt="Mèo xiêm" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Mèo Xiêm
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/cat/meoanh.jpg" class="card-img-top" alt="Mèo anh lông ngắn" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Mèo Anh lông ngắn
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/cat/meoscottish.png" class="card-img-top" alt="Mèo tai cụp Scottish Fold" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Mèo tai cụp Scottish Fold
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/cat/meomunchkin.png" class="card-img-top" alt="Mèo Munchkin chân ngắn" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Mèo Munchkin chân ngắn
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
+                        </h2>  
+                        <div class="row">
+	                    	<th:block th:each="cat: ${cats}">                    
+	                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+	                            <div class="card mt-1" style="width:20rem;">
+	                                <img th:src="@{${cat.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+	                                <h4 class="card-title text-center" th:text="${cat.name}"></h3>
+	                            </div>
+	                        </div>
+	                        </th:block>
+	                    </div>
+                            
                         
                 		<h2 class="title">
                                 Lựa chọn thức ăn cho thú cưng của mình
                             </h2>    
                             <div class="row">
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/food/thucan1.jpg" class="card-img-top" alt="Royal Canin Kitten" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Royal Canin Kitten
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/food/thucan2.jpg" class="card-img-top" alt="Royal Canin Indoor" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Royal Canin Indoor
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/food/thucan3.jpg" class="card-img-top" alt="Royal Canin Hair and Skin" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Royal Canin Hair and Skin
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/food/thucan4.jpg" class="card-img-top" alt="Súp thưởng cho chó" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Súp thưởng cho chó
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/food/thucan5.jpg" class="card-img-top" alt="Pate IRIS One Care Beef" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Pate IRIS One Care Beef
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/food/thucan6.jpg" class="card-img-top" alt="Cần sa cho mèo" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Cần sa cho mèo
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
+	                    	<th:block th:each="food: ${foods}">                    
+	                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+	                            <div class="card mt-1" style="width:20rem;">
+	                                <img th:src="@{${food.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+	                                <h4 class="card-title text-center" th:text="${food.name}"></h4>
+	                            </div>
+	                        </div>
+	                        </th:block>
+	                    </div>
                         
-                        This is toy    
+                        <h2 class="title">
+                                Không thể thiếu đồ chơi cho các thú cưng của mình
+                            </h2>    
+                            <div class="row">
+	                    	<th:block th:each="toy: ${toys}">                    
+	                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+	                            <div class="card mt-1" style="width:20rem;">
+	                                <img th:src="@{${toy.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+	                                <h3 class="card-title text-center" th:text="${toy.name}"></h3>
+	                            </div>
+	                        </div>
+	                        </th:block>
+	                    </div>  
                        
 	            </div>
                 <div class="tab-pane fade show mt-1" id="Dog" role="tabpanel" aria-labelledby="Dog-tab">
@@ -248,57 +181,17 @@
                         <div class="tab-pane fade show active mt-1" id="Cat" role="tabpanel" aria-labelledby="Cat-tab">
                             <h2 class="title">
                                 Lựa chọn mèo thoải mái với nhiều loài khác nhau
-                            </h2>    
-                            <div class="row">
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/cat/meomuop.jpg" class="card-img-top" alt="Mèo mướp" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Mèo mướp
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 bestseller">
-                                    <div class="card mt-1 " style="width:20rem;">
-                                        <img src="./images/cat/meovang.jpg" class="card-img-top" alt="Mèo vàng" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Mèo vàng
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/cat/meoxiem.jpg" class="card-img-top" alt="Mèo xiêm" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Mèo Xiêm
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/cat/meoanh.jpg" class="card-img-top" alt="Mèo anh lông ngắn" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Mèo Anh lông ngắn
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/cat/meoscottish.png" class="card-img-top" alt="Mèo tai cụp Scottish Fold" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Mèo tai cụp Scottish Fold
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/cat/meomunchkin.png" class="card-img-top" alt="Mèo Munchkin chân ngắn" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Mèo Munchkin chân ngắn
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
+	                        </h2>  
+	                        <div class="row">
+		                    	<th:block th:each="cat: ${cats}">                    
+		                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+		                            <div class="card mt-1" style="width:20rem;">
+		                                <img th:src="@{${cat.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+		                                <h4 class="card-title text-center" th:text="${cat.name}"></h3>
+		                            </div>
+		                        </div>
+		                        </th:block>
+		                    </div>
                         </div>
                     </div>
                 </div>
@@ -309,55 +202,15 @@
                                 Lựa chọn thức ăn cho thú cưng của mình
                             </h2>    
                             <div class="row">
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/food/thucan1.jpg" class="card-img-top" alt="Royal Canin Kitten" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Royal Canin Kitten
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/food/thucan2.jpg" class="card-img-top" alt="Royal Canin Indoor" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Royal Canin Indoor
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/food/thucan3.jpg" class="card-img-top" alt="Royal Canin Hair and Skin" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Royal Canin Hair and Skin
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/food/thucan4.jpg" class="card-img-top" alt="Súp thưởng cho chó" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Súp thưởng cho chó
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/food/thucan5.jpg" class="card-img-top" alt="Pate IRIS One Care Beef" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Pate IRIS One Care Beef
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/food/thucan6.jpg" class="card-img-top" alt="Cần sa cho mèo" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Cần sa cho mèo
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
+	                    	<th:block th:each="food: ${foods}">                    
+		                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+		                            <div class="card mt-1" style="width:20rem;">
+		                                <img th:src="@{${food.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+		                                <h4 class="card-title text-center" th:text="${food.name}"></h4>
+		                            </div>
+		                        </div>
+		                        </th:block>
+		                    </div>
                         </div>
                     </div>
                 </div>
