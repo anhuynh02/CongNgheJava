@@ -44,8 +44,15 @@ public class HomeController {
 		}
 		else
 			model.addAttribute("user", null);
+		List<Product> cats = productService.findAllByCategory(categoryService.findById(1));
 		List<Product> dogs = productService.findAllByCategory(categoryService.findById(2));
+		List<Product> foods = productService.findAllByCategory(categoryService.findById(3));
+		List<Product> toys = productService.findAllByCategory(categoryService.findById(4));
+		
+		model.addAttribute("cats",cats);
 		model.addAttribute("dogs",dogs);
+		model.addAttribute("foods",foods);
+		model.addAttribute("toys",toys);
 		
 		return "Homepage";
 	}
