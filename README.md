@@ -16,6 +16,3 @@ Quản lý kho, loại sản phẩm (repository service thymeleaf each)<br>
 thống kê (?)<br>
 tìm kiếm (repository service)<br>
 database thêm bill, bill_details (vỏ hàng)<br>
-<br>
-error cho login + trang error (th:if="${#fields.hasErrors('???')}")<br>
-logout (post @{/logout})<br>
