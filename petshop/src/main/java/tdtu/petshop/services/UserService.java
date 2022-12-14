@@ -19,6 +19,10 @@ public class UserService {
 	@Autowired
 	private RoleService roleService;
 	
+	public User findById(int id) {
+		return userRepository.findById(id);
+	}
+	
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}
@@ -27,7 +31,7 @@ public class UserService {
 		return userRepository.findByPhone(phone);
 	}
 	
-	public List<User> findAllByRole(int id) {
+	public List<User> findAllByRole(int id) { 
 		return userRepository.findAllByRole(roleService.findById(id));
 	}
 	
@@ -55,8 +59,8 @@ public class UserService {
 		userRepository.save(user);
 	}
 	
-	public void deleteUser(String username) {
-		userRepository.deleteById(username);
+	public void deleteById(int id) {
+		userRepository.deleteById(id);
 	}
 		
 }

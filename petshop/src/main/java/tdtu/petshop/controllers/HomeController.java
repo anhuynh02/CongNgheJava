@@ -40,11 +40,10 @@ public class HomeController {
 		if (principal instanceof UserDetailsImpl) {
 			model.addAttribute("user", (UserDetailsImpl) principal);
 		}
-		else // principal = "anonymousUser"
+		else
 			model.addAttribute("user", null);
 		List<Product> dogs = productService.findAllByCategory(categoryService.findById(2));
-		model.addAttribute("dogs",dogs);
-		
+		model.addAttribute("dogs", dogs);
 		return "Homepage";
 	}
 	
@@ -54,7 +53,7 @@ public class HomeController {
 		if (principal instanceof UserDetailsImpl) {
 			model.addAttribute("user", (UserDetailsImpl) principal);
 		}
-		else // principal = "anonymousUser"
+		else
 			model.addAttribute("user", null);
 		
 		return "cart";
