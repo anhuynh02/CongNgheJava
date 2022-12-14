@@ -48,6 +48,18 @@ public class HomeController {
 		return "Homepage";
 	}
 	
+	@GetMapping("cart")
+	public String getCart(Model model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetailsImpl) {
+			model.addAttribute("user", (UserDetailsImpl) principal);
+		}
+		else // principal = "anonymousUser"
+			model.addAttribute("user", null);
+		
+		return "cart";
+	}
+	
 	@GetMapping("login")
 	public String getLogin() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
