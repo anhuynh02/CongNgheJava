@@ -106,7 +106,7 @@
 	                    	<th:block th:each="dog: ${dogs}">                    
 	                        <div class="bestseller col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
 	                            <div class="card mt-1" style="width:20rem;">
-	                                <img th:src="@{${dog.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+	                                <img th:src="@{${dog.image}}" class="card-img-top" th:alt="${dog.name}" width="200" height="200">
 	                                <h4 class="card-title text-center" th:text="${dog.name}"></h4>
 	                                <form th:action="@{addcart}"  method="post" class="ml-auto">
 	                                	<input type="hidden" name="id" th:value="${dog.id}">
@@ -126,7 +126,7 @@
 	                    	<th:block th:each="cat: ${cats}">                    
 	                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
 	                            <div class="card mt-1" style="width:20rem;">
-	                                <img th:src="@{${cat.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+	                                <img th:src="@{${cat.image}}" class="card-img-top" th:alt="${cat.name}" width="200" height="200">
 	                                <h4 class="card-title text-center" th:text="${cat.name}"></h4>
 	                                <form th:action="@{addcart}"  method="post" class="ml-auto">
 	                                	<input type="hidden" name="id" th:value="${cat.id}">
@@ -147,7 +147,7 @@
 	                    	<th:block th:each="food: ${foods}">                    
 	                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
 	                            <div class="card mt-1" style="width:20rem;">
-	                                <img th:src="@{${food.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+	                                <img th:src="@{${food.image}}" class="card-img-top" th:alt="${food.name}" width="200" height="200">
 	                                <h4 class="card-title text-center" th:text="${food.name}"></h4>
 	                                <form th:action="@{addcart}"  method="post" class="ml-auto">
 	                                	<input type="hidden" name="id" th:value="${food.id}">
@@ -167,7 +167,7 @@
 	                    	<th:block th:each="toy: ${toys}">                    
 	                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
 	                            <div class="card mt-1" style="width:20rem;">
-	                                <img th:src="@{${toy.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+	                                <img th:src="@{${toy.image}}" class="card-img-top" th:alt="${toy.name}" width="200" height="200">
 	                                <h4 class="card-title text-center" th:text="${toy.name}"></h4>
 	                                <form th:action="@{addcart}"  method="post" class="ml-auto">
 	                                	<input type="hidden" name="id" th:value="${toy.id}">
@@ -190,7 +190,7 @@
                     	<th:block th:each="dog: ${dogs}">                    
                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
                             <div class="card mt-1" style="width:20rem;">
-                                <img th:src="@{${dog.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+                                <img th:src="@{${dog.image}}" class="card-img-top" th:alt="${dog.name}" width="200" height="200">
                                 <h4 class="card-title text-center" th:text="${dog.name}"></h4>
                                 <form th:action="@{addcart}"  method="post" class="ml-auto">
 	                                	<input type="hidden" name="id" th:value="${dog.id}">
@@ -211,7 +211,7 @@
 		                    	<th:block th:each="cat: ${cats}">                    
 		                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
 		                            <div class="card mt-1" style="width:20rem;">
-		                                <img th:src="@{${cat.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+		                                <img th:src="@{${cat.image}}" class="card-img-top" th:alt="${cat.name}" width="200" height="200">
 		                                <h4 class="card-title text-center" th:text="${cat.name}"></h4>
 		                                <form th:action="@{addcart}"  method="post" class="ml-auto">
 	                                	<input type="hidden" name="id" th:value="${cat.id}">
@@ -233,7 +233,7 @@
 	                    	<th:block th:each="food: ${foods}">                    
 		                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
 		                            <div class="card mt-1" style="width:20rem;">
-		                                <img th:src="@{${food.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+		                                <img th:src="@{${food.image}}" class="card-img-top" th:alt="${food.name}" width="200" height="200">
 		                                <h4 class="card-title text-center" th:text="${food.name}"></h4>
 		                                <form th:action="@{addcart}"  method="post" class="ml-auto">
 	                                	<input type="hidden" name="id" th:value="${food.id}">
@@ -255,7 +255,7 @@
 	                    	<th:block th:each="toy: ${toys}">                    
 	                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
 	                            <div class="card mt-1" style="width:20rem;">
-	                                <img th:src="@{${toy.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+	                                <img th:src="@{${toy.image}}" class="card-img-top" th:alt="${toy.name}" width="200" height="200">
 	                                <h5 class="card-title text-center" th:text="${toy.name}"></h5>
 	                                <form th:action="@{addcart}"  method="post" class="ml-auto">
 	                                	<input type="hidden" name="id" th:value="${toy.id}">
