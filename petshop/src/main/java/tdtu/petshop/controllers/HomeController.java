@@ -93,10 +93,13 @@ public class HomeController {
 				billDetail.setQuantity(billDetail.getQuantity()+1);
 				billDetailService.saveBillDetail(billDetail);
 			}else {
+				//Ngược lại thêm sp vào giỏ hàng
 				billDetailService.addBillDetail(product, currentBill);
 			}
+			//cong gia vao bill 
 			currentBill.setTotal(currentBill.getTotal()+product.getPrice());
-			//Ngược lại thêm sp vào giỏ hàng
+			billService.saveBill(currentBill);
+			
 		return "redirect:/";
 	}
 	@PostMapping("/cart/delete")

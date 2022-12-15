@@ -76,11 +76,11 @@
                 <table class="table table-striped">
                 <thead>
                     <tr>
-                        <td colspan="7">
+                        <td colspan="4">
                             <a th:href="@{/}" class="btn btn-primary">Tiếp tục mua hàng</a>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="table-primary">
                         <th>Ảnh</th>
                         <th>Tên sản phẩm</th>
                         <th>Số lượng</th>
@@ -90,7 +90,8 @@
                     </tr>
                 </thead>
                 <tbody id="cartContainer">
-                     <tr th:each="billDetail : ${billDetails}">
+                
+                     <tr class="table-info" th:each="billDetail : ${billDetails}">
             	<td th:text = "${billDetail.id}" hidden>
             		
             	</td>
@@ -103,27 +104,100 @@
               </td>
               <td th:text="${billDetail.product.name}"></td>
               <td>
-                <input type="number" th:value="${billDetail.quantity}" />
+                <input class="form-control" type="number" th:value="${billDetail.quantity}" />
               </td>
               <td
-                th:text="${#numbers.formatDecimal(billDetail.product.price, 0, 'COMMA', 0, 'POINT')+' vnđ'}"
+                th:text="${#numbers.formatDecimal(billDetail.product.price, 0, 'COMMA', 0, 'POINT')+' VNĐ'}"
               ></td>
-              <td
+              <td class = "totalItemPrice"
                 th:text="${#numbers.formatDecimal(billDetail.product.price * billDetail.quantity, 0, 'COMMA', 0, 'POINT')+ ' vnđ'}">
               </td>
               <td
               	th:text="${billDetail.bill.id}" hidden>
               </td>
               <td>
-                <button class="deleteBtn">Delete</button>
+                <button class="deleteBtn btn btn-warning">Xóa</button>
               </td>
             </tr>
+            <tr class="table-light">
+            	<td colspan="5" ><h2 id="totalPriceBill"></h2></td>
+            	<td colspan="1" ><button class="purchaseBtn btn btn-success">Thanh toán</button></td>
+            </tr>
                 </tbody>
+               
             </table>
             
         </div>
     </section>
-   
+    
+    <!-- Modal xác nhận thanh toán -->
+    <div class="modal fade" id="purchaseModal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+          <h4 class="modal-title">Xác nhận thanh toán</h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+    
+          </div>
+             <div class="modal-body">
+             	<div>
+             		<h3>
+             			Chi tiết sản phẩm thanh toán
+             		</h3>
+             	</div>
+             	<div>
+             		<table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Tên sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                
+		            <tr th:each="billDetail : ${billDetails}">
+		            	<td th:text = "${billDetail.id}" hidden>
+		            		
+		            	</td>
+		              <td th:text="${billDetail.product.name}"></td>
+		              <td>
+		                <input type="number" th:value="${billDetail.quantity}" />
+		              </td>
+		              <td
+		                th:text="${#numbers.formatDecimal(billDetail.product.price, 0, 'COMMA', 0, 'POINT')+' VNĐ'}"
+		              ></td>
+		              <td
+		                th:text="${#numbers.formatDecimal(billDetail.product.price * billDetail.quantity, 0, 'COMMA', 0, 'POINT')+ ' vnđ'}">
+		              </td>
+		            </tr>
+                </tbody>
+            </table>
+             	</div>
+             	<div>
+             		<h2 id="purchaseTotalMoney"></h2>
+             	</div>
+             	
+             </div>
+      	
+            <div class="modal-footer">
+              <form th:action="@{cart/purchase}" method="post">  
+			        			<input type="text" name="billId" id="billId" hidden>
+			        			<input type="text" name="billTotal" id="billTotal" hidden>
+			        			<input type="submit" class="btn btn-success" value="Xác Nhận">
+			        			<button type="button" class="btn btn-warning" data-dismiss="modal">Không</button>
+			   </form>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+   <!--Modal xác nhận xóa-->
     <div class="modal fade" id="deleteModal" role="dialog">
       <div class="modal-dialog">
         <!-- Modal content-->
