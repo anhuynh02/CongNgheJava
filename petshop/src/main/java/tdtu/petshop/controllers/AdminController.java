@@ -8,6 +8,7 @@ import org.aspectj.weaver.patterns.HasThisTypePatternTriedToSneakInSomeGenericOr
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,7 @@ import tdtu.petshop.models.User;
 import tdtu.petshop.services.CategoryService;
 import tdtu.petshop.services.ProductService;
 import tdtu.petshop.services.RoleService;
+import tdtu.petshop.services.UserDetailsImpl;
 import tdtu.petshop.services.UserService;
 
 @Controller
@@ -39,10 +41,12 @@ public class AdminController {
     
     @GetMapping("")
 	public String getAdmin(Model model) {
+    	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	List<User> staffs = userService.findAllByRole(2);
     	List<Product> products = productService.findAll();
+    	model.addAttribute("user", (UserDetailsImpl) principal);
     	model.addAttribute("staffs", staffs);
-    	model.addAttribute("products",products);
+    	model.addAttribute("products", products);
 		return "admin";
 	}
 	
@@ -58,29 +62,32 @@ public class AdminController {
 		return "redirect:/admin/";
 	}
 	
-	@GetMapping(path = "/staff/edit/{username}", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> getStaffEdit(@PathVariable("username") String username) {
-		return new ResponseEntity<User>(userService.findByUsername(username), HttpStatus.OK);
+	@GetMapping(path = "/staff/edit/{id}", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> getStaffEdit(@PathVariable("id") int id) {
+		return new ResponseEntity<User>(userService.findById(id), HttpStatus.OK);
 	}
 	
 	@PostMapping("/staff/edit")
-	public String postStaffEdit(@ModelAttribute("staff") User staff) {
-		User temp = userService.findByUsername(staff.getUsername());
-		temp.setPhone(staff.getPhone());
-		temp.setName(staff.getName());
-		userService.saveUser(temp);
+	public String postStaffEdit(RedirectAttributes redirectAttributes, @ModelAttribute("staff") User staff) {
+		String error = userService.changeUserInfo(staff);
+		if (error != null) {
+			redirectAttributes.addFlashAttribute("error", error);
+		} else {
+			redirectAttributes.addFlashAttribute("success", "Sửa thông tin nhân viên.");
+		}
 		return "redirect:/admin";
 	}
 	
-	@GetMapping("/staff/edit/password/{username}")
-	public String getStaffEditPassword(Model model, @PathVariable("username") String username) {
-		model.addAttribute("username", username);
+	@GetMapping("/staff/edit/password/{id}")
+	public String getStaffEditPassword(Model model, @PathVariable("id") int id) {
+		model.addAttribute("id", id);
 		return "staffPasswordChange";
 	}
 	
 	@PostMapping("/staff/edit/password")
 	public String postStaffEditPassword(HttpServletRequest request) {
-		User staff = userService.findByUsername(request.getParameter("username"));
+		
+		User staff = userService.findById(Integer.parseInt(request.getParameter("id")));
 		staff.setPassword(new BCryptPasswordEncoder().encode(request.getParameter("password")));
 		userService.saveUser(staff);
 		return "redirect:/admin";
@@ -88,7 +95,7 @@ public class AdminController {
 	
 	@PostMapping("/staff/delete")
 	public String postDeleteStaff(HttpServletRequest request) {
-		userService.deleteUser(request.getParameter("username"));
+		userService.deleteById(Integer.parseInt(request.getParameter("id")));
 		return "redirect:/admin";
 	}
 	

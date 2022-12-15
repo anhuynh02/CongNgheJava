@@ -48,7 +48,7 @@ public class HomeController {
 		if (principal instanceof UserDetailsImpl) {
 			model.addAttribute("user", (UserDetailsImpl) principal);
 		}
-		else // principal = "anonymousUser"
+		else
 			model.addAttribute("user", null);
 		List<Product> cats = productService.findAllByCategory(categoryService.findById(1));
 		List<Product> dogs = productService.findAllByCategory(categoryService.findById(2));
@@ -71,7 +71,6 @@ public class HomeController {
 			Bill currentBill = billService.loadBill(udI.getId());
 			List<BillDetail> billDetails = billDetailService.findAllByBill(currentBill);
 			model.addAttribute("billDetails", billDetails);
-			
 		
 		return "cart";
 	}

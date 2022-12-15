@@ -16,38 +16,45 @@ $(document).ready(function() {
 //----------------------Quản lý nhân viên-------------------------
     
     //Thêm nhân viên dialog
-    $("#addBtn").click(function(e) {
-            $("#addModal").modal({
-                backdrop: "static",
-                keyboard: false
-            });
+    $("#addStaffBtn").click(function(e) {
+        $("#addModal").modal({
+            backdrop: "static",
+            keyboard: false
+        });
+    });
+    
+    //Xóa nhân viên dialog
+    $("#deleteStaffBtn").click(function(e) {
+        $("#addModal").modal({
+            backdrop: "static",
+            keyboard: false
+        });
     });
     
     //Chỉnh sửa nhân viên
-    $(".staffEdit").click(function(e) {
-			console.log("click");
-        	$("#editModal").modal({
-                backdrop: "static",
-                keyboard: false
-            });
-        	$.get("staff/edit/" + $(this).data("id"), function(staff) {
-				$("#editPhone").val(staff.phone);
-				$("#editName").val(staff.name);
-				$("#editUsername").val(staff.username);
-       		});
-            e.preventDefault();
+    $(".btn-edit-staff").click(function(e) {
+    	$("#editStaffModal").modal({
+            backdrop: "static",
+            keyboard: false
         });
+    	$.get("admin/staff/edit/" + $(this).data("id"), function(staff) {
+			$("#editStaffId").val(staff.id);
+			$("#editStaffPhone").val(staff.phone);
+			$("#editStaffName").val(staff.name);
+			$("#editStaffUsername").val(staff.username);
+   		});
+        e.preventDefault();
+    });
     
     //Xóa nhân viên
-    	$(".staffDel").click(function(e) {
-			console.log("Delete" + $(this).data("id"));
-  			$("#deleteUsername").val($(this).data("id"));
-            $("#deleteModal").modal({
-                backdrop: "static",
-                keyboard: false
-            });
-  			e.preventDefault();
+	$(".btn-delete-staff").click(function(e) {
+		$("#deleteId").val($(this).data("id"));
+        $("#deleteModal").modal({
+            backdrop: "static",
+            keyboard: false
         });
+		e.preventDefault();
+    });
     
 //----------------------Quản lý sản phẩm-------------------------
     
