@@ -17,15 +17,15 @@ $(document).ready(function() {
     
     //Thêm nhân viên dialog
     $("#addStaffBtn").click(function(e) {
-        $("#addModal").modal({
+        $("#addStaffModal").modal({
             backdrop: "static",
             keyboard: false
         });
     });
     
     //Xóa nhân viên dialog
-    $("#deleteStaffBtn").click(function(e) {
-        $("#addModal").modal({
+    $(".btn-delete-staff").click(function(e) {
+        $("#deleteStaffModal").modal({
             backdrop: "static",
             keyboard: false
         });
@@ -37,11 +37,16 @@ $(document).ready(function() {
             backdrop: "static",
             keyboard: false
         });
-    	$.get("admin/staff/edit/" + $(this).data("id"), function(staff) {
+        let currId = $(this).data("id")
+    	$.get("admin/staff/edit/" + currId, function(staff) {
 			$("#editStaffId").val(staff.id);
 			$("#editStaffPhone").val(staff.phone);
 			$("#editStaffName").val(staff.name);
 			$("#editStaffUsername").val(staff.username);
+			//Đổi mật khẩu nhân viên
+		    $("#editPassword").click(function() {
+		    	window.location.href = "admin/staff/edit/password/" + currId;
+		    });
    		});
         e.preventDefault();
     });

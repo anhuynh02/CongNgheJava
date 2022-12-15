@@ -135,7 +135,7 @@ public class HomeController {
 	
 	@PostMapping("register")
 	public String postRegister(Model model, @ModelAttribute("user") User user, HttpServletRequest request) {
-		String error = userService.registerUser(user, request.getParameter("confirmPassword"));
+		String error = userService.registerUser(user, request.getParameter("confirmPassword"), 3);
 		if (error != null) {
 			model.addAttribute("error", error);
 			model.addAttribute("user", user);
