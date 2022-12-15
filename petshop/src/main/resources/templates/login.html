@@ -12,7 +12,7 @@
           <form th:action="@{/login}" class="login-form" method="post">
             <input type="text" placeholder="Tên người dùng" name="username" class="info" required />
             <input type="password" placeholder="Mật khẩu" name="password" class="info" required/>
-            <input type="submit" value="Đăng nhập" style="background-color: skyblue;color:white">
+            <input class="btn" type="submit" value="Đăng nhập" style="background-color: skyblue;color:white">
             <p class="error message" style="color:red" th:if="${param.error}">Tên người dùng hoặc mật khẩu không hợp lệ.</p>
             <p class="message">Chưa đăng ký? <a href="/register" id="signup">Tạo tài khoản</a></p>
           </form>

@@ -44,7 +44,7 @@
   cursor: pointer;
 }
 
-.form button:hover,
+.form .btn:hover,
 .form button:focus {
   background-color:blue !important;
 }
