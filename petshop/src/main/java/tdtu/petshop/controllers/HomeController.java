@@ -108,6 +108,15 @@ public class HomeController {
 		return "redirect:/cart";
 	}
 	
+	@PostMapping("/cart/purchase")
+	public String postPurchaseCart(HttpServletRequest request) {
+		Bill bill = billService.findById(Integer.parseInt(request.getParameter("billId")));
+		bill.setPurchased(true);
+		bill.setTotal(Integer.parseInt(request.getParameter("billTotal")));
+		billService.saveBill(bill);
+		return "redirect:/cart";
+	}
+	
 	@GetMapping("login")
 	public String getLogin() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
