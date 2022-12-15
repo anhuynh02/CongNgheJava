@@ -1,15 +1,6 @@
-<<<<<<< HEAD
 Manifest-Version: 1.0
 Build-Jdk-Spec: 17
 Implementation-Title: petshop
 Implementation-Version: 0.0.1-SNAPSHOT
 Created-By: Maven Integration for Eclipse
 
-=======
-Manifest-Version: 1.0
-Build-Jdk-Spec: 17
-Implementation-Title: petshop
-Implementation-Version: 0.0.1-SNAPSHOT
-Created-By: Maven Integration for Eclipse
-
->>>>>>> 3c41182bc06e3cf2cdd2e96cecde92065662afd9
