@@ -31,7 +31,7 @@
                     </form>
                     <ul class="navbar-nav ml-auto">
                     	<li class="nav-item">
-                               <a id="itemNavLeft" class="nav-link" th:text="${user != null} ? 'Cart'" th:href="@{cart}"></a>
+                                <a id="itemNavLeft" class="nav-link" th:text="${user != null} ? 'Cart ('+${count}+' sản phẩm)'" th:href="@{cart}"></a>
                         </li>
                         <li class="nav-item active">
                             <a id="itemNavLeft" class="nav-link" th:text="${user != null} ? ${user.getUsername()} : 'Đăng Nhập'" 
