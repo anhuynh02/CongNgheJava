@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,12 +10,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/slide.css">
+    <link rel="stylesheet" href="./fontawesome-free-6.2.1-web/css/all.min.css">
 </head>
 <body>
     <section class="first">
         <div class="container ">
             <nav class="first navbar navbar-expand-lg firstNav">
-                <a class="navbar-brand" href="homepage.html">
+                <a class="navbar-brand" th:href="@{/}">
                     <img src="./images/icon/Logo.jpg" alt="Logo của Shop" style="width:100px;"/>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#PetBar" aria-controls="PetBar" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,13 +25,17 @@
                 <div class="collapse navbar-collapse" id="PetBar">
                     <ul class="navbar-nav mr-auto"></ul>
                     <ul class="navbar-nav mr-auto"></ul>
-                    <form class="form-inline my-2 my-lg-0 mr-auto">
-                        <input class="box form-control mr-sm-2 w" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <form id="search-form" th:action="@{/search}" method="post" class="my-2 my-lg-0 mr-auto">
+                        <input id="search-bar" class="box form-control mr-sm-2 w" name="name" type="search" placeholder="Search" aria-label="Search">
+                        <button id="search-btn" class="btn my-2 my-sm-0" type="submit"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
                     </form>
                     <ul class="navbar-nav ml-auto">
+                    	<li class="nav-item">
+                               <a id="itemNavLeft" class="nav-link" th:text="${user != null} ? 'Cart'" th:href="@{cart}"></a>
+                        </li>
                         <li class="nav-item active">
-                            <a id="itemNavLeft" class="nav-link" th:text="${user != null} ? ${user.getUsername()} : 'Đăng Nhập'" th:href="@{'/' + __(${user != null} ? ${user.getAuthorities()[0]} : 'login')__}"></a>
+                            <a id="itemNavLeft" class="nav-link" th:text="${user != null} ? ${user.getUsername()} : 'Đăng Nhập'" 
+                            th:href="@{'/' + __(${user != null} ? (${user.getAuthorities()[0].toString().equals('customer')} ? 'cart' : ${user.getAuthorities()[0]}) : 'login')__}"></a>
                         </li>
                         <li class="nav-item">
                         	<form th:action="@{logout}" method="post">
@@ -47,6 +52,10 @@
         <div class="container">
             <nav>
                 <div class="nav nav-tabs justify-content-center" id="category" role="tabslist">
+                	<button class="nav-link" id="All-tab" data-toggle="tab" data-target="#All" type="button" role="tab" aria-controls="All" aria-selected="true">
+                        <img src="./images/icon/pet.png" alt="dog icon" width="20px"/>
+                        Tất cả
+                    </button>
                     <button class="nav-link" id="Dog-tab" data-toggle="tab" data-target="#Dog" type="button" role="tab" aria-controls="Dog" aria-selected="true">
                         <img src="./images/icon/dogIcon.png" alt="dog icon" width="20px"/>
                         Chó cảnh
@@ -76,8 +85,6 @@
                 </div>
                 <div class="slide">
                 </div>
-
-
                 <a class="prev" onclick="plusSlides(-1)">
                     <img src="./images/icon/BenTrai.png" alt="Mũi tên trái" width="30" height="30">
                 </a>
@@ -93,180 +100,177 @@
     <section class="third">
         <div class="container">
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active mt-1" id="Dog" role="tabpanel" aria-labelledby="Dog-tab">
+	            <div class="tab-pane fade show active mt-1" id="All" role="tabpanel" aria-labelledby="All-tab">
+	                    <h2 class="title">
+	                        Đa dạng giống chó cảnh cho bạn lựa chọn
+	                    </h2>  
+	                      
+	                    <div class="row">
+	                    	<th:block th:each="dog: ${dogs}">                    
+	                        <div class="bestseller col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+	                            <div class="card mt-1" style="width:20rem;">
+	                                <img th:src="@{${dog.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+	                                <h4 class="card-title text-center" th:text="${dog.name}"></h4>
+	                                <form th:action="@{addcart}"  method="post" class="ml-auto">
+	                                	<input type="hidden" name="id" th:value="${dog.id}">
+	                                	<input type="hidden" name="name" th:value="${dog.name}">
+	                                	<input type="hidden" name="price" th:value="${dog.price}">
+	                                	<button type="submit" class="btnAddCart">Thêm giỏ hàng</button>
+	                                </form>
+	                            </div>
+	                        </div>
+	                        </th:block>
+	                    </div>
+	                    
+	                    <h2 class="title">
+                                Lựa chọn mèo thoải mái với nhiều loài khác nhau
+                        </h2>  
+                        <div class="row">
+	                    	<th:block th:each="cat: ${cats}">                    
+	                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+	                            <div class="card mt-1" style="width:20rem;">
+	                                <img th:src="@{${cat.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+	                                <h4 class="card-title text-center" th:text="${cat.name}"></h4>
+	                                <form th:action="@{addcart}"  method="post" class="ml-auto">
+	                                	<input type="hidden" name="id" th:value="${cat.id}">
+	                                	<input type="hidden" name="name" th:value="${cat.name}">
+	                                	<input type="hidden" name="price" th:value="${cat.price}">
+	                                	<button type="submit" class="btnAddCart">Thêm giỏ hàng</button>
+	                                </form>
+	                            </div>
+	                        </div>
+	                        </th:block>
+	                    </div>
+                            
+                        
+                		<h2 class="title">
+                                Lựa chọn thức ăn cho thú cưng của mình
+                            </h2>    
+                            <div class="row">
+	                    	<th:block th:each="food: ${foods}">                    
+	                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+	                            <div class="card mt-1" style="width:20rem;">
+	                                <img th:src="@{${food.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+	                                <h4 class="card-title text-center" th:text="${food.name}"></h4>
+	                                <form th:action="@{addcart}"  method="post" class="ml-auto">
+	                                	<input type="hidden" name="id" th:value="${food.id}">
+	                                	<input type="hidden" name="name" th:value="${food.name}">
+	                                	<input type="hidden" name="price" th:value="${food.price}">
+	                                	<button type="submit" class="btnAddCart">Thêm giỏ hàng</button>
+	                                </form>
+	                            </div>
+	                        </div>
+	                        </th:block>
+	                    </div>
+                        
+                        	<h2 class="title">
+                                Không thể thiếu đồ chơi cho các thú cưng của mình
+                            </h2>    
+                            <div class="row">
+	                    	<th:block th:each="toy: ${toys}">                    
+	                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+	                            <div class="card mt-1" style="width:20rem;">
+	                                <img th:src="@{${toy.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+	                                <h4 class="card-title text-center" th:text="${toy.name}"></h4>
+	                                <form th:action="@{addcart}"  method="post" class="ml-auto">
+	                                	<input type="hidden" name="id" th:value="${toy.id}">
+	                                	<input type="hidden" name="name" th:value="${toy.name}">
+	                                	<input type="hidden" name="price" th:value="${toy.price}">
+	                                	<button type="submit" class="btnAddCart">Thêm giỏ hàng</button>
+	                                </form>
+	                            </div>
+	                        </div>
+	                        </th:block>
+	                    </div>  
+                       
+	            </div>
+                <div class="tab-pane fade show mt-1" id="Dog" role="tabpanel" aria-labelledby="Dog-tab">
                     <h2 class="title">
                         Đa dạng giống chó cảnh cho bạn lựa chọn
-                    </h2>    
+                    </h2>  
+                      
                     <div class="row">
+                    	<th:block th:each="dog: ${dogs}">                    
                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
                             <div class="card mt-1" style="width:20rem;">
-                                <img src="./images/dog/chihuahua.jpg" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
-                                <h3 class="card-title text-center">
-                                    Chó Chihuahua
-                                </h3>
+                                <img th:src="@{${dog.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+                                <h4 class="card-title text-center" th:text="${dog.name}"></h4>
+                                <form th:action="@{addcart}"  method="post" class="ml-auto">
+	                                	<input type="hidden" name="id" th:value="${dog.id}">
+	                                	<input type="hidden" name="name" th:value="${dog.name}">
+	                                	<input type="hidden" name="price" th:value="${dog.price}">
+	                                	<button type="submit" class="btnAddCart">Thêm giỏ hàng</button>
+	                                </form>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                            <div class="card mt-1" style="width:20rem;">
-                                <img src="./images/dog/bacKinh.jpg" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
-                                <h3 class="card-title text-center">
-                                    Chó Bắc Kinh
-                                </h3>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                            <div class="card mt-1" style="width:20rem;">
-                                <img src="./images/dog/husky.jpg" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
-                                <h3 class="card-title text-center">
-                                    Chó Husky
-                                </h3>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 bestseller">
-                            <div class="card mt-1 " style="width:20rem;">
-                                <img src="./images/dog/alaska.jpg" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
-                                <h3 class="card-title text-center">
-                                    Chó Alaska
-                                </h3>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 bestseller">
-                            <div class="card mt-1 " style="width:20rem;">
-                                <img src="./images/dog/poodle.jpg" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
-                                <h3 class="card-title text-center">
-                                    Chó Poodle
-                                </h3>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                            <div class="card mt-1" style="width:20rem;">
-                                <img src="./images/dog/golden.jpg" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
-                                <h3 class="card-title text-center">
-                                    Chó Golden
-                                </h3>
-                            </div>
-                        </div>
+                        </th:block>
                     </div>
                 </div>
                 <div class="tab-pane fade show m-1" id="Cat" role="tabpanel" aria-labelledby="Cat-tab">
-                    <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active mt-1" id="Cat" role="tabpanel" aria-labelledby="Cat-tab">
                             <h2 class="title">
                                 Lựa chọn mèo thoải mái với nhiều loài khác nhau
-                            </h2>    
-                            <div class="row">
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/cat/meomuop.jpg" class="card-img-top" alt="Mèo mướp" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Mèo mướp
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 bestseller">
-                                    <div class="card mt-1 " style="width:20rem;">
-                                        <img src="./images/cat/meovang.jpg" class="card-img-top" alt="Mèo vàng" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Mèo vàng
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/cat/meoxiem.jpg" class="card-img-top" alt="Mèo xiêm" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Mèo Xiêm
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/cat/meoanh.jpg" class="card-img-top" alt="Mèo anh lông ngắn" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Mèo Anh lông ngắn
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/cat/meoscottish.png" class="card-img-top" alt="Mèo tai cụp Scottish Fold" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Mèo tai cụp Scottish Fold
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/cat/meomunchkin.png" class="card-img-top" alt="Mèo Munchkin chân ngắn" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Mèo Munchkin chân ngắn
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
+	                        </h2>  
+	                        <div class="row">
+		                    	<th:block th:each="cat: ${cats}">                    
+		                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+		                            <div class="card mt-1" style="width:20rem;">
+		                                <img th:src="@{${cat.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+		                                <h4 class="card-title text-center" th:text="${cat.name}"></h4>
+		                                <form th:action="@{addcart}"  method="post" class="ml-auto">
+	                                	<input type="hidden" name="id" th:value="${cat.id}">
+	                                	<input type="hidden" name="name" th:value="${cat.name}">
+	                                	<input type="hidden" name="price" th:value="${cat.price}">
+	                                	<button type="submit" class="btnAddCart">Thêm giỏ hàng</button>
+	                                </form>
+		                            </div>
+		                        </div>
+		                        </th:block>
+		                    </div>
                         </div>
-                    </div>
-                </div>
+                        
                 <div class="tab-pane fade show m-1" id="foodSupply" role="tabpanel" aria-labelledby="foodSupply-tab">
-                    <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active mt-1" id="foodSupply" role="tabpanel" aria-labelledby="foodSupply-tab">
                             <h2 class="title">
                                 Lựa chọn thức ăn cho thú cưng của mình
                             </h2>    
                             <div class="row">
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/food/thucan1.jpg" class="card-img-top" alt="Royal Canin Kitten" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Royal Canin Kitten
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/food/thucan2.jpg" class="card-img-top" alt="Royal Canin Indoor" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Royal Canin Indoor
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/food/thucan3.jpg" class="card-img-top" alt="Royal Canin Hair and Skin" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Royal Canin Hair and Skin
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/food/thucan4.jpg" class="card-img-top" alt="Súp thưởng cho chó" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Súp thưởng cho chó
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/food/thucan5.jpg" class="card-img-top" alt="Pate IRIS One Care Beef" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Pate IRIS One Care Beef
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="card mt-1" style="width:20rem;">
-                                        <img src="./images/food/thucan6.jpg" class="card-img-top" alt="Cần sa cho mèo" width="200" height="200">
-                                        <h3 class="card-title text-center">
-                                            Cần sa cho mèo
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
+	                    	<th:block th:each="food: ${foods}">                    
+		                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+		                            <div class="card mt-1" style="width:20rem;">
+		                                <img th:src="@{${food.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+		                                <h4 class="card-title text-center" th:text="${food.name}"></h4>
+		                                <form th:action="@{addcart}"  method="post" class="ml-auto">
+	                                	<input type="hidden" name="id" th:value="${food.id}">
+	                                	<input type="hidden" name="name" th:value="${food.name}">
+	                                	<input type="hidden" name="price" th:value="${food.price}">
+	                                	<button type="submit" class="btnAddCart">Thêm giỏ hàng</button>
+	                                </form>
+		                            </div>
+		                        </div>
+		                        </th:block>
+		                    </div>
                         </div>
-                    </div>
+
+                <div class="tab-pane fade show m-1" id="Toy" role="tabpanel" aria-labelledby="Toy-tab">
+                	<h2 class="title">
+                                Không thể thiếu đồ chơi cho các thú cưng của mình
+                            </h2>    
+                            <div class="row">
+	                    	<th:block th:each="toy: ${toys}">                    
+	                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+	                            <div class="card mt-1" style="width:20rem;">
+	                                <img th:src="@{${toy.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
+	                                <h5 class="card-title text-center" th:text="${toy.name}"></h5>
+	                                <form th:action="@{addcart}"  method="post" class="ml-auto">
+	                                	<input type="hidden" name="id" th:value="${toy.id}">
+	                                	<input type="hidden" name="name" th:value="${toy.name}">
+	                                	<input type="hidden" name="price" th:value="${toy.price}">
+	                                	<button type="submit" class="btnAddCart">Thêm giỏ hàng</button>
+	                                </form>
+	                            </div>
+	                        </div>
+	                        </th:block>
+	                    </div>  
                 </div>
-                <div class="tab-pane fade show m-1" id="Toy" role="tabpanel" aria-labelledby="Dog-tab">This is toy</div>
             </div>
         </section>
     </div>
@@ -316,5 +320,7 @@
         }
         
     }
+    
+    setInterval(plusSlides(1),150);
 </script>
 </html>

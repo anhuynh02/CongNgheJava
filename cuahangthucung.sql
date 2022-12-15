@@ -4,6 +4,7 @@
 --
 -- Máy chủ: 127.0.0.1
 <<<<<<< HEAD
+<<<<<<< HEAD
 -- Thời gian đã tạo: Th12 13, 2022 lúc 06:27 PM
 -- Phiên bản máy phục vụ: 10.4.25-MariaDB
 -- Phiên bản PHP: 7.4.30
@@ -12,6 +13,11 @@
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 8.1.6
 >>>>>>> ad0fb638b43c319a97d4c8c548e2ecbfbc30ba55
+=======
+-- Thời gian đã tạo: Th12 14, 2022 lúc 06:14 AM
+-- Phiên bản máy phục vụ: 10.4.24-MariaDB
+-- Phiên bản PHP: 8.1.6
+>>>>>>> 3c41182bc06e3cf2cdd2e96cecde92065662afd9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,7 +33,10 @@ SET time_zone = "+00:00";
 -- Cơ sở dữ liệu: `cuahangthucung`
 --
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 3c41182bc06e3cf2cdd2e96cecde92065662afd9
 CREATE DATABASE IF NOT EXISTS `cuahangthucung` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `cuahangthucung`;
 >>>>>>> ad0fb638b43c319a97d4c8c548e2ecbfbc30ba55
@@ -35,6 +44,7 @@ USE `cuahangthucung`;
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 <<<<<<< HEAD
 -- Cấu trúc bảng cho bảng `category`
 --
@@ -55,6 +65,17 @@ CREATE TABLE `bill` (
   `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+=======
+-- Cấu trúc bảng cho bảng `bill`
+--
+
+CREATE TABLE `bill` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `total` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+>>>>>>> 3c41182bc06e3cf2cdd2e96cecde92065662afd9
 -- --------------------------------------------------------
 
 --
@@ -87,7 +108,10 @@ CREATE TABLE `category` (
   `description` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+<<<<<<< HEAD
 >>>>>>> ad0fb638b43c319a97d4c8c548e2ecbfbc30ba55
+=======
+>>>>>>> 3c41182bc06e3cf2cdd2e96cecde92065662afd9
 --
 -- Đang đổ dữ liệu cho bảng `category`
 --
@@ -109,10 +133,14 @@ CREATE TABLE `product` (
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `price` int(11) NOT NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
   `description` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
 =======
   `description` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
 >>>>>>> ad0fb638b43c319a97d4c8c548e2ecbfbc30ba55
+=======
+  `description` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+>>>>>>> 3c41182bc06e3cf2cdd2e96cecde92065662afd9
   `vote` int(11) NOT NULL,
   `image` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `category_id` int(11) NOT NULL
@@ -126,6 +154,7 @@ INSERT INTO `product` (`id`, `name`, `price`, `description`, `vote`, `image`, `c
 (1, 'Mèo Xiêm', 2800000, 'Một trong những loài mèo đầu tiên của mèo lông ngắn phương Đông được công nhận', 4, './images/cat/meoxiem.jpg', 1),
 (2, 'Chó Alaska', 9000000, 'Chó Alaska hay Alaska Malamute hoặc Mahlemuts là một giống chó kéo xe ở Alaska', 4, './images/dog/alaska.jpg', 2),
 (3, 'Royal Canin Kitten', 115000, 'Thức ăn cho mèo con ROYAL CANIN Kitten bao gồm protein từ lòng trắng trứng + Probiotic, chất chống o', 4, './images/food/thucan1.jpg', 3),
+<<<<<<< HEAD
 <<<<<<< HEAD
 (4, 'Đồ chơi tạm', 100000, 'Placeholder', 4, './images/toy/temp', 4),
 (5, 'Mèo Anh lông ngắn', 10000000, 'British Shorthair là giống mèo cảnh cổ của Vương quốc Anh. Chúng đã có quá trình sinh sống và phát triển trên quần đảo Anh quốc từ hàng ngàn năm.', 4, './images/cat/anhlongngan.jpg', 1),
@@ -170,6 +199,8 @@ INSERT INTO `product` (`id`, `name`, `price`, `description`, `vote`, `image`, `c
 (44, 'Đồ chơi xương gặm in hình bàn chân', 20000, 'Đồ chơi xương gặm in hình bàn chân là sản phẩm đồ chơi cho chó rất được ưa chuộng bởi thiết kế bắt mắt, đáng yêu, kích thước vừa phải. Có độ bền cao và an toàn cho sức khỏe cún cưng.', 4, './images/toy/xuong.jpg', 4),
 (45, 'Chuông cho chó mèo nhiều sắc màu\r\n', 10000, 'Chuông cho chó mèo nhiều sắc màu hay còn được gọi là lục lạc. Với đầy đủ các sắc màu và kích cỡ khác nhau. Phù hợp với tất cả các loại giống chó mèo.', 4, './images/toy/chuong.jpg', 4);
 =======
+=======
+>>>>>>> 3c41182bc06e3cf2cdd2e96cecde92065662afd9
 (4, 'Đồ chơi tạm', 100000, 'Placeholder', 4, './images/toy/temp', 4);
 >>>>>>> ad0fb638b43c319a97d4c8c548e2ecbfbc30ba55
 
@@ -202,9 +233,13 @@ INSERT INTO `role` (`id`, `name`, `description`) VALUES
 
 CREATE TABLE `user` (
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   `id` int(11) NOT NULL,
 >>>>>>> ad0fb638b43c319a97d4c8c548e2ecbfbc30ba55
+=======
+  `id` int(11) NOT NULL,
+>>>>>>> 3c41182bc06e3cf2cdd2e96cecde92065662afd9
   `phone` varchar(13) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `username` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
@@ -218,18 +253,24 @@ CREATE TABLE `user` (
 --
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 INSERT INTO `user` (`phone`, `name`, `username`, `password`, `enable`, `role_id`) VALUES
 ('0700000001', 'Admin', 'admin', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', b'1', 1),
 ('0700000002', 'Trần Văn A', 'customer', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', b'1', 3),
 ('0700000010', 'Lê Khánh Văn', 'staff', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', b'1', 2),
 ('0700000020', 'Liễu Duy Ngôn', 'staffTemp', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', b'1', 2);
 =======
+=======
+>>>>>>> 3c41182bc06e3cf2cdd2e96cecde92065662afd9
 INSERT INTO `user` (`id`, `phone`, `name`, `username`, `password`, `enable`, `role_id`) VALUES
 (1, '0700000001', 'Admin', 'admin', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', b'1', 1),
 (2, '0700000010', 'Lê Khánh Văn', 'staff', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', b'1', 2),
 (3, '0700000020', 'Liễu Duy Ngôn', 'staffTemp', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', b'1', 2),
 (4, '0700000002', 'Trần Văn A', 'customer', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', b'1', 3);
+<<<<<<< HEAD
 >>>>>>> ad0fb638b43c319a97d4c8c548e2ecbfbc30ba55
+=======
+>>>>>>> 3c41182bc06e3cf2cdd2e96cecde92065662afd9
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -237,7 +278,10 @@ INSERT INTO `user` (`id`, `phone`, `name`, `username`, `password`, `enable`, `ro
 
 --
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 3c41182bc06e3cf2cdd2e96cecde92065662afd9
 -- Chỉ mục cho bảng `bill`
 --
 ALTER TABLE `bill`
@@ -250,7 +294,10 @@ ALTER TABLE `bill_detail`
   ADD PRIMARY KEY (`id`);
 
 --
+<<<<<<< HEAD
 >>>>>>> ad0fb638b43c319a97d4c8c548e2ecbfbc30ba55
+=======
+>>>>>>> 3c41182bc06e3cf2cdd2e96cecde92065662afd9
 -- Chỉ mục cho bảng `category`
 --
 ALTER TABLE `category`
@@ -274,6 +321,7 @@ ALTER TABLE `role`
 --
 ALTER TABLE `user`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD PRIMARY KEY (`username`),
   ADD UNIQUE KEY `phone` (`phone`),
 =======
@@ -281,6 +329,11 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `phone` (`phone`),
   ADD UNIQUE KEY `username` (`username`),
 >>>>>>> ad0fb638b43c319a97d4c8c548e2ecbfbc30ba55
+=======
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `phone` (`phone`),
+  ADD UNIQUE KEY `username` (`username`),
+>>>>>>> 3c41182bc06e3cf2cdd2e96cecde92065662afd9
   ADD KEY `role_id` (`role_id`);
 
 --
@@ -289,7 +342,10 @@ ALTER TABLE `user`
 
 --
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 3c41182bc06e3cf2cdd2e96cecde92065662afd9
 -- AUTO_INCREMENT cho bảng `bill`
 --
 ALTER TABLE `bill`
@@ -302,7 +358,10 @@ ALTER TABLE `bill_detail`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+<<<<<<< HEAD
 >>>>>>> ad0fb638b43c319a97d4c8c548e2ecbfbc30ba55
+=======
+>>>>>>> 3c41182bc06e3cf2cdd2e96cecde92065662afd9
 -- AUTO_INCREMENT cho bảng `category`
 --
 ALTER TABLE `category`
@@ -313,10 +372,14 @@ ALTER TABLE `category`
 --
 ALTER TABLE `product`
 <<<<<<< HEAD
+<<<<<<< HEAD
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 =======
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 >>>>>>> ad0fb638b43c319a97d4c8c548e2ecbfbc30ba55
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+>>>>>>> 3c41182bc06e3cf2cdd2e96cecde92065662afd9
 
 --
 -- AUTO_INCREMENT cho bảng `role`
@@ -326,14 +389,20 @@ ALTER TABLE `role`
 
 --
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 3c41182bc06e3cf2cdd2e96cecde92065662afd9
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+<<<<<<< HEAD
 >>>>>>> ad0fb638b43c319a97d4c8c548e2ecbfbc30ba55
+=======
+>>>>>>> 3c41182bc06e3cf2cdd2e96cecde92065662afd9
 -- Các ràng buộc cho các bảng đã đổ
 --
 

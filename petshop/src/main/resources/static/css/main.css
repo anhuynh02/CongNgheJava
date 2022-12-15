@@ -51,8 +51,45 @@ p{
     width: 100%;
     height: 20px;
 }
-.link{
-	background: none!important;
-	border: none;
-	cursor: pointer;
+.link {
+		background: none!important;
+		border: none;
+		cursor: pointer;
 }
+
+#search-bar{
+    width: 600px;
+    border-radius: 20px 0 0 20px;
+    margin-right: 0 !important;
+}
+
+#search-btn{
+    background-color: #AAC4FF;
+    border-radius: 0 20px 20px 0;
+    width: 60px;
+}
+
+#search-form{
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    }
+    
+.second-search{
+    background-color: #D2DAFF;
+    height: 50px;
+    font-size: 1.5rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.search-result{
+    margin: 20px 0;
+}
+
+.btnAddCart{
+	background-color: #D2DAFF;
+	height:40px;
+	width: fit-content;
+	margin-right: 10px;
+}
+    

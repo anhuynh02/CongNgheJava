@@ -12,10 +12,12 @@ import javax.persistence.Table;
 @Table(name = "user")
 public class User {
 	
+	@Id
+	private int id;
 	@Column(unique=true)
 	private String phone;
 	private String name;
-	@Id
+	@Column(unique=true)
 	private String username;
 	private String password;
 	private boolean enable;
@@ -66,4 +68,7 @@ public class User {
 		return "User [phone=" + phone + ", name=" + name + ", username=" + username + ", password=" + password + ", enable=" + enable + ", role=" + role + "]";
 	}
 	
+	public int getId() {
+		return this.id;
+	}
 }
