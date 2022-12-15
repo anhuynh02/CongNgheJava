@@ -19,6 +19,10 @@ public class UserService {
 	@Autowired
 	private RoleService roleService;
 	
+	public User findById(int id) {
+		return userRepository.findById(id);
+	}
+	
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}

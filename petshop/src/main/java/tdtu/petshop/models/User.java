@@ -68,4 +68,7 @@ public class User {
 		return "User [phone=" + phone + ", name=" + name + ", username=" + username + ", password=" + password + ", enable=" + enable + ", role=" + role + "]";
 	}
 	
+	public int getId() {
+		return this.id;
+	}
 }
