@@ -31,11 +31,12 @@ p{
 }
 
 .forth{
-	position: fixed;
-	width: 100%;
-    background-color: #AAC4FF;
-    bottom:0;
-    
+   background-color: #AAC4FF;
+   position: sticky;
+   left: 0;
+   top: 1000px;
+   width: 100%;
+   text-align: center;
 }
 .title{
     font-style: italic;
@@ -45,10 +46,13 @@ p{
     background-color: #EEF1FF;
 
 }
-.footer{
+
+.footer { 
+    
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin-left: 20px;
 }
+
 .slideshow{
     height: fit-content;
 }
