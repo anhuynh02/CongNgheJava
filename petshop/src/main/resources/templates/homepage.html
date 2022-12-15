@@ -42,6 +42,7 @@
                                 <button id="itemNavLeft" class="nav-link link" aria-current="page" th:if="${user != null}">Đăng Xuất</button>
                             </form>
                         </li>
+                                     
                     </ul>
                 </div>
             </nav>
@@ -72,6 +73,7 @@
                         <img src="./images/icon/toyIcon.png" alt="dog icon" width="20px"/>
                         Đồ chơi
                     </button>
+                    
                 </div>
             </nav>
         </div>
@@ -291,7 +293,10 @@
             </div>
         </div>
     </section>
-
+	<div th:if="${success} != null" class="alert alert-success alert-dismissable fade-in" id="alertAddCart">
+			        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			        <strong>Thành công!</strong> <span th:text="${success}"></span>
+			    </div>
 </body>
 <script src="./js/homepage.js"></script>
 </html>

@@ -48,7 +48,7 @@ p{
 }
 
 .footer { 
-    
+    text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin-left: 20px;
 }
@@ -68,7 +68,7 @@ p{
 }
 
 #search-bar{
-    width: 600px;
+    width: 500px;
     border-radius: 20px 0 0 20px;
     margin-right: 0 !important;
 }
@@ -102,4 +102,11 @@ p{
 	width: fit-content;
 	margin-right: 10px;
 }
-    
+
+#alertCart, #alertAddCart{
+	z-index: 999;
+	position: fixed;
+	width : 500px;
+	bottom: 0px;
+	right: 0px
+}

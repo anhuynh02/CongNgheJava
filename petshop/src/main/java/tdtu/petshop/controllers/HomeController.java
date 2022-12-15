@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import tdtu.petshop.models.Bill;
 import tdtu.petshop.models.BillDetail;
@@ -74,7 +75,7 @@ public class HomeController {
 	}
 	
 	@PostMapping("addcart")
-	public String postAddCart(HttpServletRequest request, Model model) {
+	public String postAddCart(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			model.addAttribute("user", (UserDetailsImpl) principal);
 			//lấy thông tin user đang trong session
@@ -93,6 +94,7 @@ public class HomeController {
 				//Ngược lại thêm sp vào giỏ hàng
 				billDetailService.addBillDetail(product, currentBill);
 			}
+			redirectAttributes.addFlashAttribute("success", "Thêm vào giỏ hàng thành công");
 			//cong gia vao bill 
 			currentBill.setTotal(currentBill.getTotal()+product.getPrice());
 			billService.saveBill(currentBill);
@@ -100,28 +102,30 @@ public class HomeController {
 		return "redirect:/";
 	}
 	@PostMapping("/cart/delete")
-	public String postDeleteCart(HttpServletRequest request) {
+	public String postDeleteCart(HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		billDetailService.deleteBillDetail(Integer.parseInt(request.getParameter("id")));
+		redirectAttributes.addFlashAttribute("success", "Xóa sản phẩm thành công");
 		return "redirect:/cart";
 	}
 	
 	@PostMapping("/cart/update")
-	public String postUpdateCart(HttpServletRequest request) {
+	public String postUpdateCart(HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		if(request.getParameter("billDetailId") != "" && request.getParameter("quantityItem")!= "") {
 			BillDetail billDetail = billDetailService.findById(Integer.parseInt(request.getParameter("billDetailId")));
 			billDetail.setQuantity(Integer.parseInt(request.getParameter("quantityItem")));
 			billDetailService.saveBillDetail(billDetail);
-			
+			redirectAttributes.addFlashAttribute("success", "Cập nhật giỏ hàng thành công");
 		}
 		return "redirect:/cart";
 	}
 	
 	@PostMapping("/cart/purchase")
-	public String postPurchaseCart(HttpServletRequest request) {
+	public String postPurchaseCart(HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		Bill bill = billService.findById(Integer.parseInt(request.getParameter("billId")));
 		bill.setPurchased(true);
 		bill.setTotal(Integer.parseInt(request.getParameter("billTotal")));
 		billService.saveBill(bill);
+		redirectAttributes.addFlashAttribute("success", "Thanh toán thành công");
 		return "redirect:/cart";
 	}
 	

@@ -4,7 +4,13 @@ function plusSlides(n){
     showSlide(index += n);
 }
 
-
+if($("#alertAddCart").length != 0){
+		let a = $("#alertAddCart").children("a");
+		setTimeout(function () {
+            // Closing the alert
+            $('#alertAddCart').alert('close');
+        }, 2000);
+	}
 function showSlide(n){
     var i;
     var slides = document.getElementsByClassName("slide");

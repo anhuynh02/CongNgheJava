@@ -1,5 +1,12 @@
 $(document).ready(function() {
 	var money = 0;
+	if($("#alertCart").length != 0){
+		let a = $("#alertCart").children("a");
+		setTimeout(function () {
+            // Closing the alert
+            $('#alertCart').alert('close');
+        }, 2000);
+	}
 	$("#totalPriceBill").html('Tổng tiền: 0 VNĐ');
 	$.each($(".totalItemPrice"),function(index, value){
 		let string = value.innerText;
