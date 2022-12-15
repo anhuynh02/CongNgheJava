@@ -40,10 +40,6 @@ public class ProductService {
 		productRepository.deleteById(id);
 	}
 	
-	public List<Product> findAllByCategory(Category category){
-		return productRepository.findByCategory(category);
-	}
-	
 	public List<Product> findByNameContaining(String name){
 		return productRepository.findByNameContaining(name);
 	}
