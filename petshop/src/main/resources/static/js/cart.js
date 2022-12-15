@@ -38,7 +38,8 @@ $(document).ready(function() {
 		
 	});
 	
-	$(".volumn").on("input", function() {
+	$(".volumn").on("input", function(e) {
+		e.preventDefault();
 		if($(this).val() < 1){
 			$(this).val("1");
 		}
