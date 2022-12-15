@@ -39,10 +39,15 @@ $(document).ready(function() {
 	});
 	
 	$(".volumn").on("input", function() {
+		if($(this).val() < 1){
+			$(this).val("1");
+		}
 	   let volumnItem =$(this).val();
 	   let row =$(this).parent().parent().children()[0];
-	   $("#billDetailId").val(row.innerText);
-	   $("#quantityItem").val(volumnItem); 
-	   $("#updateForm").submit();
+	   let b =$("#billDetailId").val(row.innerText);
+	   let a =$("#quantityItem").val(volumnItem);
+	   if(b !=null){
+			$("#updateForm").submit();
+		}
 	});
 });

@@ -113,9 +113,12 @@ public class HomeController {
 	
 	@PostMapping("/cart/update")
 	public String postUpdateCart(HttpServletRequest request) {
-		BillDetail billDetail = billDetailService.findById(Integer.parseInt(request.getParameter("billDetailId")));
-		billDetail.setQuantity(Integer.parseInt(request.getParameter("quantityItem")));
-		billDetailService.saveBillDetail(billDetail);
+		if(request.getParameter("billDetailId") != "" && request.getParameter("quantityItem")!= "") {
+			BillDetail billDetail = billDetailService.findById(Integer.parseInt(request.getParameter("billDetailId")));
+			billDetail.setQuantity(Integer.parseInt(request.getParameter("quantityItem")));
+			billDetailService.saveBillDetail(billDetail);
+			
+		}
 		return "redirect:/cart";
 	}
 	
