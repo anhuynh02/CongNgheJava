@@ -73,8 +73,4 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", phone=" + phone + ", name=" + name + ", username=" + username + ", password=" + password + ", enable=" + enable + ", role=" + role + "]";
 	}
-	
-	public int getId() {
-		return this.id;
-	}
 }
