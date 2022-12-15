@@ -4,12 +4,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.aspectj.weaver.patterns.HasThisTypePatternTriedToSneakInSomeGenericOrParameterizedTypePatternMatchingStuffAnywhereVisitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MimeTypeUtils;
@@ -24,7 +22,6 @@ import tdtu.petshop.models.Product;
 import tdtu.petshop.models.User;
 import tdtu.petshop.services.CategoryService;
 import tdtu.petshop.services.ProductService;
-import tdtu.petshop.services.RoleService;
 import tdtu.petshop.services.UserDetailsImpl;
 import tdtu.petshop.services.UserService;
 

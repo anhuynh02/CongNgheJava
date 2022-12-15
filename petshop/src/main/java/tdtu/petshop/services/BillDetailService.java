@@ -9,9 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tdtu.petshop.models.Bill;
 import tdtu.petshop.models.BillDetail;
 import tdtu.petshop.models.Product;
-import tdtu.petshop.models.User;
 import tdtu.petshop.repositories.BillDetailRepository;
-import tdtu.petshop.repositories.BillRepository;
 @Service
 @Transactional
 public class BillDetailService {
