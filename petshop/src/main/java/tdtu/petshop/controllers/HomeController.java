@@ -76,6 +76,30 @@ public class HomeController {
 		return "cart";
 	}
 	
+	@PostMapping("addcart")
+	public String postAddCart(HttpServletRequest request, Model model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			model.addAttribute("user", (UserDetailsImpl) principal);
+			//lấy thông tin user đang trong session
+			UserDetailsImpl udI = (UserDetailsImpl)principal;
+			//Lấy bill của user hiện tại
+			Bill currentBill = billService.loadBill(udI.getId());
+			//Lấy product bằng id đc gửi thông qua request
+			Product product = productService.findById(Integer.parseInt(request.getParameter("id")));
+			//Lấy thông tin của bill detail của user
+			BillDetail billDetail = billDetailService.findByProductAndBill(product,currentBill);
+			//Nếu trong giỏ hàng có sản phẩm cập nhật lại số lượng
+			if(billDetail != null) {
+				billDetail.setQuantity(billDetail.getQuantity()+1);
+				billDetailService.saveBillDetail(billDetail);
+				return "redirect:/";
+			}else {
+				billDetailService.addBillDetail(product, currentBill);
+			}
+			currentBill.setTotal(currentBill.getTotal()+product.getPrice());
+			//Ngược lại thêm sp vào giỏ hàng
+		return "redirect:/";
+	}
 	@PostMapping("/cart/delete")
 	public String postDeleteCart(HttpServletRequest request) {
 		billDetailService.deleteBillDetail(Integer.parseInt(request.getParameter("id")));

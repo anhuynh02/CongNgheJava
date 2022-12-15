@@ -109,8 +109,11 @@
                 th:text="${#numbers.formatDecimal(billDetail.product.price, 0, 'COMMA', 0, 'POINT')+' vnđ'}"
               ></td>
               <td
-                th:text="${#numbers.formatDecimal(billDetail.product.price * billDetail.quantity, 0, 'COMMA', 0, 'POINT')+ ' vnđ'}"
-              ></td>
+                th:text="${#numbers.formatDecimal(billDetail.product.price * billDetail.quantity, 0, 'COMMA', 0, 'POINT')+ ' vnđ'}">
+              </td>
+              <td
+              	th:text="${billDetail.bill.id}" hidden>
+              </td>
               <td>
                 <button class="deleteBtn">Delete</button>
               </td>

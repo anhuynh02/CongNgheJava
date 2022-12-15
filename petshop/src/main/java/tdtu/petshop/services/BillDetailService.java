@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import tdtu.petshop.models.Bill;
 import tdtu.petshop.models.BillDetail;
+import tdtu.petshop.models.Product;
 import tdtu.petshop.models.User;
 import tdtu.petshop.repositories.BillDetailRepository;
 import tdtu.petshop.repositories.BillRepository;
@@ -25,5 +26,19 @@ public class BillDetailService {
 	}
 	public void deleteBillDetail(int id) {
 		billDetailRepository.deleteById(id);
+	}
+	public BillDetail findByProductAndBill(Product product, Bill bill) {
+		return billDetailRepository.findByProductAndBill(product,bill);
+	}
+	public void saveBillDetail(BillDetail billDetail) {
+		billDetailRepository.save(billDetail);
+	}
+	public BillDetail addBillDetail(Product product, Bill bill) {
+		BillDetail billDetail = new BillDetail();
+		billDetail.setBill(bill);
+		billDetail.setProduct(product);
+		billDetail.setQuantity(1);
+		billDetailRepository.save(billDetail);
+		return billDetail;
 	}
 }

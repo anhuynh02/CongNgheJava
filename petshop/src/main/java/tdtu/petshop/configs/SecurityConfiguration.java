@@ -30,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/", "/login", "/register")
 			.permitAll();
-		http.authorizeRequests().antMatchers("/cart/**")
+		http.authorizeRequests().antMatchers("/cart/**", "/addcart")
 			.hasAnyAuthority("customer", "staff", "admin");
 		http.authorizeRequests().antMatchers("/staff/**")
 			.hasAnyAuthority("staff", "admin");
