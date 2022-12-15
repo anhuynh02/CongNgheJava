@@ -223,6 +223,10 @@
 	<input type="text" name="billDetailId" id="billDetailId">
 	<input type="submit" id="updateBtn">
 </form>
+<div th:if="${success} != null" class="alert alert-success alert-dismissable fade-in" id="alertCart">
+			        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			        <strong>Thành công!</strong> <span th:text="${success}"></span>
+			    </div>
 </body>
 <script src="../js/cart.js"></script>
 </html>
