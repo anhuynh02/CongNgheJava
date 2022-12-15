@@ -74,4 +74,7 @@ public class User {
 		return "User [id=" + id + ", phone=" + phone + ", name=" + name + ", username=" + username + ", password=" + password + ", enable=" + enable + ", role=" + role + "]";
 	}
 	
+	public int getId() {
+		return this.id;
+	}
 }

@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/slide.css">
+    <link rel="stylesheet" href="./fontawesome-free-6.2.1-web/css/all.min.css">
 </head>
 <body>
     <section class="first">
@@ -24,9 +25,9 @@
                 <div class="collapse navbar-collapse" id="PetBar">
                     <ul class="navbar-nav mr-auto"></ul>
                     <ul class="navbar-nav mr-auto"></ul>
-                    <form class="form-inline my-2 my-lg-0 mr-auto">
-                        <input class="box form-control mr-sm-2 w" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <form id="search-form" th:action="@{/search}" method="post" class="my-2 my-lg-0 mr-auto">
+                        <input id="search-bar" class="box form-control mr-sm-2 w" name="name" type="search" placeholder="Search" aria-label="Search">
+                        <button id="search-btn" class="btn my-2 my-sm-0" type="submit"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
                     </form>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
@@ -65,10 +66,6 @@
                         <img src="./images/icon/toyIcon.png" alt="dog icon" width="20px"/>
                         Đồ chơi
                     </button>
-                    <a class="nav-link" href="cart" aria-selected="true">
-                        <img src="./images/icon/toyIcon.png" alt="dog icon" width="20px"/>
-                        Giỏ hàng
-                    </a>
                 </div>
             </nav>
         </div>
@@ -76,15 +73,14 @@
     <section class= "third">
         <div class="container">
             <h2>Giỏ hàng</h2>
-            <form action="#" method="post" id="refreshForm">
                 <table class="table table-striped">
                 <thead>
                     <tr>
-                        <td colspan="7">
+                        <td colspan="4">
                             <a th:href="@{/}" class="btn btn-primary">Tiếp tục mua hàng</a>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="table-primary">
                         <th>Ảnh</th>
                         <th>Tên sản phẩm</th>
                         <th>Số lượng</th>
@@ -94,15 +90,140 @@
                     </tr>
                 </thead>
                 <tbody id="cartContainer">
-                    
+                
+                     <tr class="table-info" th:each="billDetail : ${billDetails}">
+            	<td th:text = "${billDetail.id}" hidden>
+            		
+            	</td>
+              <td>
+                <img
+                  th:src="${billDetail.product.image}"
+                  alt="Logo của sốp"
+                  width="100"
+                />
+              </td>
+              <td th:text="${billDetail.product.name}"></td>
+              <td>
+                <input class="form-control" type="number" th:value="${billDetail.quantity}" />
+              </td>
+              <td
+                th:text="${#numbers.formatDecimal(billDetail.product.price, 0, 'COMMA', 0, 'POINT')+' VNĐ'}"
+              ></td>
+              <td class = "totalItemPrice"
+                th:text="${#numbers.formatDecimal(billDetail.product.price * billDetail.quantity, 0, 'COMMA', 0, 'POINT')+ ' vnđ'}">
+              </td>
+              <td
+              	th:text="${billDetail.bill.id}" hidden>
+              </td>
+              <td>
+                <button class="deleteBtn btn btn-warning">Xóa</button>
+              </td>
+            </tr>
+            <tr class="table-light">
+            	<td colspan="5" ><h2 id="totalPriceBill"></h2></td>
+            	<td colspan="1" ><button class="purchaseBtn btn btn-success">Thanh toán</button></td>
+            </tr>
                 </tbody>
+               
             </table>
-            </form>
             
         </div>
     </section>
-   
     
+    <!-- Modal xác nhận thanh toán -->
+    <div class="modal fade" id="purchaseModal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+          <h4 class="modal-title">Xác nhận thanh toán</h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+    
+          </div>
+             <div class="modal-body">
+             	<div>
+             		<h3>
+             			Chi tiết sản phẩm thanh toán
+             		</h3>
+             	</div>
+             	<div>
+             		<table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Tên sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                
+		            <tr th:each="billDetail : ${billDetails}">
+		            	<td th:text = "${billDetail.id}" hidden>
+		            		
+		            	</td>
+		              <td th:text="${billDetail.product.name}"></td>
+		              <td>
+		                <input type="number" th:value="${billDetail.quantity}" />
+		              </td>
+		              <td
+		                th:text="${#numbers.formatDecimal(billDetail.product.price, 0, 'COMMA', 0, 'POINT')+' VNĐ'}"
+		              ></td>
+		              <td
+		                th:text="${#numbers.formatDecimal(billDetail.product.price * billDetail.quantity, 0, 'COMMA', 0, 'POINT')+ ' vnđ'}">
+		              </td>
+		            </tr>
+                </tbody>
+            </table>
+             	</div>
+             	<div>
+             		<h2 id="purchaseTotalMoney"></h2>
+             	</div>
+             	
+             </div>
+      	
+            <div class="modal-footer">
+              <form th:action="@{cart/purchase}" method="post">  
+			        			<input type="text" name="billId" id="billId" hidden>
+			        			<input type="text" name="billTotal" id="billTotal" hidden>
+			        			<input type="submit" class="btn btn-success" value="Xác Nhận">
+			        			<button type="button" class="btn btn-warning" data-dismiss="modal">Không</button>
+			   </form>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+   <!--Modal xác nhận xóa-->
+    <div class="modal fade" id="deleteModal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+          <h4 class="modal-title">Xóa</h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+            
+          </div>
+             <div class="modal-body">
+             	<p id="productDeleteName"></p>
+             </div>
+      	
+            <div class="modal-footer">
+              <form th:action="@{cart/delete}" method="post">  
+			        			<input type="text" name="id" id="deleteProductID" hidden>  
+			        			<input type="submit" class="btn btn-danger" value=Xóa>
+			        			<button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
+			   </form>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     <section class="forth mt-2">
         <div class="container">
             <div class="row pb-2 pt-2">
@@ -122,32 +243,5 @@
     </section>
 
 </body>
-<script>
-    var index = 0;
-    showSlide(index);
-    function plusSlides(n){
-        showSlide(index += n);
-    }
-
-
-    function showSlide(n){
-        var i;
-        var slides = document.getElementsByClassName("slide");
-        var bestseller = document.getElementsByClassName("bestseller");
-        var get = bestseller;
-        if(n >= bestseller.length){
-            index = 0;
-        }
-        if(n < 0){
-            index = bestseller.length-1;
-        }
-        slides[0].innerHTML = get[index].innerHTML;
-        if(index + 1 >= bestseller.length){
-            slides[1].innerHTML = get[0].innerHTML;
-        }else{
-            slides[1].innerHTML = get[index+1].innerHTML;
-        }
-        
-    }
-</script>
+<script src="../js/cart.js"></script>
 </html>

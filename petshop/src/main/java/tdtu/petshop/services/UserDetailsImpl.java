@@ -32,7 +32,11 @@ public class UserDetailsImpl implements UserDetails {
 	public String getPassword() {
 		return user.getPassword();
 	}
-
+	
+	public int getId() {
+		return user.getId();
+	}
+	
 	@Override
 	public String getUsername() {
 		return user.getUsername();
