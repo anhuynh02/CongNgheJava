@@ -85,4 +85,10 @@ p{
 .search-result{
     margin: 20px 0;
 }
+
+.btnAddCart{
+	background-color: #D2DAFF;
+	height:40px;
+	width: fit-content;
+	margin-right: 10px;
     

@@ -63,6 +63,12 @@
 	                     <div class="card mt-1" style="width:20rem;">
 	                          <img th:src="@{${product.image}}" class="card-img-top" alt="Chó Chihuahua" width="200" height="200">
 	                          <h4 class="card-title text-center" th:text="${product.name}"></h4>
+	                          <form class="ml-auto">
+	                              <input type="hidden" name="id" value="${product.id}">
+	                              <input type="hidden" name="name" value="${product.name}">
+	                              <input type="hidden" name="price" value="${product.price}">
+	                              <button type="submit" class="btnAddCart">Thêm giỏ hàng</button>
+	                          </form>
 	                      </div>
 	                </div>
 	            </th:block>
