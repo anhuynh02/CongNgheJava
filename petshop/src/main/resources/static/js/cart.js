@@ -24,12 +24,17 @@ $(document).ready(function() {
 	
 	$(".purchaseBtn").click(function(){
 		let column =$(this).parent().parent().parent().children()[0].children[6];
-		let cartBillId = column.innerText;
+		if(column != null){
+			let cartBillId = column.innerText;
 		$("#purchaseTotalMoney").html($("#totalPriceBill").text())
 		$("#billId").val(cartBillId);
 		$("#purchaseModal").modal({
                 backdrop: "static",
                 keyboard: false
             });
+		}else{
+			alert("Giỏ hàng trống");
+		}
+		
 	});
 });
