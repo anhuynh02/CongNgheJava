@@ -92,7 +92,6 @@ public class HomeController {
 			if(billDetail != null) {
 				billDetail.setQuantity(billDetail.getQuantity()+1);
 				billDetailService.saveBillDetail(billDetail);
-				return "redirect:/";
 			}else {
 				billDetailService.addBillDetail(product, currentBill);
 			}
