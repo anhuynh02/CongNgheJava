@@ -35,7 +35,7 @@ public class UserService {
 		return userRepository.findAllByRole(roleService.findById(id));
 	}
 	
-	public String registerUser(User user, String confirmPassword) {
+	public String registerUser(User user, String confirmPassword, int roleId) {
 		if (!user.getPhone().matches("\\d{10}")) {
 			return "Số điện thoại không hợp lệ";
 		}
@@ -50,7 +50,7 @@ public class UserService {
 		}
 		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 		user.setEnable(true);
-		user.setRole(roleService.findById(3));
+		user.setRole(roleService.findById(roleId));
 		userRepository.save(user);
 		return null;
 	}

@@ -47,19 +47,23 @@ public class AdminController {
     	model.addAttribute("user", (UserDetailsImpl) principal);
     	model.addAttribute("staffs", staffs);
     	model.addAttribute("products", products);
+    	
+    	if (!model.containsAttribute("staff")) {
+            model.addAttribute("staff", new User());
+        }
 		return "admin";
 	}
 	
 	@PostMapping("/staff/add")
 	public String postAddStaff(RedirectAttributes redirectAttributes, @ModelAttribute("staff") User staff, HttpServletRequest request) {
-		String error = userService.registerUser(staff, request.getParameter("confirmPassword"));
+		String error = userService.registerUser(staff, request.getParameter("confirmPassword"), 2);
 		if (error != null) {
 			redirectAttributes.addFlashAttribute("error", error);
 			redirectAttributes.addFlashAttribute("staff", staff);
 		} else {
 			redirectAttributes.addFlashAttribute("success", "Thêm nhân viên.");
 		}
-		return "redirect:/admin/";
+		return "redirect:/admin";
 	}
 	
 	@GetMapping(path = "/staff/edit/{id}", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
@@ -79,17 +83,24 @@ public class AdminController {
 	}
 	
 	@GetMapping("/staff/edit/password/{id}")
-	public String getStaffEditPassword(Model model, @PathVariable("id") int id) {
-		model.addAttribute("id", id);
-		return "staffPasswordChange";
+	public String getStaffEditPassword(RedirectAttributes redirectAttributes, Model model, @PathVariable("id") int id) {
+		User user = userService.findById(id);
+		if (user.getRole().getId() != 2) {
+			redirectAttributes.addFlashAttribute("error", "Đối tượng không hợp lệ");
+			return "redirect:/admin";
+		}
+		model.addAttribute("user", user);
+		return "changePassword";
 	}
 	
 	@PostMapping("/staff/edit/password")
-	public String postStaffEditPassword(HttpServletRequest request) {
-		
-		User staff = userService.findById(Integer.parseInt(request.getParameter("id")));
-		staff.setPassword(new BCryptPasswordEncoder().encode(request.getParameter("password")));
-		userService.saveUser(staff);
+	public String postStaffEditPassword(RedirectAttributes redirectAttributes, @ModelAttribute("user") User staff, HttpServletRequest request) {
+		String error = userService.changeUserPassword(staff, request.getParameter("confirmPassword"));
+		if (error != null) {
+			redirectAttributes.addFlashAttribute("error", error);
+			return "redirect:/admin/staff/edit/password/" + staff.getId();
+		}
+		redirectAttributes.addFlashAttribute("success", "Đổi mật khẩu nhân viên.");
 		return "redirect:/admin";
 	}
 	
@@ -123,8 +134,9 @@ public class AdminController {
 	}
 	
 	@PostMapping("/product/delete")
-	public String postDeleteProduct(HttpServletRequest request) {
+	public String postDeleteProduct(RedirectAttributes redirectAttributes, HttpServletRequest request) {
 		productService.deleteProduct(Integer.parseInt(request.getParameter("id")));
+		redirectAttributes.addFlashAttribute("success", "Xóa nhân viên thành công.");
 		return "redirect:/admin";
 	}
 }
