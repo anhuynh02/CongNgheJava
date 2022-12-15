@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -19,14 +18,11 @@ import tdtu.petshop.models.Bill;
 import tdtu.petshop.models.BillDetail;
 import tdtu.petshop.models.Product;
 import tdtu.petshop.models.User;
-import tdtu.petshop.repositories.UserRepository;
 import tdtu.petshop.services.UserService;
 import tdtu.petshop.services.UserDetailsImpl;
 import tdtu.petshop.services.BillDetailService;
 import tdtu.petshop.services.BillService;
-import tdtu.petshop.services.CategoryService;
 import tdtu.petshop.services.ProductService;
-import tdtu.petshop.services.RoleService;
 
 @Controller
 public class HomeController {
@@ -35,8 +31,6 @@ public class HomeController {
     private UserService userService;
     @Autowired
     private ProductService productService;
-    @Autowired
-    private CategoryService categoryService;
     @Autowired
     private BillService billService;
     @Autowired
@@ -47,13 +41,17 @@ public class HomeController {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (principal instanceof UserDetailsImpl) {
 			model.addAttribute("user", (UserDetailsImpl) principal);
+			UserDetailsImpl udI = (UserDetailsImpl)principal;
+			Bill currentBill = billService.loadBill(udI.getId());
+			List<BillDetail> billDetails = billDetailService.findAllByBill(currentBill);
+			model.addAttribute("count", billDetails.size());
 		}
-		else // principal = "anonymousUser"
+		else
 			model.addAttribute("user", null);
-		List<Product> cats = productService.findAllByCategory(categoryService.findById(1));
-		List<Product> dogs = productService.findAllByCategory(categoryService.findById(2));
-		List<Product> foods = productService.findAllByCategory(categoryService.findById(3));
-		List<Product> toys = productService.findAllByCategory(categoryService.findById(4));
+		List<Product> cats = productService.findByCategory(1);
+		List<Product> dogs = productService.findByCategory(2);
+		List<Product> foods = productService.findByCategory(3);
+		List<Product> toys = productService.findByCategory(4);
 		
 		model.addAttribute("cats",cats);
 		model.addAttribute("dogs",dogs);
@@ -71,8 +69,7 @@ public class HomeController {
 			Bill currentBill = billService.loadBill(udI.getId());
 			List<BillDetail> billDetails = billDetailService.findAllByBill(currentBill);
 			model.addAttribute("billDetails", billDetails);
-			
-		
+			model.addAttribute("count", billDetails.size());
 		return "cart";
 	}
 	
@@ -92,17 +89,39 @@ public class HomeController {
 			if(billDetail != null) {
 				billDetail.setQuantity(billDetail.getQuantity()+1);
 				billDetailService.saveBillDetail(billDetail);
-				return "redirect:/";
 			}else {
+				//Ngược lại thêm sp vào giỏ hàng
 				billDetailService.addBillDetail(product, currentBill);
 			}
+			//cong gia vao bill 
 			currentBill.setTotal(currentBill.getTotal()+product.getPrice());
-			//Ngược lại thêm sp vào giỏ hàng
+			billService.saveBill(currentBill);
+			
 		return "redirect:/";
 	}
 	@PostMapping("/cart/delete")
 	public String postDeleteCart(HttpServletRequest request) {
 		billDetailService.deleteBillDetail(Integer.parseInt(request.getParameter("id")));
+		return "redirect:/cart";
+	}
+	
+	@PostMapping("/cart/update")
+	public String postUpdateCart(HttpServletRequest request) {
+		if(request.getParameter("billDetailId") != "" && request.getParameter("quantityItem")!= "") {
+			BillDetail billDetail = billDetailService.findById(Integer.parseInt(request.getParameter("billDetailId")));
+			billDetail.setQuantity(Integer.parseInt(request.getParameter("quantityItem")));
+			billDetailService.saveBillDetail(billDetail);
+			
+		}
+		return "redirect:/cart";
+	}
+	
+	@PostMapping("/cart/purchase")
+	public String postPurchaseCart(HttpServletRequest request) {
+		Bill bill = billService.findById(Integer.parseInt(request.getParameter("billId")));
+		bill.setPurchased(true);
+		bill.setTotal(Integer.parseInt(request.getParameter("billTotal")));
+		billService.saveBill(bill);
 		return "redirect:/cart";
 	}
 	
@@ -125,7 +144,7 @@ public class HomeController {
 	
 	@PostMapping("register")
 	public String postRegister(Model model, @ModelAttribute("user") User user, HttpServletRequest request) {
-		String error = userService.registerUser(user, request.getParameter("confirmPassword"));
+		String error = userService.registerUser(user, request.getParameter("confirmPassword"), 3);
 		if (error != null) {
 			model.addAttribute("error", error);
 			model.addAttribute("user", user);

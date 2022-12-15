@@ -1,5 +1,6 @@
 body{
     background-color: #EEF1FF;
+    height:1000px;
 }
 
 p{
@@ -17,6 +18,7 @@ p{
     font-family: sans-serif;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
 .second{
     background-color: #D2DAFF;
     height: fit-content;
@@ -27,9 +29,14 @@ p{
     background-color: #EEF1FF;
     height: fit-content;
 }
+
 .forth{
-    background-color: #AAC4FF;
-    
+   background-color: #AAC4FF;
+   position: sticky;
+   left: 0;
+   top: 1000px;
+   width: 100%;
+   text-align: center;
 }
 .title{
     font-style: italic;
@@ -39,10 +46,13 @@ p{
     background-color: #EEF1FF;
 
 }
-.footer{
+
+.footer { 
+    
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin-left: 20px;
 }
+
 .slideshow{
     height: fit-content;
 }

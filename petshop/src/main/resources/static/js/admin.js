@@ -16,38 +16,50 @@ $(document).ready(function() {
 //----------------------Quản lý nhân viên-------------------------
     
     //Thêm nhân viên dialog
-    $("#addBtn").click(function(e) {
-            $("#addModal").modal({
-                backdrop: "static",
-                keyboard: false
-            });
+    $("#addStaffBtn").click(function(e) {
+        $("#addStaffModal").modal({
+            backdrop: "static",
+            keyboard: false
+        });
+    });
+    
+    //Xóa nhân viên dialog
+    $(".btn-delete-staff").click(function(e) {
+        $("#deleteStaffModal").modal({
+            backdrop: "static",
+            keyboard: false
+        });
     });
     
     //Chỉnh sửa nhân viên
-    $(".staffEdit").click(function(e) {
-			console.log("click");
-        	$("#editModal").modal({
-                backdrop: "static",
-                keyboard: false
-            });
-        	$.get("staff/edit/" + $(this).data("id"), function(staff) {
-				$("#editPhone").val(staff.phone);
-				$("#editName").val(staff.name);
-				$("#editUsername").val(staff.username);
-       		});
-            e.preventDefault();
+    $(".btn-edit-staff").click(function(e) {
+    	$("#editStaffModal").modal({
+            backdrop: "static",
+            keyboard: false
         });
+        let currId = $(this).data("id")
+    	$.get("admin/staff/edit/" + currId, function(staff) {
+			$("#editStaffId").val(staff.id);
+			$("#editStaffPhone").val(staff.phone);
+			$("#editStaffName").val(staff.name);
+			$("#editStaffUsername").val(staff.username);
+			//Đổi mật khẩu nhân viên
+		    $("#editPassword").click(function() {
+		    	window.location.href = "admin/staff/edit/password/" + currId;
+		    });
+   		});
+        e.preventDefault();
+    });
     
     //Xóa nhân viên
-    	$(".staffDel").click(function(e) {
-			console.log("Delete" + $(this).data("id"));
-  			$("#deleteUsername").val($(this).data("id"));
-            $("#deleteModal").modal({
-                backdrop: "static",
-                keyboard: false
-            });
-  			e.preventDefault();
+	$(".btn-delete-staff").click(function(e) {
+		$("#deleteId").val($(this).data("id"));
+        $("#deleteModal").modal({
+            backdrop: "static",
+            keyboard: false
         });
+		e.preventDefault();
+    });
     
 //----------------------Quản lý sản phẩm-------------------------
     
@@ -67,21 +79,27 @@ $(document).ready(function() {
                 keyboard: false
             });
         	$.get("admin/product/edit/" + $(this).data("id"), function(product) {
-				$("#editProPrice").val(product.price);
-				$("#editProName").val(product.name);
-				$("#editProDes").val(product.description);
+				$("#editprice").val(product.price);
+				$("#editname").val(product.name);
+				$("#editdes").val(product.description);
+				$("#editprice").val(product.price);
 				$("#editProId").val(product.id);
-				console.log($("#editProId").val())
-				
+				if(product.category.id == "1"){
+					$("#editcat").prop("checked",true);
+				}else if(product.category.id == "2"){
+					$("#editdog").prop("checked",true);
+				}else if(product.category.id == "3"){
+					$("#editfood").prop("checked",true);
+				}else if(product.category.id == "4"){
+					$("#edittoy").prop("checked",true);
+				}
        		});
             e.preventDefault();
         });
      
     //Xóa sản phẩm
     $(".productDel").click(function(e) {
-			console.log($(this).data("id"))
   			$("#delProId").val($(this).data("id"));
-  			console.log($("#delProId").val())
             $("#deleteProduct").modal({
                 backdrop: "static",
                 keyboard: false

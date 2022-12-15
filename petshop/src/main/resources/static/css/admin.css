@@ -35,6 +35,9 @@ a:hover{
     width: 300px;
     height: 1000px;
     background-color: #FAF7F0;
+    position: fixed;
+    left:0;
+    z-index: 999;
 }
 
 .side-logo{
@@ -79,9 +82,11 @@ a:hover{
 /* CSS other side */
 .content{
     display: flex;
-    width: 100%;
+    width: 80%;
     height: fit-content;
     flex-direction: column;
+    position: absolute;
+    right:0px;
 }
 
 /* CSS header */
@@ -124,7 +129,7 @@ a:hover{
 }
 
 .inside-table{
-    width: 95%;
+    width: 100%;
     font-size: 20px;
     text-align: center;
 }
@@ -141,6 +146,10 @@ a:hover{
     cursor: pointer;
 }
 
+.productBtn{
+	margin-left:10px;
+}
+
 #productManage{
     display: none;
 }
@@ -149,7 +158,7 @@ a:hover{
     display: block;
 }
 
-.btnEdit{
+.btn-edit{
     width: 50px;
     height: 30px;
     border: none;
@@ -158,7 +167,7 @@ a:hover{
     border-radius: 20px;
 }
 
-.btnDel{
+.btn-delete{
     width: 70px;
     height: 30px;
     border: none;
@@ -175,4 +184,17 @@ a:hover{
 	background: none!important;
 	border: none;
 	cursor: pointer;
+}
+
+.option{
+	width:90px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-direction: row;
+	margin: 0;
+}
+p{
+	margin: 0 !important;
 }

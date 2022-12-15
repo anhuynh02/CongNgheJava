@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import tdtu.petshop.models.Category;
 import tdtu.petshop.models.Product;
-import tdtu.petshop.repositories.CategoryRepository;
 import tdtu.petshop.repositories.ProductRepository;
 
 @Service
@@ -40,12 +38,41 @@ public class ProductService {
 		productRepository.deleteById(id);
 	}
 	
-	public List<Product> findAllByCategory(Category category){
-		return productRepository.findByCategory(category);
-	}
-	
 	public List<Product> findByNameContaining(String name){
 		return productRepository.findByNameContaining(name);
 	}
-
+	
+	public String addProduct(Product product, String kind) {
+		if(kind.equals("1")) {
+			product.setCategory(categoryService.findById(1));
+		}else if(kind.equals("2")) {
+			product.setCategory(categoryService.findById(2));
+		}else if(kind.equals("3")) {
+			product.setCategory(categoryService.findById(3));
+		}else if(kind.equals("4")) {
+			product.setCategory(categoryService.findById(4));
+		}
+		product.setImage("./images/product/" + product.getImage());
+		productRepository.save(product);
+		return null;
+	}
+	
+	public String editProduct(Product product, String kind) {
+		Product temp = productRepository.findById(product.getId());
+		if(kind.equals("1")) {
+			temp.setCategory(categoryService.findById(1));
+		}else if(kind.equals("2")) {
+			temp.setCategory(categoryService.findById(2));
+		}else if(kind.equals("3")) {
+			temp.setCategory(categoryService.findById(3));
+		}else if(kind.equals("4")) {
+			temp.setCategory(categoryService.findById(4));
+		}
+		temp.setDescription(product.getDescription());
+		temp.setImage("./images/product/" + product.getImage());
+		temp.setName(product.getName());
+		temp.setPrice(product.getPrice());
+		productRepository.save(temp);
+		return null;
+	}
 }

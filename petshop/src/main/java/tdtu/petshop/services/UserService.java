@@ -31,11 +31,11 @@ public class UserService {
 		return userRepository.findByPhone(phone);
 	}
 	
-	public List<User> findAllByRole(int id) {
+	public List<User> findAllByRole(int id) { 
 		return userRepository.findAllByRole(roleService.findById(id));
 	}
 	
-	public String registerUser(User user, String confirmPassword) {
+	public String registerUser(User user, String confirmPassword, int roleId) {
 		if (!user.getPhone().matches("\\d{10}")) {
 			return "Số điện thoại không hợp lệ";
 		}
@@ -50,8 +50,33 @@ public class UserService {
 		}
 		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 		user.setEnable(true);
-		user.setRole(roleService.findById(3));
+		user.setRole(roleService.findById(roleId));
 		userRepository.save(user);
+		return null;
+	}
+	
+	public String changeUserInfo(User user) {
+		User temp = userRepository.findById(user.getId());
+		if (userRepository.findByPhone(user.getPhone()) != null && !temp.getPhone().equals(user.getPhone())) {
+			return "Số điện thoại đã được sử dụng";
+		}
+		if (userRepository.findByUsername(user.getUsername()) != null && !temp.getUsername().equals(user.getUsername())) {
+			return "Tên người dùng đã được sử dụng";
+		}
+		temp.setPhone(user.getPhone());
+		temp.setName(user.getName());
+		temp.setUsername(user.getUsername());
+		userRepository.save(temp);
+		return null;
+	}
+	
+	public String changeUserPassword(User user, String confirmPassword) {
+		User temp = userRepository.findById(user.getId());
+		if (!user.getPassword().equals(confirmPassword)) {
+			return "Mật khẩu nhập không khớp";
+		}
+		temp.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+		userRepository.save(temp);
 		return null;
 	}
 	
@@ -59,8 +84,8 @@ public class UserService {
 		userRepository.save(user);
 	}
 	
-	public void deleteUser(String username) {
-		userRepository.deleteById(username);
+	public void deleteById(int id) {
+		userRepository.deleteById(id);
 	}
 		
 }

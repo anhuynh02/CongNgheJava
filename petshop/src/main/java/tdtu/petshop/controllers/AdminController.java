@@ -4,11 +4,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.aspectj.weaver.patterns.HasThisTypePatternTriedToSneakInSomeGenericOrParameterizedTypePatternMatchingStuffAnywhereVisitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MimeTypeUtils;
@@ -23,7 +22,7 @@ import tdtu.petshop.models.Product;
 import tdtu.petshop.models.User;
 import tdtu.petshop.services.CategoryService;
 import tdtu.petshop.services.ProductService;
-import tdtu.petshop.services.RoleService;
+import tdtu.petshop.services.UserDetailsImpl;
 import tdtu.petshop.services.UserService;
 
 @Controller
@@ -39,74 +38,91 @@ public class AdminController {
     
     @GetMapping("")
 	public String getAdmin(Model model) {
+    	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	List<User> staffs = userService.findAllByRole(2);
     	List<Product> products = productService.findAll();
+    	model.addAttribute("user", (UserDetailsImpl) principal);
     	model.addAttribute("staffs", staffs);
-    	model.addAttribute("products",products);
+    	model.addAttribute("products", products);
+    	
+    	if (!model.containsAttribute("staff")) {
+            model.addAttribute("staff", new User());
+        }
 		return "admin";
 	}
 	
 	@PostMapping("/staff/add")
 	public String postAddStaff(RedirectAttributes redirectAttributes, @ModelAttribute("staff") User staff, HttpServletRequest request) {
-		String error = userService.registerUser(staff, request.getParameter("confirmPassword"));
+		String error = userService.registerUser(staff, request.getParameter("confirmPassword"), 2);
 		if (error != null) {
 			redirectAttributes.addFlashAttribute("error", error);
 			redirectAttributes.addFlashAttribute("staff", staff);
 		} else {
 			redirectAttributes.addFlashAttribute("success", "Thêm nhân viên.");
 		}
-		return "redirect:/admin/";
-	}
-	
-	@GetMapping(path = "/staff/edit/{username}", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> getStaffEdit(@PathVariable("username") String username) {
-		return new ResponseEntity<User>(userService.findByUsername(username), HttpStatus.OK);
-	}
-	
-	@PostMapping("/staff/edit")
-	public String postStaffEdit(@ModelAttribute("staff") User staff) {
-		User temp = userService.findByUsername(staff.getUsername());
-		temp.setPhone(staff.getPhone());
-		temp.setName(staff.getName());
-		userService.saveUser(temp);
 		return "redirect:/admin";
 	}
 	
-	@GetMapping("/staff/edit/password/{username}")
-	public String getStaffEditPassword(Model model, @PathVariable("username") String username) {
-		model.addAttribute("username", username);
-		return "staffPasswordChange";
+	@GetMapping(path = "/staff/edit/{id}", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> getStaffEdit(@PathVariable("id") int id) {
+		return new ResponseEntity<User>(userService.findById(id), HttpStatus.OK);
+	}
+	
+	@PostMapping("/staff/edit")
+	public String postStaffEdit(RedirectAttributes redirectAttributes, @ModelAttribute("staff") User staff) {
+		String error = userService.changeUserInfo(staff);
+		if (error != null) {
+			redirectAttributes.addFlashAttribute("error", error);
+		} else {
+			redirectAttributes.addFlashAttribute("success", "Sửa thông tin nhân viên.");
+		}
+		return "redirect:/admin";
+	}
+	
+	@GetMapping("/staff/edit/password/{id}")
+	public String getStaffEditPassword(RedirectAttributes redirectAttributes, Model model, @PathVariable("id") int id) {
+		User user = userService.findById(id);
+		if (user.getRole().getId() != 2) {
+			redirectAttributes.addFlashAttribute("error", "Đối tượng không hợp lệ");
+			return "redirect:/admin";
+		}
+		model.addAttribute("user", user);
+		return "changePassword";
 	}
 	
 	@PostMapping("/staff/edit/password")
-	public String postStaffEditPassword(HttpServletRequest request) {
-		User staff = userService.findByUsername(request.getParameter("username"));
-		staff.setPassword(new BCryptPasswordEncoder().encode(request.getParameter("password")));
-		userService.saveUser(staff);
+	public String postStaffEditPassword(RedirectAttributes redirectAttributes, @ModelAttribute("user") User staff, HttpServletRequest request) {
+		String error = userService.changeUserPassword(staff, request.getParameter("confirmPassword"));
+		if (error == null) {
+			redirectAttributes.addFlashAttribute("error", error);
+			return "redirect:/admin/staff/edit/password/" + staff.getId();
+		}
+		redirectAttributes.addFlashAttribute("success", "Đổi mật khẩu nhân viên.");
 		return "redirect:/admin";
 	}
 	
 	@PostMapping("/staff/delete")
 	public String postDeleteStaff(HttpServletRequest request) {
-		userService.deleteUser(request.getParameter("username"));
+		userService.deleteById(Integer.parseInt(request.getParameter("id")));
 		return "redirect:/admin";
 	}
 	
 	@PostMapping("/product/add")
-	public String postAddProduct(@ModelAttribute("product") Product product) {
-		product.setCategory(categoryService.findById(2));
-		product.setImage("./images/cat/meoxiem.jpg");
-		productService.saveProduct(product);
+	public String postAddProduct(RedirectAttributes redirectAttributes, @ModelAttribute("product") Product product, HttpServletRequest request) {
+		String add = productService.addProduct(product, request.getParameter("kind"));
+		if (add == null) {
+			redirectAttributes.addFlashAttribute("prosuccess", "Thêm sản phẩm thành công");
+		}else {
+			redirectAttributes.addFlashAttribute("Error", "Không thêm được");
+		}
 		return "redirect:/admin";
 	}
 	
 	@PostMapping("/product/edit")
-	public String postProductEdit(@ModelAttribute("product") Product product) {
-		Product temp = productService.findById(product.getId());
-		temp.setName(product.getName());
-		temp.setPrice(product.getPrice());
-		temp.setDescription(product.getDescription());
-		productService.saveProduct(temp);
+	public String postProductEdit(RedirectAttributes redirectAttributes, @ModelAttribute("product") Product product, HttpServletRequest request) {
+		String edit = productService.editProduct(product, request.getParameter("kind"));
+		if(edit == null)
+			redirectAttributes.addFlashAttribute("prosuccess", "Chỉnh sửa sản phẩm thành công");
 		return "redirect:/admin";
 	}
 	
@@ -116,8 +132,9 @@ public class AdminController {
 	}
 	
 	@PostMapping("/product/delete")
-	public String postDeleteProduct(HttpServletRequest request) {
+	public String postDeleteProduct(RedirectAttributes redirectAttributes, HttpServletRequest request) {
 		productService.deleteProduct(Integer.parseInt(request.getParameter("id")));
+		redirectAttributes.addFlashAttribute("prosuccess", "Xóa sản phẩm thành công.");
 		return "redirect:/admin";
 	}
 }

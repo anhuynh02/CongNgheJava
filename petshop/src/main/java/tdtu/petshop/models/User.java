@@ -25,7 +25,12 @@ public class User {
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
-	
+	public int getId() {
+		return this.id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getPhone() {
 		return phone;
 	}
@@ -65,10 +70,6 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [phone=" + phone + ", name=" + name + ", username=" + username + ", password=" + password + ", enable=" + enable + ", role=" + role + "]";
-	}
-	
-	public int getId() {
-		return this.id;
+		return "User [id=" + id + ", phone=" + phone + ", name=" + name + ", username=" + username + ", password=" + password + ", enable=" + enable + ", role=" + role + "]";
 	}
 }
