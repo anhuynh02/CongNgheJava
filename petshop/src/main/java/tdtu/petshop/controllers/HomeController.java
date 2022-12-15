@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -19,14 +18,11 @@ import tdtu.petshop.models.Bill;
 import tdtu.petshop.models.BillDetail;
 import tdtu.petshop.models.Product;
 import tdtu.petshop.models.User;
-import tdtu.petshop.repositories.UserRepository;
 import tdtu.petshop.services.UserService;
 import tdtu.petshop.services.UserDetailsImpl;
 import tdtu.petshop.services.BillDetailService;
 import tdtu.petshop.services.BillService;
-import tdtu.petshop.services.CategoryService;
 import tdtu.petshop.services.ProductService;
-import tdtu.petshop.services.RoleService;
 
 @Controller
 public class HomeController {
@@ -35,8 +31,6 @@ public class HomeController {
     private UserService userService;
     @Autowired
     private ProductService productService;
-    @Autowired
-    private CategoryService categoryService;
     @Autowired
     private BillService billService;
     @Autowired
@@ -54,10 +48,10 @@ public class HomeController {
 		}
 		else
 			model.addAttribute("user", null);
-		List<Product> cats = productService.findAllByCategory(categoryService.findById(1));
-		List<Product> dogs = productService.findAllByCategory(categoryService.findById(2));
-		List<Product> foods = productService.findAllByCategory(categoryService.findById(3));
-		List<Product> toys = productService.findAllByCategory(categoryService.findById(4));
+		List<Product> cats = productService.findByCategory(1);
+		List<Product> dogs = productService.findByCategory(2);
+		List<Product> foods = productService.findByCategory(3);
+		List<Product> toys = productService.findByCategory(4);
 		
 		model.addAttribute("cats",cats);
 		model.addAttribute("dogs",dogs);
