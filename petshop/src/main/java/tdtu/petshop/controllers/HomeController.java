@@ -15,11 +15,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import tdtu.petshop.models.Bill;
+import tdtu.petshop.models.BillDetail;
 import tdtu.petshop.models.Product;
 import tdtu.petshop.models.User;
 import tdtu.petshop.repositories.UserRepository;
 import tdtu.petshop.services.UserService;
 import tdtu.petshop.services.UserDetailsImpl;
+import tdtu.petshop.services.BillDetailService;
+import tdtu.petshop.services.BillService;
 import tdtu.petshop.services.CategoryService;
 import tdtu.petshop.services.ProductService;
 import tdtu.petshop.services.RoleService;
@@ -33,7 +37,10 @@ public class HomeController {
     private ProductService productService;
     @Autowired
     private CategoryService categoryService;
-
+    @Autowired
+    private BillService billService;
+    @Autowired
+    private BillDetailService billDetailService;
 	
 	@GetMapping("")
 	public String getHome(Model model) {
@@ -59,13 +66,20 @@ public class HomeController {
 	@GetMapping("cart")
 	public String getCart(Model model) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if (principal instanceof UserDetailsImpl) {
 			model.addAttribute("user", (UserDetailsImpl) principal);
-		}
-		else // principal = "anonymousUser"
-			model.addAttribute("user", null);
+			UserDetailsImpl udI = (UserDetailsImpl)principal;
+			Bill currentBill = billService.loadBill(udI.getId());
+			List<BillDetail> billDetails = billDetailService.findAllByBill(currentBill);
+			model.addAttribute("billDetails", billDetails);
+			
 		
 		return "cart";
+	}
+	
+	@PostMapping("/cart/delete")
+	public String postDeleteCart(HttpServletRequest request) {
+		billDetailService.deleteBillDetail(Integer.parseInt(request.getParameter("id")));
+		return "redirect:/cart";
 	}
 	
 	@GetMapping("login")

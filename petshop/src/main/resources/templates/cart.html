@@ -66,10 +66,6 @@
                         <img src="./images/icon/toyIcon.png" alt="dog icon" width="20px"/>
                         Đồ chơi
                     </button>
-                    <a class="nav-link" href="cart" aria-selected="true">
-                        <img src="./images/icon/toyIcon.png" alt="dog icon" width="20px"/>
-                        Giỏ hàng
-                    </a>
                 </div>
             </nav>
         </div>
@@ -77,7 +73,6 @@
     <section class= "third">
         <div class="container">
             <h2>Giỏ hàng</h2>
-            <form action="#" method="post" id="refreshForm">
                 <table class="table table-striped">
                 <thead>
                     <tr>
@@ -95,15 +90,63 @@
                     </tr>
                 </thead>
                 <tbody id="cartContainer">
-                    
+                     <tr th:each="billDetail : ${billDetails}">
+            	<td th:text = "${billDetail.id}" hidden>
+            		
+            	</td>
+              <td>
+                <img
+                  th:src="${billDetail.product.image}"
+                  alt="Logo của sốp"
+                  width="100"
+                />
+              </td>
+              <td th:text="${billDetail.product.name}"></td>
+              <td>
+                <input type="number" th:value="${billDetail.quantity}" />
+              </td>
+              <td
+                th:text="${#numbers.formatDecimal(billDetail.product.price, 0, 'COMMA', 0, 'POINT')+' vnđ'}"
+              ></td>
+              <td
+                th:text="${#numbers.formatDecimal(billDetail.product.price * billDetail.quantity, 0, 'COMMA', 0, 'POINT')+ ' vnđ'}"
+              ></td>
+              <td>
+                <button class="deleteBtn">Delete</button>
+              </td>
+            </tr>
                 </tbody>
             </table>
-            </form>
             
         </div>
     </section>
    
-    
+    <div class="modal fade" id="deleteModal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+          <h4 class="modal-title">Xóa</h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+            
+          </div>
+             <div class="modal-body">
+             	<p id="productDeleteName"></p>
+             </div>
+      	
+            <div class="modal-footer">
+              <form th:action="@{cart/delete}" method="post">  
+			        			<input type="text" name="id" id="deleteProductID" hidden>  
+			        			<input type="submit" class="btn btn-danger" value=Xóa>
+			        			<button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
+			   </form>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     <section class="forth mt-2">
         <div class="container">
             <div class="row pb-2 pt-2">
@@ -123,32 +166,5 @@
     </section>
 
 </body>
-<script>
-    var index = 0;
-    showSlide(index);
-    function plusSlides(n){
-        showSlide(index += n);
-    }
-
-
-    function showSlide(n){
-        var i;
-        var slides = document.getElementsByClassName("slide");
-        var bestseller = document.getElementsByClassName("bestseller");
-        var get = bestseller;
-        if(n >= bestseller.length){
-            index = 0;
-        }
-        if(n < 0){
-            index = bestseller.length-1;
-        }
-        slides[0].innerHTML = get[index].innerHTML;
-        if(index + 1 >= bestseller.length){
-            slides[1].innerHTML = get[0].innerHTML;
-        }else{
-            slides[1].innerHTML = get[index+1].innerHTML;
-        }
-        
-    }
-</script>
+<script src="../js/cart.js"></script>
 </html>
