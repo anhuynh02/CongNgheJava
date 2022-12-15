@@ -37,4 +37,12 @@ $(document).ready(function() {
 		}
 		
 	});
+	
+	$(".volumn").on("input", function() {
+	   let volumnItem =$(this).val();
+	   let row =$(this).parent().parent().children()[0];
+	   $("#billDetailId").val(row.innerText);
+	   $("#quantityItem").val(volumnItem); 
+	   $("#updateForm").submit();
+	});
 });

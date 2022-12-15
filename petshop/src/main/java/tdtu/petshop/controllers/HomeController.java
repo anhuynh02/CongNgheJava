@@ -47,6 +47,10 @@ public class HomeController {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (principal instanceof UserDetailsImpl) {
 			model.addAttribute("user", (UserDetailsImpl) principal);
+			UserDetailsImpl udI = (UserDetailsImpl)principal;
+			Bill currentBill = billService.loadBill(udI.getId());
+			List<BillDetail> billDetails = billDetailService.findAllByBill(currentBill);
+			model.addAttribute("count", billDetails.size());
 		}
 		else
 			model.addAttribute("user", null);
@@ -71,7 +75,7 @@ public class HomeController {
 			Bill currentBill = billService.loadBill(udI.getId());
 			List<BillDetail> billDetails = billDetailService.findAllByBill(currentBill);
 			model.addAttribute("billDetails", billDetails);
-		
+			model.addAttribute("count", billDetails.size());
 		return "cart";
 	}
 	
@@ -104,6 +108,14 @@ public class HomeController {
 	@PostMapping("/cart/delete")
 	public String postDeleteCart(HttpServletRequest request) {
 		billDetailService.deleteBillDetail(Integer.parseInt(request.getParameter("id")));
+		return "redirect:/cart";
+	}
+	
+	@PostMapping("/cart/update")
+	public String postUpdateCart(HttpServletRequest request) {
+		BillDetail billDetail = billDetailService.findById(Integer.parseInt(request.getParameter("billDetailId")));
+		billDetail.setQuantity(Integer.parseInt(request.getParameter("quantityItem")));
+		billDetailService.saveBillDetail(billDetail);
 		return "redirect:/cart";
 	}
 	
