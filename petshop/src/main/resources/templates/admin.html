@@ -213,12 +213,8 @@
                     <table class="inside-table">
                         <thead>
                             <tr>
-<<<<<<< HEAD
                                 <th>Tên</th>
                                 <th>Loại</th>
-=======
-                                <th colspan ="2">Tên</th>
->>>>>>> 2e65cf376eb63ee12067d696cd0814993b616ccc
                                 <th>Giá cả</th>
                                 <th>Mô tả</th>
                                 <th>Hình ảnh</th>
@@ -227,14 +223,10 @@
                         </thead>
                         <tbody>
                             <tr th:each="product: ${products}">
-<<<<<<< HEAD
                                 <td style="width:100px" th:text="${product.name}"></td>
                                 <td th:text="${product.category.name}"></td>
                                 <td th:text="${product.price}"></td>
-=======
-                                <td colspan="2" th:text="${product.name}"></td>
                                 <td th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')+' VNĐ'}"></td>
->>>>>>> 2e65cf376eb63ee12067d696cd0814993b616ccc
                                 <td class="des" th:text="${product.description}"></td>
                                 <td><img th:src="@{${product.image}}" width="100px" height="100px"></td>
                                 <td>
