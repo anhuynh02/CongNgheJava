@@ -26,6 +26,10 @@ public class BillDetail {
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "bill_id", nullable = false)
     private Bill bill;
+	
+	public BillDetail() {
+		super();
+	}
 	public int getQuantity() {
 		return quantity;
 	}

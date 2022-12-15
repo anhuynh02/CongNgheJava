@@ -8,10 +8,13 @@ import org.springframework.stereotype.Repository;
 
 import tdtu.petshop.models.Bill;
 import tdtu.petshop.models.BillDetail;
+import tdtu.petshop.models.Product;
+import tdtu.petshop.models.User;
 
 @Repository
 public interface BillDetailRepository extends JpaRepository<BillDetail, Integer>{
 	
 	BillDetail findById(int id);
 	List<BillDetail> findAllByBill(Bill bill);
+	BillDetail findByProductAndBill(Product product, Bill bill);
 }

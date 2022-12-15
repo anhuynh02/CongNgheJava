@@ -30,6 +30,7 @@ public class BillService {
 		}
 		return bill;
 	}
-	
-	
+	public void saveBill(Bill bill) {
+		billRepository.save(bill);
+	}
 }
