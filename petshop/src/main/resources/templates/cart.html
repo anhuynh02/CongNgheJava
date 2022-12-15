@@ -86,7 +86,7 @@
                 th:text="${#numbers.formatDecimal(billDetail.product.price, 0, 'COMMA', 0, 'POINT')+' VNĐ'}"
               ></td>
               <td class = "totalItemPrice"
-                th:text="${#numbers.formatDecimal(billDetail.product.price * billDetail.quantity, 0, 'COMMA', 0, 'POINT')+ ' vnđ'}">
+                th:text="${#numbers.formatDecimal(billDetail.product.price * billDetail.quantity, 0, 'COMMA', 0, 'POINT')+ ' VNĐ'}">
               </td>
               <td
               	th:text="${billDetail.bill.id}" hidden>
@@ -142,13 +142,13 @@
 		            	</td>
 		              <td th:text="${billDetail.product.name}"></td>
 		              <td>
-		                <input type="number" th:value="${billDetail.quantity}" />
+		                <td th:text="${billDetail.quantity}"></td>
 		              </td>
 		              <td
 		                th:text="${#numbers.formatDecimal(billDetail.product.price, 0, 'COMMA', 0, 'POINT')+' VNĐ'}"
 		              ></td>
 		              <td
-		                th:text="${#numbers.formatDecimal(billDetail.product.price * billDetail.quantity, 0, 'COMMA', 0, 'POINT')+ ' vnđ'}">
+		                th:text="${#numbers.formatDecimal(billDetail.product.price * billDetail.quantity, 0, 'COMMA', 0, 'POINT')+ ' VNĐ'}">
 		              </td>
 		            </tr>
                 </tbody>
@@ -165,7 +165,7 @@
 			        			<input type="text" name="billId" id="billId" hidden>
 			        			<input type="text" name="billTotal" id="billTotal" hidden>
 			        			<input type="submit" class="btn btn-success" value="Xác Nhận">
-			        			<button type="button" class="btn btn-warning" data-dismiss="modal">Không</button>
+			        			<button type="button" class="btn btn-warning" data-dismiss="modal">Hủy</button>
 			   </form>
             </div>
           </form>
@@ -218,7 +218,7 @@
         </div>
     </section>
 <!-- form update số lượng -->
-<form th:action="@{cart/update}" method ="post" id ="updateForm">
+<form th:action="@{cart/update}" method ="post" id ="updateForm" hidden>
 	<input type="text" name="quantityItem" id="quantityItem">
 	<input type="text" name="billDetailId" id="billDetailId">
 	<input type="submit" id="updateBtn">
