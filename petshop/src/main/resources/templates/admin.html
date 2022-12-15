@@ -207,7 +207,7 @@
                     <table class="inside-table">
                         <thead>
                             <tr>
-                                <th>Tên</th>
+                                <th colspan ="2">Tên</th>
                                 <th>Giá cả</th>
                                 <th>Mô tả</th>
                                 <th>Thao tác</th>
@@ -215,8 +215,8 @@
                         </thead>
                         <tbody>
                             <tr th:each="product: ${products}">
-                                <td th:text="${product.name}"></td>
-                                <td th:text="${product.price}"></td>
+                                <td colspan="2" th:text="${product.name}"></td>
+                                <td th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')+' VNĐ'}"></td>
                                 <td class="des" th:text="${product.description}"></td>
                                 <td>
 									<button class="productEdit btn-edit" th:attr="data-id=${product.id}">Edit</button>
