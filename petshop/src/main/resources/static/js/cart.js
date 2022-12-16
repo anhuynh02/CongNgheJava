@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	$("#dateOfBill").html("Thời gian lập đơn: "+$(".dateModify")[0].innerText);
 	var money = 0;
 	if($("#alertCart").length != 0){
 		let a = $("#alertCart").children("a");

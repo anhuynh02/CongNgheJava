@@ -52,14 +52,16 @@
                 <table class="table table-striped">
                 <thead>
                     <tr>
-                        <td colspan="4">
+                        <td colspan="2">
                             <a th:href="@{/}" class="btn btn-primary">Tiếp tục mua hàng</a>
+                        </td>
+                        <td colspan="4" style ="text-align: right">
+                            <h3 id="dateOfBill"></h3>
                         </td>
                     </tr>
                     <tr class="table-primary">
                         <th>Ảnh</th>
                         <th>Tên sản phẩm</th>
-                        <th>Ngày lập đơn</th>
                         <th>Số lượng</th>
                         <th>Giá</th>
                         <th>Thành tiền</th>
@@ -80,7 +82,7 @@
                 />
               </td>
               <td th:text="${billDetail.product.name}"></td>
-               <td th:text="${billDetail.bill.date}"></td>
+               <td th:text="${billDetail.bill.date}" class="dateModify" hidden></td>
               <td>
                 <input class="form-control volumn" type="number" th:value="${billDetail.quantity}" />
               </td>
@@ -98,7 +100,7 @@
               </td>
             </tr>
             <tr class="table-light">
-            	<td colspan="6" ><h2 id="totalPriceBill"></h2></td>
+            	<td colspan="5" ><h2 id="totalPriceBill"></h2></td>
             	<td colspan="1" ><button class="purchaseBtn btn btn-success">Thanh toán</button></td>
             </tr>
                 </tbody>
@@ -131,7 +133,6 @@
                 <thead>
                     <tr>
                         <th>Tên sản phẩm</th>
-                        <th>Ngày lập đơn</th>
                         <th>Số lượng</th>
                         <th>Giá</th>
                         <th>Thành tiền</th>
@@ -144,7 +145,6 @@
 		            		
 		            	</td>
 		              <td th:text="${billDetail.product.name}"></td>
-		              <td th:text="${billDetail.bill.date}"></td>
 		           
 		                <td th:text="${billDetail.quantity}"></td>
 
