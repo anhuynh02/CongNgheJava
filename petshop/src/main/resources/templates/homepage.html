@@ -54,23 +54,23 @@
             <nav>
                 <div class="nav nav-tabs justify-content-center" id="category" role="tabslist">
                 	<button class="nav-link active" id="All-tab" data-toggle="tab" data-target="#All" type="button" role="tab" aria-controls="All" aria-selected="true">
-                        <img src="./images/icon/pet.png" alt="dog icon" width="20px"/>
+                        <img src="../images/icon/pet.png" alt="dog icon" width="20px"/>
                         Tất cả
                     </button>
                     <button class="nav-link" id="Dog-tab" data-toggle="tab" data-target="#Dog" type="button" role="tab" aria-controls="Dog" aria-selected="true">
-                        <img src="./images/icon/dogIcon.png" alt="dog icon" width="20px"/>
+                        <img src="../images/icon/dogIcon.png" alt="dog icon" width="20px"/>
                         Chó cảnh
                     </button>
                     <button class="nav-link" id="Cat-tab" data-toggle="tab" data-target="#Cat" type="button" role="tab" aria-controls="Cat" aria-selected="true">
-                        <img src="./images/icon/catIcon.png" al t="dog icon" width="20px"/>
+                        <img src="../images/icon/catIcon.png" al t="dog icon" width="20px"/>
                         Mèo cảnh
                     </button>
                     <button class="nav-link" id="foodSupply-tab" data-toggle="tab" data-target="#foodSupply" type="button" role="tab" aria-controls="foodSupply" aria-selected="true">
-                        <img src="./images/icon/foodIcon.png" alt="dog icon" width="20px"/>
+                        <img src="../images/icon/foodIcon.png" alt="dog icon" width="20px"/>
                         Đồ ăn
                     </button>
                     <button class="nav-link" id="Toy-tab" data-toggle="tab" data-target="#Toy" type="button" role="tab" aria-controls="Toy" aria-selected="true">
-                        <img src="./images/icon/toyIcon.png" alt="dog icon" width="20px"/>
+                        <img src="../images/icon/toyIcon.png" alt="dog icon" width="20px"/>
                         Đồ chơi
                     </button>
                     
@@ -88,10 +88,10 @@
                 <div class="slide">
                 </div>
                 <a class="prev" onclick="plusSlides(-1)">
-                    <img src="./images/icon/BenTrai.png" alt="Mũi tên trái" width="30" height="30">
+                    <img src="../images/icon/BenTrai.png" alt="Mũi tên trái" width="30" height="30">
                 </a>
                 <a class="next" onclick="plusSlides(1)">
-                    <img src="./images/icon/BenPhai.png" alt="Mũi tên phải" width="30" height="30">
+                    <img src="../images/icon/BenPhai.png" alt="Mũi tên phải" width="30" height="30">
                 </a>
             </div>
         </div>
@@ -112,7 +112,7 @@
 	                        <div class="bestseller col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
 	                            <div class="card mt-1" style="width:20rem;">
 	                                <img th:src="@{${dog.image}}" class="card-img-top" th:alt="${dog.name}" width="200" height="200">
-	                                <h4 class="card-title text-center" th:text="${dog.name}"></h4>
+	                                <a id="itemNavLeft" class="nav-link" th:text="${dog.name}" th:href="|info/@{${dog.id}}|"></a>
 	                                <form th:action="@{addcart}"  method="post" class="ml-auto">
 	                                	<input type="hidden" name="id" th:value="${dog.id}">
 	                                	<input type="hidden" name="name" th:value="${dog.name}">
@@ -132,7 +132,7 @@
 	                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
 	                            <div class="card mt-1" style="width:20rem;">
 	                                <img th:src="@{${cat.image}}" class="card-img-top" th:alt="${cat.name}" width="200" height="200">
-	                                <h4 class="card-title text-center" th:text="${cat.name}"></h4>
+	                                <a id="itemNavLeft" class="nav-link" th:text="${cat.name}" th:href="|info/@{${cat.id}}|"></a>
 	                                <form th:action="@{addcart}"  method="post" class="ml-auto">
 	                                	<input type="hidden" name="id" th:value="${cat.id}">
 	                                	<input type="hidden" name="name" th:value="${cat.name}">
@@ -153,7 +153,7 @@
 	                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
 	                            <div class="card mt-1" style="width:20rem;">
 	                                <img th:src="@{${food.image}}" class="card-img-top" th:alt="${food.name}" width="200" height="200">
-	                                <h4 class="card-title text-center" th:text="${food.name}"></h4>
+	                                <a id="itemNavLeft" class="nav-link" th:text="${food.name}" th:href="|info/@{${food.id}}|"></a>
 	                                <form th:action="@{addcart}"  method="post" class="ml-auto">
 	                                	<input type="hidden" name="id" th:value="${food.id}">
 	                                	<input type="hidden" name="name" th:value="${food.name}">
@@ -173,7 +173,7 @@
 	                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
 	                            <div class="card mt-1" style="width:20rem;">
 	                                <img th:src="@{${toy.image}}" class="card-img-top" th:alt="${toy.name}" width="200" height="200">
-	                                <h4 class="card-title text-center" th:text="${toy.name}"></h4>
+	                                <a id="itemNavLeft" class="nav-link" th:text="${toy.name}" th:href="|info/@{${toy.id}}|"></a>
 	                                <form th:action="@{addcart}"  method="post" class="ml-auto">
 	                                	<input type="hidden" name="id" th:value="${toy.id}">
 	                                	<input type="hidden" name="name" th:value="${toy.name}">
@@ -196,7 +196,7 @@
                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
                             <div class="card mt-1" style="width:20rem;">
                                 <img th:src="@{${dog.image}}" class="card-img-top" th:alt="${dog.name}" width="200" height="200">
-                                <h4 class="card-title text-center" th:text="${dog.name}"></h4>
+                                <a id="itemNavLeft" class="nav-link" th:text="${dog.name}" th:href="|info/@{${dog.id}}|"></a>
                                 <form th:action="@{addcart}"  method="post" class="ml-auto">
 	                                	<input type="hidden" name="id" th:value="${dog.id}">
 	                                	<input type="hidden" name="name" th:value="${dog.name}">
@@ -217,7 +217,7 @@
 		                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
 		                            <div class="card mt-1" style="width:20rem;">
 		                                <img th:src="@{${cat.image}}" class="card-img-top" th:alt="${cat.name}" width="200" height="200">
-		                                <h4 class="card-title text-center" th:text="${cat.name}"></h4>
+		                                <a id="itemNavLeft" class="nav-link" th:text="${cat.name}" th:href="|info/@{${cat.id}}|"></a>
 		                                <form th:action="@{addcart}"  method="post" class="ml-auto">
 	                                	<input type="hidden" name="id" th:value="${cat.id}">
 	                                	<input type="hidden" name="name" th:value="${cat.name}">
@@ -239,7 +239,7 @@
 		                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
 		                            <div class="card mt-1" style="width:20rem;">
 		                                <img th:src="@{${food.image}}" class="card-img-top" th:alt="${food.name}" width="200" height="200">
-		                                <h4 class="card-title text-center" th:text="${food.name}"></h4>
+		                                <a id="itemNavLeft" class="nav-link" th:text="${food.name}" th:href="|info/@{${food.id}}|"></a>
 		                                <form th:action="@{addcart}"  method="post" class="ml-auto">
 	                                	<input type="hidden" name="id" th:value="${food.id}">
 	                                	<input type="hidden" name="name" th:value="${food.name}">
@@ -261,7 +261,7 @@
 	                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
 	                            <div class="card mt-1" style="width:20rem;">
 	                                <img th:src="@{${toy.image}}" class="card-img-top" th:alt="${toy.name}" width="200" height="200">
-	                                <h5 class="card-title text-center" th:text="${toy.name}"></h5>
+	                                <a id="itemNavLeft" class="nav-link" th:text="${toy.name}" th:href="|info/@{${toy.id}}|"></a>
 	                                <form th:action="@{addcart}"  method="post" class="ml-auto">
 	                                	<input type="hidden" name="id" th:value="${toy.id}">
 	                                	<input type="hidden" name="name" th:value="${toy.name}">
