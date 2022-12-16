@@ -20,7 +20,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import tdtu.petshop.models.Product;
 import tdtu.petshop.models.User;
-import tdtu.petshop.services.CategoryService;
 import tdtu.petshop.services.ProductService;
 import tdtu.petshop.services.UserDetailsImpl;
 import tdtu.petshop.services.UserService;
@@ -33,8 +32,6 @@ public class AdminController {
     private UserService userService;
     @Autowired
     private ProductService productService;
-    @Autowired
-    private CategoryService categoryService;
     
     @GetMapping("")
 	public String getAdmin(Model model) {
