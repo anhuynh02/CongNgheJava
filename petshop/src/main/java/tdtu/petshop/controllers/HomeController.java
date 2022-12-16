@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -181,5 +182,12 @@ public class HomeController {
 	public String getStaff() {
 		return "Staff Page";
 	}
-	
+	@GetMapping("info/{id}")
+	public String getInfo(Model model, @PathVariable int id) {
+		
+		Product product = productService.findById(id);
+		model.addAttribute("product",product);
+		
+		return "info";
+	}
 }
