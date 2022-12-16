@@ -1,5 +1,7 @@
 $(document).ready(function() {
-	$("#dateOfBill").html("Thời gian lập đơn: "+$(".dateModify")[0].innerText);
+	if($("#dateOfBill").length != 0 && $(".dateModify").length != 0){
+		$("#dateOfBill").html("Ngày lập đơn: "+$(".dateModify")[0].innerText);
+	}
 	var money = 0;
 	if($("#alertCart").length != 0){
 		let a = $("#alertCart").children("a");
@@ -31,7 +33,7 @@ $(document).ready(function() {
 	});
 	
 	$(".purchaseBtn").click(function(){
-		let column =$(this).parent().parent().parent().children()[0].children[6];
+		let column =$(this).parent().parent().parent().children()[0].children[7];
 		if(column != null){
 			let cartBillId = column.innerText;
 		$("#purchaseTotalMoney").html($("#totalPriceBill").text())

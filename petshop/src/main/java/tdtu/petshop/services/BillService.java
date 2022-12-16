@@ -1,5 +1,6 @@
 package tdtu.petshop.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class BillService {
 		if(bill == null) {
 			bill = new Bill();
 			bill.setUser(user);
+			bill.setDate(LocalDate.now().toString());
 			billRepository.save(bill);
 		}
 		return bill;
