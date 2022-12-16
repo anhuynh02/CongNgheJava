@@ -20,7 +20,7 @@
             <div class="side-items">
                 <p class="items" id="staff">Quản lý nhân viên</p>
                 <p class="items" id="product">Quản lý kho</p>
-                <p class="items" id="ketoan">Thống kê</p>
+                <p class="items" id="statistic">Thống kê</p>
             </div>
             <div class="side-logout">
             	<form th:action="@{logout}" method="post">
@@ -367,6 +367,39 @@
 			    </div>
 			</div>
 			<!-- Xóa sản phẩm dialog -->
+			
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Thống kê+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+			<!-- Thống kê-->
+            <div id="statisticManage" th:style="${statistic_screen}">
+                <div class="inside-head">
+                    <h1>Thống kê</h1>
+                </div>
+                <div class="inside-content">
+                    <table class="inside-table">
+                        <thead>
+                            <tr>
+                                <th>temp</th>
+                                <th>temp</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="product: ${products}">
+                                <td style="width:100px" th:text="${product.name}"></td>
+                                <td th:text="${product.category.name}"></td>
+                                <td th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')+' VNĐ'}"></td>
+                                <td class="des" th:text="${product.description}"></td>
+                                <td><img th:src="@{${product.image}}" width="100px" height="100px"></td>
+                                <td>
+									<button class="productEdit btn-edit" th:attr="data-id=${product.id}">Edit</button>
+			                		<button class="productDel btn-delete" th:attr="data-id=${product.id}">Delete</button>
+								</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+		
         </div>
     </div>
 </body>

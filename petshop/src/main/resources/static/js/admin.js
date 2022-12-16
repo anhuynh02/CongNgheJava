@@ -1,5 +1,6 @@
-let staffM = $("#staffManage");
-let productM = $("#productManage");
+const staffM = $("#staffManage");
+const productM = $("#productManage");
+const statisticM = $("#statisticManage");
 
 
 $(document).ready(function() {
@@ -7,10 +8,17 @@ $(document).ready(function() {
     $("#staff").click(function(){
         staffM.css("display","block");
         productM.css("display","none");
+        statisticM.css("display","none");
     })
     $("#product").click(function(){
         staffM.css("display","none");
         productM.css("display","block");
+        statisticM.css("display","none");
+    })
+    $("#statistic").click(function(){
+        staffM.css("display","none");
+        productM.css("display","none");
+        statisticM.css("display","block");
     })
     
 //----------------------Quản lý nhân viên-------------------------
