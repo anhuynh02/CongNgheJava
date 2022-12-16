@@ -19,6 +19,15 @@ public class Bill {
 	private int total;
 //	@Column(columnDefinition = "boolean default false")
 	private boolean purchased;
+	private String date;
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -61,7 +70,10 @@ public class Bill {
 
 	@Override
 	public String toString() {
-		return "Bill [id=" + id + ", total=" + total + ", purchased=" + purchased + ", user=" + user + "]";
+		return "Bill [id=" + id + ", total=" + total + ", purchased=" + purchased + ", date=" + date + ", user=" + user
+				+ "]";
 	}
+
+	
 	
 }

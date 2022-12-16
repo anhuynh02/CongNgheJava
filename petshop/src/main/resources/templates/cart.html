@@ -59,6 +59,7 @@
                     <tr class="table-primary">
                         <th>Ảnh</th>
                         <th>Tên sản phẩm</th>
+                        <th>Ngày lập đơn</th>
                         <th>Số lượng</th>
                         <th>Giá</th>
                         <th>Thành tiền</th>
@@ -79,6 +80,7 @@
                 />
               </td>
               <td th:text="${billDetail.product.name}"></td>
+               <td th:text="${billDetail.bill.date}"></td>
               <td>
                 <input class="form-control volumn" type="number" th:value="${billDetail.quantity}" />
               </td>
@@ -96,7 +98,7 @@
               </td>
             </tr>
             <tr class="table-light">
-            	<td colspan="5" ><h2 id="totalPriceBill"></h2></td>
+            	<td colspan="6" ><h2 id="totalPriceBill"></h2></td>
             	<td colspan="1" ><button class="purchaseBtn btn btn-success">Thanh toán</button></td>
             </tr>
                 </tbody>
@@ -129,6 +131,7 @@
                 <thead>
                     <tr>
                         <th>Tên sản phẩm</th>
+                        <th>Ngày lập đơn</th>
                         <th>Số lượng</th>
                         <th>Giá</th>
                         <th>Thành tiền</th>
@@ -141,9 +144,10 @@
 		            		
 		            	</td>
 		              <td th:text="${billDetail.product.name}"></td>
-		              <td>
+		              <td th:text="${billDetail.bill.date}"></td>
+		           
 		                <td th:text="${billDetail.quantity}"></td>
-		              </td>
+
 		              <td
 		                th:text="${#numbers.formatDecimal(billDetail.product.price, 0, 'COMMA', 0, 'POINT')+' VNĐ'}"
 		              ></td>
