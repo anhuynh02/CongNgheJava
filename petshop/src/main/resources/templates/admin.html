@@ -379,21 +379,14 @@
                     <table class="inside-table">
                         <thead>
                             <tr>
-                                <th>temp</th>
-                                <th>temp</th>
+                                <th>Tháng</th>
+                                <th>Doanh thu</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="product: ${products}">
-                                <td style="width:100px" th:text="${product.name}"></td>
-                                <td th:text="${product.category.name}"></td>
-                                <td th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')+' VNĐ'}"></td>
-                                <td class="des" th:text="${product.description}"></td>
-                                <td><img th:src="@{${product.image}}" width="100px" height="100px"></td>
-                                <td>
-									<button class="productEdit btn-edit" th:attr="data-id=${product.id}">Edit</button>
-			                		<button class="productDel btn-delete" th:attr="data-id=${product.id}">Delete</button>
-								</td>
+                            <tr th:each="statistic : ${statistics}">
+                                <td th:text="${statistic.date}"></td>
+                                <td th:text="${statistic.total}"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -403,6 +396,6 @@
         </div>
     </div>
 </body>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="./js/admin.js"></script>
 </html>

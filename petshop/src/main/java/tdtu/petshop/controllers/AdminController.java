@@ -1,5 +1,6 @@
 package tdtu.petshop.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import tdtu.petshop.models.Bill;
 import tdtu.petshop.models.Product;
 import tdtu.petshop.models.User;
+import tdtu.petshop.services.BillService;
 import tdtu.petshop.services.ProductService;
 import tdtu.petshop.services.UserDetailsImpl;
 import tdtu.petshop.services.UserService;
@@ -32,15 +35,19 @@ public class AdminController {
     private UserService userService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private BillService billService;
     
     @GetMapping("")
 	public String getAdmin(Model model) {
     	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	List<User> staffs = userService.findAllByRole(2);
     	List<Product> products = productService.findAll();
+    	List<Bill> statistics = billService.getStatistic();
     	model.addAttribute("user", (UserDetailsImpl) principal);
     	model.addAttribute("staffs", staffs);
     	model.addAttribute("products", products);
+    	model.addAttribute("statistics", statistics);
     	if (!model.containsAttribute("staff")) {
             model.addAttribute("staff", new User());
         }

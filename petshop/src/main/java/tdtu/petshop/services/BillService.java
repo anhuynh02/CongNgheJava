@@ -1,5 +1,7 @@
 package tdtu.petshop.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,5 +34,8 @@ public class BillService {
 	}
 	public void saveBill(Bill bill) {
 		billRepository.save(bill);
+	}
+	public List<Bill> getStatistic() {
+		return billRepository.getStatistic();
 	}
 }

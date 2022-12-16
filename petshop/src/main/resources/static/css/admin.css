@@ -150,6 +150,10 @@ a:hover{
 	margin-left:10px;
 }
 
+#statisticManage{
+    display: none;
+}
+
 #productManage{
     display: none;
 }
