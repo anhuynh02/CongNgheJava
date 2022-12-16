@@ -85,13 +85,13 @@ $(document).ready(function() {
 				$("#editprice").val(product.price);
 				$("#editProId").val(product.id);
 				if(product.category.id == "1"){
-					$("#editcat").prop("checked",true);
+					$("#editcat").prop("selected",true);
 				}else if(product.category.id == "2"){
-					$("#editdog").prop("checked",true);
+					$("#editdog").prop("selected",true);
 				}else if(product.category.id == "3"){
-					$("#editfood").prop("checked",true);
+					$("#editfood").prop("selected",true);
 				}else if(product.category.id == "4"){
-					$("#edittoy").prop("checked",true);
+					$("#edittoy").prop("selected",true);
 				}
        		});
             e.preventDefault();

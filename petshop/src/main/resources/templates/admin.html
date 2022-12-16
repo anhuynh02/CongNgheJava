@@ -37,7 +37,7 @@
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Quản lý nhân viên+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
             <!-- Quản lý danh sách nhân viên -->
-            <div id="staffManage">
+            <div id="staffManage" th:style="${staff_screen}">
                 <div class="inside-head">
                     <h1>Quản lý nhân viên</h1>
                     <button class="inside-btnAdd" id="addStaffBtn">Thêm nhân viên</button>
@@ -198,7 +198,7 @@
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Quản lý sản phẩm+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
 			<!-- Quản lý danh sách sản phẩm-->
-            <div id="productManage">
+            <div id="productManage" th:style="${product_screen}">
                 <div class="inside-head">
                     <h1>Quản lý kho</h1>
                     <div class="row">
@@ -255,25 +255,13 @@
 			                        <label class="control-label" for="phone">Tên sản phẩm:</label>
 			                        <input type="text" class="form-control" placeholder="Nhập tên sản phẩm" name="name" required/>
 			                    </div>
-			                    <p>Chọn loại sản phẩm:</p>
-			                    <div class="option-choice">
-					                <div class="option">
-						                <p>Mèo</p>
-						                <input type="radio" id="cat" name="kind" value="1">
-					                </div>
-					                <div class="option">
-						                <p>Chó</p>
-	  									<input type="radio" id="dog" name="kind" value="2">
-					                </div>
-					                <div class="option">
-										<p>Thức ăn</p>
-										<input type="radio" id="food" name="kind" value="3">
-					                </div>
-					                <div class="option">
-										<p>Đồ chơi<p>
-										<input type="radio" id="toy" name="kind" value="4">
-					                </div>
-					            </div>
+			                    <label for="kind">Chọn loại sản phẩm:</label>
+			                    <select name="kind" class="option-choice">
+			                    	<option value="1">Mèo</option>
+			                    	<option value="2">Chó</option>
+			                    	<option value="3">Đồ ăn</option>
+			                    	<option value="4">Đồ chơi</option>
+					            </select>
 			     	           
 			                    <div class="form-group">
 			                        <label class="control-label" for="name">Giá sản phẩm:</label>
@@ -319,24 +307,13 @@
 			                	<div class="form-group">
 			                        <label class="control-label" for="name">Tên sản phẩm:</label>
 			                        <input type="text" class="form-control" placeholder="Nhập tên sản phẩm" name="name" id="editname" required/>
-			                    <p>Chọn loại sản phẩm:</p>
-			                    <div class="option-choice">
-					                <div class="option">
-						                <p>Mèo</p>
-						                <input type="radio" id="editcat" name="kind" value="1">
-					                </div>
-					                <div class="option">
-						                <p>Chó</p>
-	  									<input type="radio" id="editdog" name="kind" value="2">
-					                </div>
-					                <div class="option">
-										<p>Thức ăn</p>
-										<input type="radio" id="editfood" name="kind" value="3">
-					                </div>
-					                <div class="option">
-										<p>Đồ chơi<p>
-										<input type="radio" id="edittoy" name="kind" value="4">
-					                </div>
+				                    <label for="kind">Chọn loại sản phẩm:</label>
+				                    <select name="kind" class="option-choice">
+				                    	<option id="editcat" value="1">Mèo</option>
+				                    	<option id="editdog" value="2">Chó</option>
+				                    	<option id="editfood" value="3">Đồ ăn</option>
+				                    	<option id="edittoy" value="4">Đồ chơi</option>
+						            </select>
 					            </div>
 			     	           
 			                    <div class="form-group">
@@ -381,7 +358,7 @@
 			            </div>
 			            <div class="modal-footer">
 			            	<form th:action="@{admin/product/delete}" method="post">  
-			        			<input type="hidden" name="id" id="deleteProId">  
+			        			<input type="hidden" name="id" id="delProId">  
 			        			<input type="submit" class="btn btn-danger" value=Xóa>
 			        			<button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
 			        		</form>

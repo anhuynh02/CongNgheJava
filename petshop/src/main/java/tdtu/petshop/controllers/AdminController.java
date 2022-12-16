@@ -44,7 +44,6 @@ public class AdminController {
     	model.addAttribute("user", (UserDetailsImpl) principal);
     	model.addAttribute("staffs", staffs);
     	model.addAttribute("products", products);
-    	
     	if (!model.containsAttribute("staff")) {
             model.addAttribute("staff", new User());
         }
@@ -110,7 +109,12 @@ public class AdminController {
 	@PostMapping("/product/add")
 	public String postAddProduct(RedirectAttributes redirectAttributes, @ModelAttribute("product") Product product, HttpServletRequest request) {
 		String add = productService.addProduct(product, request.getParameter("kind"));
+		String screenP = "display: none;";
+		String screenN = "display: none;";
 		if (add == null) {
+			screenP = "display: block;";
+			redirectAttributes.addFlashAttribute("product_screen", screenP);
+			redirectAttributes.addFlashAttribute("staff_screen", screenN);
 			redirectAttributes.addFlashAttribute("prosuccess", "Thêm sản phẩm thành công");
 		}else {
 			redirectAttributes.addFlashAttribute("Error", "Không thêm được");
@@ -121,7 +125,12 @@ public class AdminController {
 	@PostMapping("/product/edit")
 	public String postProductEdit(RedirectAttributes redirectAttributes, @ModelAttribute("product") Product product, HttpServletRequest request) {
 		String edit = productService.editProduct(product, request.getParameter("kind"));
+		String screenP = "display: none;";
+		String screenN = "display: none;";
 		if(edit == null)
+			screenP = "display: block;";
+			redirectAttributes.addFlashAttribute("product_screen", screenP);
+			redirectAttributes.addFlashAttribute("staff_screen", screenN);
 			redirectAttributes.addFlashAttribute("prosuccess", "Chỉnh sửa sản phẩm thành công");
 		return "redirect:/admin";
 	}
@@ -133,6 +142,10 @@ public class AdminController {
 	
 	@PostMapping("/product/delete")
 	public String postDeleteProduct(RedirectAttributes redirectAttributes, HttpServletRequest request) {
+		String screenP = "display: block;";
+		String screenN = "display: none;";
+		redirectAttributes.addFlashAttribute("product_screen", screenP);
+		redirectAttributes.addFlashAttribute("staff_screen", screenN);
 		productService.deleteProduct(Integer.parseInt(request.getParameter("id")));
 		redirectAttributes.addFlashAttribute("prosuccess", "Xóa sản phẩm thành công.");
 		return "redirect:/admin";

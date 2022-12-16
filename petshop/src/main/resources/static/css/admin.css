@@ -32,7 +32,7 @@ a:hover{
 /* CSS thanh side */
 
 .side-header{
-    width: 300px;
+    width: 18%;
     height: 1000px;
     background-color: #FAF7F0;
     position: fixed;
@@ -41,7 +41,7 @@ a:hover{
 }
 
 .side-logo{
-    width: 300px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -59,7 +59,7 @@ a:hover{
 .side-items{
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 100%;
     height: 200px;
     justify-content: space-between;
     margin-top: 15px;
@@ -76,13 +76,13 @@ a:hover{
     margin-top: 15px;
     display: flex;
     height: 50px;
-    width: 300px;
+    width: 100%;
 }
 
 /* CSS other side */
 .content{
     display: flex;
-    width: 80%;
+    width: 82%;
     height: fit-content;
     flex-direction: column;
     position: absolute;
