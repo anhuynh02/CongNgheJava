@@ -119,24 +119,21 @@ $(document).ready(function() {
 	
 	// Tạo màu ngẫu nhiên cho biểu đồ.
 	function generateColor() {
-		let r = parseInt(Math.random()*255);
-		let g = parseInt(Math.random()*255);
-		let b = parseInt(Math.random()*255);
-		return `rgb(${r}, ${g}, ${b}])`;
+		return "#" + Math.floor(Math.random()*16777215).toString(16);
 	}
 	
 	// Tạo biểu đồ doanh thu theo tháng năm hiện tại.
-	function statisticMonthChart(id, month=[], total=[]) {
+	function statisticMonthChart(id, months=[], totals=[]) {
 		let colors = [];
-		for (let i = 0; i < month.length; i++) {
+		for (let i = 0; i < months.length; i++) {
 			colors.push(generateColor())
 		}
 		
 		const data = {
-			labels: month,
+			labels: months,
 			datasets: [{
-				label: 'Thống kê doanh thu theo tháng năm hiện tại',
-				data: total,
+				label: "",
+				data: totals,
 				backgroundColor: colors,
 				borderColor: colors,
 				hoverOffset: 4
@@ -154,12 +151,12 @@ $(document).ready(function() {
 	}
 	
 	// Lấy dữ liệu từ bảng html.
-	let month=[], total=[];
+	let months=[], totals=[];
 	
 	$('tr.statistic').each(function (a, b) {
-        month.push($('.statistic-month', b).text());
-        total.push($('.statistic-total', b).text());
+        months.push($('.statistic-month', b).text());
+        totals.push($('.statistic-total', b).text());
     });
 	
-	statisticMonthChart("statisticMonthChart", month, total);
+	statisticMonthChart("statisticMonthChart", months, totals);
 })
