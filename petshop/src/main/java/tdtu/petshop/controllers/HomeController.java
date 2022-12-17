@@ -171,10 +171,9 @@ public class HomeController {
 		return "search";
 	}
 	
-	@GetMapping("customer")
-	@ResponseBody
-	public String getCustomer() {
-		return "Customer Page";
+	@GetMapping("/accessDenied")
+	public String getAccessDenied() {
+		return "accessDenied";
 	}
 	
 	@GetMapping("info/{id}")
