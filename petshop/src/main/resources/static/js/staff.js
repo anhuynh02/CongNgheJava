@@ -59,4 +59,49 @@ $(document).ready(function() {
         });
 		e.preventDefault();
     });
+//----------------------Thống kê-------------------------
+
+    
+    // Tạo màu ngẫu nhiên cho biểu đồ.
+	function generateColor() {
+		return "#" + Math.floor(Math.random()*16777215).toString(16);
+	}
+	
+	// Tạo biểu đồ doanh thu theo tháng năm hiện tại.
+	function statisticMonthChart(id, months=[], totals=[]) {
+		let colors = [];
+		for (let i = 0; i < months.length; i++) {
+			colors.push(generateColor())
+		}
+		
+		const data = {
+			labels: months,
+			datasets: [{
+				label: "",
+				data: totals,
+				backgroundColor: colors,
+				borderColor: colors,
+				hoverOffset: 4
+			}]
+		};
+		
+		const config = {
+			type: 'bar',
+			data: data,
+		};
+		
+		let ctx = document.getElementById(id).getContext("2d");
+		
+		new Chart(ctx, config);
+	}
+	
+	// Lấy dữ liệu từ bảng html.
+	let months=[], totals=[];
+	
+	$('tr.statistic').each(function (a, b) {
+        months.push($('.statistic-month', b).text());
+        totals.push($('.statistic-total', b).text());
+    });
+	
+	statisticMonthChart("statisticMonthChart", months, totals);
 })

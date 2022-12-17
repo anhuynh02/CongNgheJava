@@ -214,7 +214,10 @@
 			<!-- Thống kê-->
             <div id="statisticManage" th:style="${statistic_screen}">
                 <div class="inside-head">
-                    <h1>Thống kê</h1>
+                    <h1>Thống kê doanh thu theo tháng năm hiện tại</h1>
+                </div>
+                <div>
+                	<canvas id="statisticMonthChart"></canvas>
                 </div>
                 <div class="inside-content">
                     <table class="inside-table">
@@ -225,9 +228,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="statistic : ${statistics}">
-                                <td th:text="${statistic.date}"></td>
-                                <td th:text="${statistic.total}"></td>
+                            <tr class="statistic" th:each="statistic : ${statistics}">
+                                <td class="statistic-month" th:text="${statistic.date}"></td>
+                                <td class="statistic-total" th:text="${statistic.total}"></td>
                             </tr>
                         </tbody>
                     </table>

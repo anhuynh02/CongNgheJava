@@ -159,6 +159,16 @@ public class HomeController {
 	
 	@PostMapping("search")
 	public String search(Model model, @ModelAttribute("name") String name) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetailsImpl) {
+			model.addAttribute("user", (UserDetailsImpl) principal);
+			UserDetailsImpl udI = (UserDetailsImpl)principal;
+			Bill currentBill = billService.loadBill(udI.getId());
+			List<BillDetail> billDetails = billDetailService.findAllByBill(currentBill);
+			model.addAttribute("count", billDetails.size());
+		}
+		else
+			model.addAttribute("user", null);
 		List<Product> list = null;
 		int length = 0;
 		if(StringUtils.hasText(name)) {
@@ -168,6 +178,11 @@ public class HomeController {
 		model.addAttribute("products",list);
 		model.addAttribute("length",length);
 		return "search";
+	}
+	
+	@GetMapping("search")
+	public String search() {
+		return "redirect:/";
 	}
 	
 	@GetMapping("/accessDenied")

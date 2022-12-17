@@ -38,7 +38,7 @@
                             th:href="@{'/' + __(${user != null} ? (${user.getAuthorities()[0].toString().equals('customer')} ? 'cart' : ${user.getAuthorities()[0]}) : 'login')__}"></a>
                         </li>
                         <li class="nav-item">
-                        	<form th:action="@{logout}" method="post">
+                        	<form th:action="@{~/logout}" method="post">
                                 <button id="itemNavLeft" class="nav-link link" aria-current="page" th:if="${user != null}">Đăng Xuất</button>
                             </form>
                         </li>
