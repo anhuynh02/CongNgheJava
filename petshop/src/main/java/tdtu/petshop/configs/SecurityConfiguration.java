@@ -42,6 +42,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().and().logout()
 			.logoutUrl("/logout")
 			.logoutSuccessUrl("/");
+		http.authorizeRequests().and().exceptionHandling()
+			.accessDeniedPage("/accessDenied");
 		http.authorizeRequests().and().httpBasic();
 	}
 	
