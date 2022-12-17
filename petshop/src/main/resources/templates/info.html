@@ -31,7 +31,7 @@
                     </form>
                     <ul class="navbar-nav ml-auto">
                     	<li class="nav-item">
-                               <a id="itemNavLeft" class="nav-link" th:text="${user != null} ? 'Cart'" th:href="@{cart}"></a>
+                                <a id="itemNavLeft" class="nav-link" th:text="${user != null} ? 'Cart ('+${count}+' sản phẩm)'" th:href="@{cart}"></a>
                         </li>
                         <li class="nav-item active">
                             <a id="itemNavLeft" class="nav-link" th:text="${user != null} ? ${user.getUsername()} : 'Đăng Nhập'" 
@@ -42,44 +42,15 @@
                                 <button id="itemNavLeft" class="nav-link link" aria-current="page" th:if="${user != null}">Đăng Xuất</button>
                             </form>
                         </li>
+                                     
                     </ul>
                 </div>
             </nav>
         </div>
     </section>
 
-    <section class="second">
-        <div class="container">
-            <nav>
-                <div class="nav nav-tabs justify-content-center" id="category" role="tabslist">
-                	<button class="nav-link" id="All-tab" data-toggle="tab" data-target="#All" type="button" role="tab" aria-controls="All" aria-selected="true">
-                        <img src="../images/icon/pet.png" alt="dog icon" width="20px"/>
-                        Tất cả
-                    </button>
-                    <button class="nav-link" id="Dog-tab" data-toggle="tab" data-target="#Dog" type="button" role="tab" aria-controls="Dog" aria-selected="true">
-                        <img src="../images/icon/dogIcon.png" alt="dog icon" width="20px"/>
-                        Chó cảnh
-                    </button>
-                    <button class="nav-link" id="Cat-tab" data-toggle="tab" data-target="#Cat" type="button" role="tab" aria-controls="Cat" aria-selected="true">
-                        <img src="../images/icon/catIcon.png" al t="dog icon" width="20px"/>
-                        Mèo cảnh
-                    </button>
-                    <button class="nav-link" id="foodSupply-tab" data-toggle="tab" data-target="#foodSupply" type="button" role="tab" aria-controls="foodSupply" aria-selected="true">
-                        <img src="../images/icon/foodIcon.png" alt="dog icon" width="20px"/>
-                        Đồ ăn
-                    </button>
-                    <button class="nav-link" id="Toy-tab" data-toggle="tab" data-target="#Toy" type="button" role="tab" aria-controls="Toy" aria-selected="true">
-                        <img src="../images/icon/toyIcon.png" alt="dog icon" width="20px"/>
-                        Đồ chơi
-                    </button>
-                </div>
-            </nav>
-        </div>
+    <section class="second-info">
     </section>
-
-    
-
-    <div class="container line"></div>
 
      <section class="third">
         <div class="container">
@@ -102,9 +73,13 @@
         			</br>
         			<div class="row">
         				<div class="col-6">
-		        			<button class="btn btn-danger">
-		                         Thêm vào giỏ hàng
-		                     </button>
+        					
+		        			<form  th:action="@{~/addcart}" method="post" class="ml-auto">
+	                            <input type="hidden" name="id" th:value="${product.id}">
+	                            <input type="hidden" name="name" th:value="${product.name}">
+	                            <input type="hidden" name="price" th:value="${product.price}">
+	                            <button type="submit" class="btn-info-add-cart">Thêm vào giỏ hàng</button>
+	                        </form>
         				</div>
         			</div>
         		</div>
@@ -132,34 +107,4 @@
     </section>
 
 </body>
-<script>
-    var index = 0;
-    showSlide(index);
-    function plusSlides(n){
-        showSlide(index += n);
-    }
-
-
-    function showSlide(n){
-        var i;
-        var slides = document.getElementsByClassName("slide");
-        var bestseller = document.getElementsByClassName("bestseller");
-        var get = bestseller;
-        if(n >= bestseller.length){
-            index = 0;
-        }
-        if(n < 0){
-            index = bestseller.length-1;
-        }
-        slides[0].innerHTML = get[index].innerHTML;
-        if(index + 1 >= bestseller.length){
-            slides[1].innerHTML = get[0].innerHTML;
-        }else{
-            slides[1].innerHTML = get[index+1].innerHTML;
-        }
-        
-    }
-    
-    setInterval(plusSlides(1),150);
-</script>
 </html>

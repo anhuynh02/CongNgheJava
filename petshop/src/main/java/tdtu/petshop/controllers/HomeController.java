@@ -177,14 +177,18 @@ public class HomeController {
 		return "Customer Page";
 	}
 	
-	@GetMapping("staff")
-	@ResponseBody
-	public String getStaff() {
-		return "Staff Page";
-	}
 	@GetMapping("info/{id}")
 	public String getInfo(Model model, @PathVariable int id) {
-		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetailsImpl) {
+			model.addAttribute("user", (UserDetailsImpl) principal);
+			UserDetailsImpl udI = (UserDetailsImpl)principal;
+			Bill currentBill = billService.loadBill(udI.getId());
+			List<BillDetail> billDetails = billDetailService.findAllByBill(currentBill);
+			model.addAttribute("count", billDetails.size());
+		}
+		else
+			model.addAttribute("user", null);
 		Product product = productService.findById(id);
 		model.addAttribute("product",product);
 		

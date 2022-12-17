@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Page</title>
-    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/staff.css}">
     <link rel="stylesheet" th:href="@{/fontawesome-free-6.2.1-web/css/all.min.css}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -20,7 +20,6 @@
 				</a>
             </div>
             <div class="side-items">
-                <p class="items" id="staff">Quản lý nhân viên</p>
                 <p class="items" id="product">Quản lý kho</p>
                 <p class="items" id="statistic">Thống kê</p>
             </div>
@@ -32,175 +31,15 @@
         </div>
         <div class="content">
             <div class="header">
-                <p class="header-logo">Trang chủ quản lý</p>
+                <p class="header-logo">Trang chủ nhân viên</p>
                 <p class="header-side">Xin chào <Strong th:text="${user.getUsername()}"></Strong></p>
             </div>
             
-<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Quản lý nhân viên+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-
-            <!-- Quản lý danh sách nhân viên -->
-            <div id="staffManage" th:style="${staff_screen}">
-                <div class="inside-head">
-                    <h1>Quản lý nhân viên</h1>
-                    <button class="inside-btnAdd" id="addStaffBtn">Thêm nhân viên</button>
-                </div>
-                <div class="inside-content">
-                    <table class="inside-table">
-                        <thead>
-                            <tr>
-                                <th>SĐT</th>
-                                <th>Họ tên</th>
-                                <th>Tên người dùng</th>
-                                <th>Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="staff : ${staffs}">
-                                <td th:text="${staff.phone}"></td>
-                                <td th:text="${staff.name}"></td>
-                                <td th:text="${staff.username}"></td>
-                                <td>
-									<button class="btn-edit-staff btn-edit" th:attr="data-id=${staff.id}">Sửa</button>
-			                		<button class="btn-delete-staff btn-delete" th:attr="data-id=${staff.id}">Xóa</button>
-								</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <br><br>
-			    <div th:if="${success} != null" class="alert alert-success alert-dismissable fade in">
-			        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			        <strong>Thành công!</strong> <span th:text="${success}"></span>
-			    </div>
-			    <br>
-			    <div th:if="${error} != null" class="alert alert-danger alert-dismissable fade in">
-			        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			        <strong>Thất bại!</strong> <span th:text="${error}"></span>
-			    </div>
-            </div>
-            
-            <!-- Thêm nhân viên dialog -->
-			<div class="modal fade" id="addStaffModal" role="dialog">
-			    <div class="modal-dialog">
-			
-			        <!-- Modal content-->
-			        <div class="modal-content">
-			            <div class="modal-header">
-			                <button type="button" class="close" data-dismiss="modal">&times;</button>
-			                <h4 class="modal-title">Thêm nhân viên</h4>
-			            </div>
-			            <form th:action="@{admin/staff/add}" th:object="${staff}" method="post">
-			                <div class="modal-body">
-			                	<div class="form-group">
-			                        <label class="control-label" for="phone">Số điện thoại:</label>
-			                        <input type="text" class="form-control" placeholder="Số điện thoại" name="phone" th:value=${phone} required/>
-			                    </div>
-			                
-			                    <div class="form-group">
-			                        <label class="control-label" for="name">Họ và tên:</label>
-			                        <input type="text" class="form-control" placeholder="Họ và Tên" name="name" th:value=*{name} required/>
-			                    </div>
-			    
-			                    <div class="form-group">
-					                <label for="username">Tên người dùng:</label>
-					                <input type="text" class="form-control" placeholder="Nhập tên người dùng" name="username" th:value=*{username} required>
-					            </div>
-					            
-					            <div class="form-group">
-					                <label for="password">Mật khẩu:</label>
-					                <input type="password" class="form-control" placeholder="Nhập mật khẩu" name="password" th:value=*{password} required>
-					            </div>
-					            
-					            <div class="form-group">
-					                <label for="confirmPassword">Nhập lại mật khẩu:</label>
-					                <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" name="confirmPassword" required>
-					            </div>
-			                </div>
-			
-			                <div class="modal-footer">
-			                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-								<input type="submit" class="btn btn-success" value="Thêm"/>
-			                </div>
-			
-			            </form>
-			        </div>
-			        
-			    </div>
-			</div>
-			<!-- Thêm nhân viên dialog -->
-			
-			<!-- Sửa nhân viên dialog -->
-			<div class="modal fade" id="editStaffModal" role="dialog">
-			    <div class="modal-dialog">
-			
-			        <!-- Modal content-->
-			        <div class="modal-content">
-			            <div class="modal-header">
-			                <button type="button" class="close" data-dismiss="modal">&times;</button>
-			                <h4 class="modal-title">Sửa thông tin nhân viên</h4>
-			            </div>
-			            <form th:action="@{admin/staff/edit}" th:object="${staff}" method="post">
-			                <div class="modal-body">
-			                	<input type="hidden" name="id" id="editStaffId">
-			                	<div class="form-group">
-			                        <label class="control-label" for="phone">Số điện thoại:</label>
-			                        <input type="text" class="form-control" placeholder="Số điện thoại" name="phone" id="editStaffPhone" required/>
-			                    </div>
-			                
-			                    <div class="form-group">
-			                        <label class="control-label" for="name">Họ và tên:</label>
-			                        <input type="text" class="form-control" placeholder="Họ và Tên" name="name" id="editStaffName" required/>
-			                    </div>
-			                    
-			                    <div class="form-group">
-					                <label for="username">Tên người dùng:</label>
-					                <input type="text" class="form-control" placeholder="Nhập tên người dùng" name="username" id="editStaffUsername" required>
-					            </div>
-			                    
-			                    <button type="button" class="btn btn-default" id="editPassword">Đổi mật khấu</button>
-			                </div>
-			                <div class="modal-footer">
-			                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-								<input type="submit" class="btn btn-success" value="Sửa"/>
-			                </div>
-			
-			            </form>
-			        </div>
-			        
-			    </div>
-			</div>
-			<!-- Sửa nhân viên dialog -->
-			
-			<!-- Xóa nhân viên dialog -->
-			<div class="modal fade" id="deleteStaffModal" role="dialog">
-			    <div class="modal-dialog">
-			
-			        <!-- Modal content-->
-			        <div class="modal-content">
-			            <div class="modal-header">
-			                <button type="button" class="close" data-dismiss="modal">&times;</button>
-			                <h4 class="modal-title">Xóa nhân viên</h4>
-			            </div>
-			            <div class="modal-body">
-			                <p>Bạn có chắc chắn muốn xóa nhân viên?</p>
-			            </div>
-			            <div class="modal-footer">
-			            	<form th:action="@{admin/staff/delete}" method="post">  
-			        			<input type="hidden" name="id" id="deleteStaffId">  
-			        			<input type="submit" class="btn btn-danger" value=Xóa>
-			        			<button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
-			        		</form>
-			            </div>
-			        </div>
-			
-			    </div>
-			</div>
-			<!-- Xóa nhân viên dialog -->
 			
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Quản lý sản phẩm+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
 			<!-- Quản lý danh sách sản phẩm-->
-            <div id="productManage" th:style="${product_screen}">
+            <div id="productManage">
                 <div class="inside-head">
                     <h1>Quản lý kho</h1>
                     <div class="row">

@@ -61,7 +61,7 @@ $(document).ready(function() {
     
     //Xóa nhân viên
 	$(".btn-delete-staff").click(function(e) {
-		$("#deleteId").val($(this).data("id"));
+		$("#deleteStaffId").val($(this).data("id"));
         $("#deleteModal").modal({
             backdrop: "static",
             keyboard: false
