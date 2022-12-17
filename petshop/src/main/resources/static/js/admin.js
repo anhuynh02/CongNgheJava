@@ -119,10 +119,7 @@ $(document).ready(function() {
 	
 	// Tạo màu ngẫu nhiên cho biểu đồ.
 	function generateColor() {
-		let r = parseInt(Math.random()*255);
-		let g = parseInt(Math.random()*255);
-		let b = parseInt(Math.random()*255);
-		return `rgb(${r}, ${g}, ${b}])`;
+		return "#" + Math.floor(Math.random()*16777215).toString(16);
 	}
 	
 	// Tạo biểu đồ doanh thu theo tháng năm hiện tại.
