@@ -114,4 +114,52 @@ $(document).ready(function() {
         });
 		e.preventDefault();
     });
+    
+//----------------------Thống kê-------------------------
+	
+	// Tạo màu ngẫu nhiên cho biểu đồ.
+	function generateColor() {
+		let r = parseInt(Math.random()*255);
+		let g = parseInt(Math.random()*255);
+		let b = parseInt(Math.random()*255);
+		return `rgb(${r}, ${g}, ${b}])`;
+	}
+	
+	// Tạo biểu đồ doanh thu theo tháng năm hiện tại.
+	function statisticMonthChart(id, month=[], total=[]) {
+		let colors = [];
+		for (let i = 0; i < month.length; i++) {
+			colors.push(generateColor())
+		}
+		
+		const data = {
+			labels: month,
+			datasets: [{
+				label: 'Thống kê doanh thu theo tháng năm hiện tại',
+				data: total,
+				backgroundColor: colors,
+				borderColor: colors,
+				hoverOffset: 4
+			}]
+		};
+		
+		const config = {
+			type: 'bar',
+			data: data,
+		};
+		
+		let ctx = document.getElementById(id).getContext("2d");
+		
+		new Chart(ctx, config);
+	}
+	
+	// Lấy dữ liệu từ bảng html.
+	let month=[], total=[];
+	
+	$('tr.statistic').each(function (a, b) {
+        month.push($('.statistic-month', b).text());
+        total.push($('.statistic-total', b).text());
+    });
+	
+	statisticMonthChart("statisticMonthChart", month, total);
 })
