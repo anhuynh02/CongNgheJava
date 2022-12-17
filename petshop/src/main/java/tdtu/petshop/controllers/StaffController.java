@@ -48,11 +48,6 @@ public class StaffController {
 		return "staff";
 	}
 	
-	@GetMapping("/product")
-	public String getProduct() {
-		return "productManagement";
-	}
-	
 	@PostMapping("/product/add")
 	public String postAddProduct(RedirectAttributes redirectAttributes, @ModelAttribute("product") Product product, HttpServletRequest request) {
 		String add = productService.addProduct(product, request.getParameter("kind"));
@@ -66,7 +61,7 @@ public class StaffController {
 		}else {
 			redirectAttributes.addFlashAttribute("Error", "Không thêm được");
 		}
-		return "redirect:/admin";
+		return "redirect:/staff";
 	}
 	
 	@PostMapping("/product/edit")
@@ -79,7 +74,7 @@ public class StaffController {
 			redirectAttributes.addFlashAttribute("product_screen", screenP);
 			redirectAttributes.addFlashAttribute("staff_screen", screenN);
 			redirectAttributes.addFlashAttribute("prosuccess", "Chỉnh sửa sản phẩm thành công");
-		return "redirect:/admin";
+		return "redirect:/staff";
 	}
 	
 	@GetMapping(path = "/product/edit/{id}", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
@@ -95,6 +90,6 @@ public class StaffController {
 		redirectAttributes.addFlashAttribute("staff_screen", screenN);
 		productService.deleteProduct(Integer.parseInt(request.getParameter("id")));
 		redirectAttributes.addFlashAttribute("prosuccess", "Xóa sản phẩm thành công.");
-		return "redirect:/admin";
+		return "redirect:/staff";
 	}
 }

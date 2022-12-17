@@ -95,7 +95,7 @@ public class AdminController {
 	@PostMapping("/staff/edit/password")
 	public String postStaffEditPassword(RedirectAttributes redirectAttributes, @ModelAttribute("user") User staff, HttpServletRequest request) {
 		String error = userService.changeUserPassword(staff, request.getParameter("confirmPassword"));
-		if (error == null) {
+		if (error != null) {
 			redirectAttributes.addFlashAttribute("error", error);
 			return "redirect:/admin/staff/edit/password/" + staff.getId();
 		}
@@ -104,8 +104,9 @@ public class AdminController {
 	}
 	
 	@PostMapping("/staff/delete")
-	public String postDeleteStaff(HttpServletRequest request) {
+	public String postDeleteStaff(RedirectAttributes redirectAttributes, HttpServletRequest request) {
 		userService.deleteById(Integer.parseInt(request.getParameter("id")));
+		redirectAttributes.addFlashAttribute("success", "Xóa nhân viên.");
 		return "redirect:/admin";
 	}
 	
