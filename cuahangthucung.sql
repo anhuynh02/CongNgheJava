@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 17, 2022 lúc 10:33 AM
--- Phiên bản máy phục vụ: 10.4.24-MariaDB
--- Phiên bản PHP: 8.1.6
+-- Host: 127.0.0.1
+-- Generation Time: Dec 17, 2022 at 11:15 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `cuahangthucung`
+-- Database: `cuahangthucung`
 --
 CREATE DATABASE IF NOT EXISTS `cuahangthucung` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `cuahangthucung`;
@@ -26,7 +26,7 @@ USE `cuahangthucung`;
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `bill`
+-- Table structure for table `bill`
 --
 
 CREATE TABLE `bill` (
@@ -38,7 +38,7 @@ CREATE TABLE `bill` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `bill`
+-- Dumping data for table `bill`
 --
 
 INSERT INTO `bill` (`id`, `purchased`, `total`, `user_id`, `date`) VALUES
@@ -59,7 +59,7 @@ INSERT INTO `bill` (`id`, `purchased`, `total`, `user_id`, `date`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `bill_detail`
+-- Table structure for table `bill_detail`
 --
 
 CREATE TABLE `bill_detail` (
@@ -70,7 +70,7 @@ CREATE TABLE `bill_detail` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `bill_detail`
+-- Dumping data for table `bill_detail`
 --
 
 INSERT INTO `bill_detail` (`id`, `quantity`, `bill_id`, `product_id`) VALUES
@@ -122,7 +122,7 @@ INSERT INTO `bill_detail` (`id`, `quantity`, `bill_id`, `product_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `category`
+-- Table structure for table `category`
 --
 
 CREATE TABLE `category` (
@@ -132,7 +132,7 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `category`
+-- Dumping data for table `category`
 --
 
 INSERT INTO `category` (`id`, `name`, `description`) VALUES
@@ -144,7 +144,7 @@ INSERT INTO `category` (`id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `product`
+-- Table structure for table `product`
 --
 
 CREATE TABLE `product` (
@@ -158,14 +158,14 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `product`
+-- Dumping data for table `product`
 --
 
 INSERT INTO `product` (`id`, `name`, `price`, `description`, `vote`, `image`, `category_id`) VALUES
 (1, 'Mèo Xiêm', 2800000, 'Một trong những loài mèo đầu tiên của mèo lông ngắn phương Đông được công nhận', 4, './images/product/meoxiem.jpg', 1),
 (2, 'Chó Alaska', 9000000, 'Chó Alaska hay Alaska Malamute hoặc Mahlemuts là một giống chó kéo xe ở Alaska', 4, './images/product/alaska.jpg', 2),
 (3, 'Royal Canin Kitten', 115000, 'Thức ăn cho mèo con ROYAL CANIN Kitten bao gồm protein từ lòng trắng trứng + Probiotic, chất chống o', 4, './images/product/thucan1.jpg', 3),
-(4, 'Đồ chơi tạm', 100000, 'Placeholder', 4, './images/product/temp', 4),
+(4, 'Mèo nhà', 100000, 'Mèo nhà là mèo nhà', 0, './images/product/pet.png', 4),
 (5, 'Mèo Anh lông ngắn', 10000000, 'British Shorthair là giống mèo cảnh cổ của Vương quốc Anh. Chúng đã có quá trình sinh sống và phát triển trên quần đảo Anh quốc từ hàng ngàn năm.', 4, './images/product/anhlongngan.jpg', 1),
 (6, 'Mèo Anh lông dài', 15000000, 'British Longthair là giống mèo cảnh cổ của Vương quốc Anh. Chúng đã có quá trình sinh sống và phát triển trên quần đảo Anh quốc từ hàng ngàn năm.', 4, './images/product/meoanhlongdai.jpg', 1),
 (7, 'Mèo Munchkin', 5000000, 'Mèo Munchkin là một giống mèo rất mới trên thế giới. Chúng mới chỉ bắt đầu được lai tạo và phát triển thành giống hoàn chỉnh một cách chính thức từ năm 1983.', 4, './images/product/meomunchkin.jpg', 1),
@@ -206,13 +206,12 @@ INSERT INTO `product` (`id`, `name`, `price`, `description`, `vote`, `image`, `c
 (42, 'Đồ chơi bóng in hình bàn chân size M', 20000, 'Đồ chơi bóng in hình bàn chân size M là sản phẩm đồ chơi cho chó rất được ưa chuộng bởi thiết kế bắt mắt, đáng yêu, kích thước vừa phải. Có độ bền cao và an toàn cho sức khỏe cún cưng. Bạn có thể tái sử dụng Đồ chơi bóng in hình bàn chân nhiều lần. ', 4, './images/product/banchan.jpg', 4),
 (43, 'Đồ chơi bóng mặt chó size L', 45000, 'Đồ chơi bóng mặt chó size L là sản phẩm đồ chơi cho chó rất được ưa chuộng bởi thiết kế bắt mắt, đáng yêu, kích thước vừa phải. Có độ bền cao và an toàn cho sức khỏe cún cưng. Bạn có thể tái sử dụng Đồ chơi bóng in hình bàn chân nhiều lần. Sản phẩm phù hợp với mọi giống chó ở mọi lứa tuổi.', 4, './images/product/matcho.jpg', 4),
 (44, 'Đồ chơi xương gặm in hình bàn chân', 20000, 'Đồ chơi xương gặm in hình bàn chân là sản phẩm đồ chơi cho chó rất được ưa chuộng bởi thiết kế bắt mắt, đáng yêu, kích thước vừa phải. Có độ bền cao và an toàn cho sức khỏe cún cưng.', 4, './images/product/xuong.jpg', 4),
-(45, 'Chuông cho chó mèo nhiều sắc màu\r\n', 10000, 'Chuông cho chó mèo nhiều sắc màu hay còn được gọi là lục lạc. Với đầy đủ các sắc màu và kích cỡ khác nhau. Phù hợp với tất cả các loại giống chó mèo.', 4, './images/product/chuong.jpg', 4),
-(46, 'Mèo nhà', 100000, 'Mèo nhà là mèo nhà', 0, './images/product/pet.png', 4);
+(45, 'Chuông cho chó mèo nhiều sắc màu\r\n', 10000, 'Chuông cho chó mèo nhiều sắc màu hay còn được gọi là lục lạc. Với đầy đủ các sắc màu và kích cỡ khác nhau. Phù hợp với tất cả các loại giống chó mèo.', 4, './images/product/chuong.jpg', 4);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `role`
+-- Table structure for table `role`
 --
 
 CREATE TABLE `role` (
@@ -222,7 +221,7 @@ CREATE TABLE `role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `role`
+-- Dumping data for table `role`
 --
 
 INSERT INTO `role` (`id`, `name`, `description`) VALUES
@@ -233,131 +232,132 @@ INSERT INTO `role` (`id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
   `phone` varchar(13) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `username` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `enable` bit(1) NOT NULL,
-  `role_id` int(11) NOT NULL,
-  `id` int(11) NOT NULL
+  `role_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `user`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`phone`, `name`, `username`, `password`, `enable`, `role_id`, `id`) VALUES
-('0700000001', 'Admin', 'admin', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', b'1', 1, 1),
-('0700000002', 'Trần Văn A', 'customer', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', b'1', 3, 2),
-('0700000010', 'Lê Khánh Văn', 'staff', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', b'1', 2, 3),
-('0700000020', 'Liễu Duy Ngôn', 'staffTemp', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', b'1', 2, 4);
+INSERT INTO `user` (`id`, `phone`, `name`, `username`, `password`, `enable`, `role_id`) VALUES
+(1, '0700000001', 'Admin', 'admin', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', b'1', 1),
+(2, '0700000002', 'Trần Văn A', 'customer', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', b'1', 3),
+(3, '0700000010', 'Lê Khánh Văn', 'staff', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', b'1', 2),
+(4, '0700000020', 'Liễu Duy Ngôn', 'staffTemp', '$2a$12$6s1OGykfx.oiHzzAs9wQCOnHAQ49W5cHEasOFi6jSSu91INSZZaLy', b'1', 2);
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `bill`
+-- Indexes for table `bill`
 --
 ALTER TABLE `bill`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FKqhq5aolak9ku5x5mx11cpjad9` (`user_id`);
+  ADD KEY `user_id` (`user_id`);
 
 --
--- Chỉ mục cho bảng `bill_detail`
+-- Indexes for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FKeolgwyayei3o80bb7rj7t207q` (`bill_id`),
-  ADD KEY `FKe7fmo7042u349ftue4g4oeiuy` (`product_id`);
+  ADD UNIQUE KEY `bill_product_id` (`bill_id`,`product_id`) USING BTREE,
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `bill_id` (`bill_id`);
 
 --
--- Chỉ mục cho bảng `category`
+-- Indexes for table `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `product`
+-- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`),
   ADD KEY `category_id` (`category_id`);
 
 --
--- Chỉ mục cho bảng `role`
+-- Indexes for table `role`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `phone` (`phone`),
+  ADD UNIQUE KEY `username` (`username`),
   ADD KEY `role_id` (`role_id`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `bill`
+-- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT cho bảng `bill_detail`
+-- AUTO_INCREMENT for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
--- AUTO_INCREMENT cho bảng `category`
+-- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT cho bảng `product`
+-- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
--- AUTO_INCREMENT cho bảng `role`
+-- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `product`
+-- Constraints for table `product`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
 
 --
--- Các ràng buộc cho bảng `user`
+-- Constraints for table `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `FKn82ha3ccdebhokx3a8fgdqeyy` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`);
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
