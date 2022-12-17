@@ -57,6 +57,9 @@ public class UserService {
 	
 	public String changeUserInfo(User user) {
 		User temp = userRepository.findById(user.getId());
+		if (!user.getPhone().matches("\\d{10}")) {
+			return "Số điện thoại không hợp lệ";
+		}
 		if (userRepository.findByPhone(user.getPhone()) != null && !temp.getPhone().equals(user.getPhone())) {
 			return "Số điện thoại đã được sử dụng";
 		}

@@ -64,7 +64,7 @@ public class StaffController {
 			redirectAttributes.addFlashAttribute("staff_screen", screenN);
 			redirectAttributes.addFlashAttribute("product_screen", screenP);
 		}
-		return "redirect:/admin";
+		return "redirect:/staff";
 	}
 	
 	@PostMapping("/product/edit")
@@ -83,7 +83,7 @@ public class StaffController {
 			redirectAttributes.addFlashAttribute("staff_screen", screenN);
 			redirectAttributes.addFlashAttribute("proError", edit);
 		}
-		return "redirect:/admin";
+		return "redirect:/staff";
 	}
 	
 	@GetMapping(path = "/product/edit/{id}", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
