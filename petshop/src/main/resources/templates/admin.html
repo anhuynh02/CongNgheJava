@@ -205,9 +205,13 @@
                     <h1>Quản lý kho</h1>
                     <div class="row">
 	                    <button class="inside-btnAdd productBtn" id="proAddBtn">Thêm sản phẩm</button>
-	                    <div th:if="${prosuccess} != null" class="alert alert-success alert-dismissable fade in">
+	                    <div th:if="${proSuccess} != null" class="alert alert-success alert-dismissable fade in">
 					        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 					        <strong th:text="${prosuccess}"></strong>
+					    </div>
+					    <div th:if="${proError} != null" class="alert alert-danger alert-dismissable fade in">
+					        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					        <strong th:text="${proError}"></strong>
 					    </div>
                     </div>
                 </div>
@@ -266,7 +270,7 @@
 			     	           
 			                    <div class="form-group">
 			                        <label class="control-label" for="name">Giá sản phẩm:</label>
-			                        <input type="text" class="form-control"  placeholder="Nhập giá sản phẩm" name="price" required/>
+			                        <input type="number" class="form-control"  placeholder="Nhập giá sản phẩm" name="price" required/>
 			                    </div>
 			    				
 			                    <div class="form-group">
@@ -319,7 +323,7 @@
 			     	           
 			                    <div class="form-group">
 			                        <label class="control-label" for="name">Giá sản phẩm:</label>
-			                        <input type="text" class="form-control" id="editprice" placeholder="Nhập giá sản phẩm" name="price" required/>
+			                        <input type="number" class="form-control" id="editprice" placeholder="Nhập giá sản phẩm" name="price" required/>
 			                    </div>
 			    				
 			                    <div class="form-group">

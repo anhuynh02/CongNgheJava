@@ -119,9 +119,12 @@ public class AdminController {
 			screenP = "display: block;";
 			redirectAttributes.addFlashAttribute("product_screen", screenP);
 			redirectAttributes.addFlashAttribute("staff_screen", screenN);
-			redirectAttributes.addFlashAttribute("prosuccess", "Thêm sản phẩm thành công");
+			redirectAttributes.addFlashAttribute("proSuccess", "Thêm sản phẩm thành công");
 		}else {
-			redirectAttributes.addFlashAttribute("Error", "Không thêm được");
+			screenP = "display: block;";
+			redirectAttributes.addFlashAttribute("proError", add);
+			redirectAttributes.addFlashAttribute("staff_screen", screenN);
+			redirectAttributes.addFlashAttribute("product_screen", screenP);
 		}
 		return "redirect:/admin";
 	}
@@ -131,11 +134,17 @@ public class AdminController {
 		String edit = productService.editProduct(product, request.getParameter("kind"));
 		String screenP = "display: none;";
 		String screenN = "display: none;";
-		if(edit == null)
+		if(edit == null) {
 			screenP = "display: block;";
 			redirectAttributes.addFlashAttribute("product_screen", screenP);
 			redirectAttributes.addFlashAttribute("staff_screen", screenN);
-			redirectAttributes.addFlashAttribute("prosuccess", "Chỉnh sửa sản phẩm thành công");
+			redirectAttributes.addFlashAttribute("proSuccess", "Chỉnh sửa sản phẩm thành công");
+		}else {
+			screenP = "display: block;";
+			redirectAttributes.addFlashAttribute("staff_screen", screenN);
+			redirectAttributes.addFlashAttribute("product_screen", screenP);
+			redirectAttributes.addFlashAttribute("proError", edit);
+		}
 		return "redirect:/admin";
 	}
 	
@@ -151,7 +160,7 @@ public class AdminController {
 		redirectAttributes.addFlashAttribute("product_screen", screenP);
 		redirectAttributes.addFlashAttribute("staff_screen", screenN);
 		productService.deleteProduct(Integer.parseInt(request.getParameter("id")));
-		redirectAttributes.addFlashAttribute("prosuccess", "Xóa sản phẩm thành công.");
+		redirectAttributes.addFlashAttribute("proSuccess", "Xóa sản phẩm thành công.");
 		return "redirect:/admin";
 	}
 }

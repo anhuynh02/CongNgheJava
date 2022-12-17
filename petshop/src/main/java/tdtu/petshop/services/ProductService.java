@@ -52,6 +52,9 @@ public class ProductService {
 		}else if(kind.equals("4")) {
 			product.setCategory(categoryService.findById(4));
 		}
+		if(product.getPrice() < 0) {
+			return "Thêm thất bại!!! Giá cả không thể để số âm";
+		}
 		product.setImage("./images/product/" + product.getImage());
 		productRepository.save(product);
 		return null;
@@ -67,6 +70,9 @@ public class ProductService {
 			temp.setCategory(categoryService.findById(3));
 		}else if(kind.equals("4")) {
 			temp.setCategory(categoryService.findById(4));
+		}
+		if(product.getPrice() < 0) {
+			return "Sửa thất bại!!! Giá cả không thể âm";
 		}
 		temp.setDescription(product.getDescription());
 		temp.setImage("./images/product/" + product.getImage());

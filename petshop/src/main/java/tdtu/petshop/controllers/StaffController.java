@@ -48,7 +48,7 @@ public class StaffController {
 		return "staff";
 	}
 	
-	@PostMapping("/product/add")
+    @PostMapping("/product/add")
 	public String postAddProduct(RedirectAttributes redirectAttributes, @ModelAttribute("product") Product product, HttpServletRequest request) {
 		String add = productService.addProduct(product, request.getParameter("kind"));
 		String screenP = "display: none;";
@@ -57,11 +57,14 @@ public class StaffController {
 			screenP = "display: block;";
 			redirectAttributes.addFlashAttribute("product_screen", screenP);
 			redirectAttributes.addFlashAttribute("staff_screen", screenN);
-			redirectAttributes.addFlashAttribute("prosuccess", "Thêm sản phẩm thành công");
+			redirectAttributes.addFlashAttribute("proSuccess", "Thêm sản phẩm thành công");
 		}else {
-			redirectAttributes.addFlashAttribute("Error", "Không thêm được");
+			screenP = "display: block;";
+			redirectAttributes.addFlashAttribute("proError", add);
+			redirectAttributes.addFlashAttribute("staff_screen", screenN);
+			redirectAttributes.addFlashAttribute("product_screen", screenP);
 		}
-		return "redirect:/staff";
+		return "redirect:/admin";
 	}
 	
 	@PostMapping("/product/edit")
@@ -69,12 +72,18 @@ public class StaffController {
 		String edit = productService.editProduct(product, request.getParameter("kind"));
 		String screenP = "display: none;";
 		String screenN = "display: none;";
-		if(edit == null)
+		if(edit == null) {
 			screenP = "display: block;";
 			redirectAttributes.addFlashAttribute("product_screen", screenP);
 			redirectAttributes.addFlashAttribute("staff_screen", screenN);
-			redirectAttributes.addFlashAttribute("prosuccess", "Chỉnh sửa sản phẩm thành công");
-		return "redirect:/staff";
+			redirectAttributes.addFlashAttribute("proSuccess", "Chỉnh sửa sản phẩm thành công");
+		}else {
+			screenP = "display: block;";
+			redirectAttributes.addFlashAttribute("product_screen", screenP);
+			redirectAttributes.addFlashAttribute("staff_screen", screenN);
+			redirectAttributes.addFlashAttribute("proError", edit);
+		}
+		return "redirect:/admin";
 	}
 	
 	@GetMapping(path = "/product/edit/{id}", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
@@ -89,7 +98,7 @@ public class StaffController {
 		redirectAttributes.addFlashAttribute("product_screen", screenP);
 		redirectAttributes.addFlashAttribute("staff_screen", screenN);
 		productService.deleteProduct(Integer.parseInt(request.getParameter("id")));
-		redirectAttributes.addFlashAttribute("prosuccess", "Xóa sản phẩm thành công.");
+		redirectAttributes.addFlashAttribute("proSuccess", "Xóa sản phẩm thành công.");
 		return "redirect:/staff";
 	}
 }
