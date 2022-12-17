@@ -31,4 +31,6 @@ function showSlide(n){
     
 }
 
-setInterval(plusSlides(1),150);
+window.onload = function(){
+		setInterval(plusSlides(1),150);
+	}

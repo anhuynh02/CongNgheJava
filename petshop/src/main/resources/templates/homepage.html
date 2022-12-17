@@ -111,7 +111,7 @@
 	                    	<th:block th:each="dog: ${dogs}">                    
 	                        <div class="bestseller col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
 	                            <div class="card mt-1" style="width:20rem;">
-	                                <img th:src="@{${dog.image}}" class="card-img-top" th:alt="${dog.name}" width="200" height="200">
+	                                <a th:href="|info/@{${dog.id}}|"><img th:src="@{${dog.image}}" class="card-img-top" th:alt="${dog.name}" width="200" height="200"></a>
 	                                <a id="itemNavLeft" class="nav-link" th:text="${dog.name}" th:href="|info/@{${dog.id}}|"></a>
 	                                <form th:action="@{addcart}"  method="post" class="ml-auto">
 	                                	<input type="hidden" name="id" th:value="${dog.id}">
@@ -244,7 +244,7 @@
 	                                	<input type="hidden" name="id" th:value="${food.id}">
 	                                	<input type="hidden" name="name" th:value="${food.name}">
 	                                	<input type="hidden" name="price" th:value="${food.price}">
-	                                	<button type="submit" class="btnAddCart">Thêm giỏ hàng</button>
+	                                	<button type="submit" class="btn-add-cart">Thêm giỏ hàng</button>
 	                                </form>
 		                            </div>
 		                        </div>
